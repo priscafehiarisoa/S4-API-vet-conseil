@@ -1,11 +1,13 @@
 <div align="center">
 <h1> Mon vet-conseil </h1>
 <img src="https://badgen.net/badge/django/4.2.1/green?icon=pypi" alt="Django">
-<img src="https://badgen.net/badge/status/development/red?icon=github" alt="Python"> <br>
-Mini-projet universitaire 🎓 de création d'une API REST pour la gestion d'une clinique vétérinaire et servies aux animaux domestiques.
+<img src="https://badgen.net/badge/status/development/red?icon=github" alt="Python">
+<br> <br>
+Mini-projet universitaire 🎓 de création d'une API REST pour la gestion d'une clinique vétérinaire et services aux animaux domestiques.
 </div>
 
 >Lisez attentivement ce document avant de commencer à travailler sur le projet. SVP 😀!
+
 
 ## Prise en main
 
@@ -18,15 +20,16 @@ travailler sur une branche différente.
 ### Pour tout le monde
 `Cloner` la branche principale du chef de sous groupe. 
 ```
-git clone
+git clone https://github.com/<demander a votre chef de sous groupe>.git
 ```
+
 
 ## Mise en marche
 > Soyez sûr d'être dans votre branche de travail avant toute modification
 ``` git checkout <nom de la branche> ```, pour vérifier la branche sur laquelle vous êtes, utiliser la commande ``` git branch ```
 
 ### Prérequis
-- Python 3
+- Python 3.11
 
 ### Création d'un environnement virtuel
 On va créer un environnement virtuel pour isoler les dépendances de notre projet par rapport à celles de notre installation globale.
@@ -66,8 +69,11 @@ Créer une application pour votre sous groupe, et commencer à travailler dessus
 python manage.py startapp <nom de l'application>
 ```
 
+  
 ## Règles de gestion de version
+  
 ### Commit et push
+  
 #### Pour tout le monde
 - Vérifier que vous êtes bien sur votre branche de travail
 - Vérifier que vous avez bien `pull` la dernière version de la branche principale (afin d'éviter les conflits,
@@ -100,6 +106,7 @@ git pull origin <nom de la branche principale>
 ```
 - Merger votre branche en créant un `pull request` sur github <br>
 | Bien donner un titre et une description à votre `pull request` pour que le chef de sous groupe puisse comprendre ce que vous avez fait
+
 ### Gitignore
 Pour éviter de pusher des fichiers sensibles et inutiles, il faut ajouter les fichiers à ignorer dans le fichier `.gitignore` à commencer par `venv` et `.env`
 > Tenez à vérifier cela avant de pusher votre code
@@ -126,4 +133,6 @@ Tout problème rencontré doit être renseigné afin de pouvoir le corriger. <br
 Pour signaler un problème, il faut créer une `issue` sur github en donnant un titre et une description du problème rencontré.
 > N'oublier pas de mettre des labels sur votre `issue`
 
-###### Work smart not hard 😆!
+###### Workflow
+[![Django CI](https://github.com/mendrika261/S4-API-vet-conseil/actions/workflows/django.yml/badge.svg)](https://github.com/mendrika261/S4-API-vet-conseil/actions/workflows/django.yml)
+[![Bandit](https://github.com/mendrika261/S4-API-vet-conseil/actions/workflows/bandit.yml/badge.svg)](https://github.com/mendrika261/S4-API-vet-conseil/actions/workflows/bandit.yml)
