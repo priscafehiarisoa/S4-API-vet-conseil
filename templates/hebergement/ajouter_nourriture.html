@@ -1,0 +1,71 @@
+{% extends 'base/root_nav_sidebar.html' %}
+{% block title %}
+ajouter une nourriture pour animaux
+{% endblock %}
+
+{% block content %}
+
+    <main role="main" class="main-content">
+     <div class="container-fluid">
+          <div class="row justify-content-center">
+            <div class="col-12">
+              <h2 class="page-title mb-5">ajouter une nourriture pour animaux </h2>
+              <div class="card col-8 shadow mb-4">
+                <div class="card-header ">
+                  <strong class="card-title">formulaire</strong>
+                </div>
+                <div class="card-body">
+                  <div class="row">
+                    <div class="col-md-12">
+
+                        <form action="">
+                            <div class="form-group mb-3">
+                        <label for="simpleinput">descriptions</label>
+                        <input type="text" id="simpleinput" class="form-control">
+                      </div>
+
+
+                        <div class="form-group mb-3">
+                        <label for="simpleinput">designation</label>
+                        <input type="text" id="simpleinput2" class="form-control">
+                      </div>
+
+                        <div class="form-group">
+                             <div>
+                                 <label for="simpleinput4">type d'animaux</label>
+                             </div>
+                             <div class="form-check form-check-inline mb-3">
+                                <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1">
+                                <label class="form-check-label" for="inlineCheckbox1">1</label>
+                              </div>
+
+                              <div class="form-check form-check-inline mb-3">
+                                <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="option2">
+                                <label class="form-check-label" for="inlineCheckbox2">2</label>
+                              </div>
+                        </div>
+
+
+                        <div class="form-group mb-3">
+                        <label for="simpleinput3">prix par jour</label>
+                        <input type="number" id="simpleinput3" class="form-control">
+                      </div>
+
+                        <div class="form-group">
+                            <button class="btn btn-outline-primary" type="submit">valider</button>
+                        </div>
+                        </form>
+
+                    </div> <!-- /.col -->
+
+                    </div>
+                  </div>
+                </div>
+              </div> <!-- / .card -->
+
+
+            </div>
+          </div>
+    </main>
+
+{% endblock %}

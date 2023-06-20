@@ -1,7 +1,8 @@
-from django.urls import path
+from django.urls import include, path
 
-from . import views
+from hebergement.views import test
 
 urlpatterns = [
-    path("", views.index, name="index"),
+    path("", test.index, name="index"),
+
 ]

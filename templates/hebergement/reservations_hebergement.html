@@ -1,0 +1,97 @@
+{% extends 'base/root_nav_sidebar.html' %}
+{% block title %}
+reservations
+{% endblock %}
+
+{% block content %}
+<main role="main" class="main-content">
+        <div class="container-fluid">
+          <div class="row justify-content-center">
+            <div class="col-12">
+                <div class="row">
+                    <div class="col-5">
+                        <h2 class="mb-2 page-title">liste reservations</h2>
+                    </div>
+
+
+                </div>
+
+              <div class="row my-4">
+                <!-- Small table -->
+                <div class="col-md-12">
+                  <div class="card shadow">
+                    <div class="card-body">
+                      <!-- table -->
+                      <table class="table datatables" id="dataTable-1">
+                        <thead>
+                          <tr>
+                            <th></th>
+                            <th>#</th>
+                           <th>animal de companie</th>
+                            <th>nom du propriétaire</th>
+                            <th>telephone</th>
+                            <th>details</th>
+                            <th>-</th>
+                            <th>-</th>
+
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr>
+                            <td>
+                              <div class="custom-control custom-checkbox">
+                                <input type="checkbox" class="custom-control-input">
+                                <label class="custom-control-label"></label>
+                              </div>
+                            </td>
+
+                            <td>368</td>
+                            <td>chien</td>
+                            <td>Imani Lara</td>
+                            <td>(478) 446-9234</td>
+
+{#                              modal details #}
+                               <td>
+                                 <button type="button" class="btn mb-2 btn-outline-primary" data-toggle="modal" data-target=".modal-right">voir les details</button>
+                                <!-- Slide Modal -->
+                                  <div class="modal fade modal-right modal-slide" tabindex="-1" role="dialog" aria-labelledby="defaultModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog modal-sm" role="document">
+                                      <div class="modal-content">
+                                        <div class="modal-header">
+                                          <h5 class="modal-title" id="defaultModalLabel">details sur l'animal de companie à héberger</h5>
+                                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                          </button>
+                                        </div>
+                                        <div class="modal-body">
+    {#                                        contenu du modal pour les details #}
+                                            <p>details 1</p>
+                                            <p>details 2</p>
+                                            <p>details 3</p>
+                                            <p>details 4</p>
+                                        </div>
+                                        <div class="modal-footer">
+                                          <button type="button" class="btn mb-2 btn-secondary" data-dismiss="modal">fermer</button>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                            </td>
+                            <td><button class="btn btn-outline-danger">Annuler</button></td>
+                            <td><button class="btn btn-outline-secondary">modifier</button></td>
+                          </tr>
+
+
+
+
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                </div> <!-- simple table -->
+              </div> <!-- end section -->
+            </div> <!-- .col-12 -->
+          </div> <!-- .row -->
+        </div> <!-- .container-fluid -->
+</main>
+{% endblock %}

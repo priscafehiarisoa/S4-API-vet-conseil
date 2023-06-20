@@ -12,3 +12,9 @@ venv/
 .DS_Store
 Thumbs.db
 .idea/
+.env
+
+#ignore some files in hebergement
+./hebergement/migrations/*.py
+./hebergement/views/test.py
+./hebergement/views/calendat.py
