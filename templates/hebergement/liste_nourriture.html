@@ -1,0 +1,123 @@
+{% extends 'base/root_nav_sidebar.html' %}
+{% load static %}
+{% block title %}
+
+{% endblock %}
+
+{#todo ne pas oublier de changer les id dans les modals sinon ça ne marche#}
+{% block content %}
+<main role="main" class="main-content">
+        <div class="container-fluid">
+          <div class="row justify-content-center">
+            <div class="col-12">
+                <div class="col-md-10 mb-4">
+                  <div class="card shadow">
+                    <div class="card-body py-4 mb-1">
+                      <div class="row">
+                        <div class="col-3">
+                          <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+                            <a class="nav-link active" id="v-pills-home-tab" data-toggle="pill" href="#v-pills-home" role="tab" aria-controls="v-pills-home" aria-selected="true">chien</a>
+                            <a class="nav-link" id="v-pills-profile-tab" data-toggle="pill" href="#v-pills-profile" role="tab" aria-controls="v-pills-profile" aria-selected="false">chat</a>
+                          </div>
+                        </div>
+                        <div class="col-8">
+                          <div class="tab-content mb-4" id="v-pills-tabContent">
+                            <div class="tab-pane fade show active" id="v-pills-home" role="tabpanel" aria-labelledby="v-pills-home-tab">
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                          <div class="card shadow mb-4 "data-toggle="modal" data-target="#defaultModal">
+                                            <div class="card-body text-center">
+                                              <div class="avatar avatar-lg mt-4">
+                                                <a href="">
+                                                  <img src="{% static '/assets/avatars/face-4.jpg'%}" alt="..." class="avatar-img rounded-circle">
+                                                </a>
+                                              </div>
+                                              <div class="card-text my-2">
+                                                <strong class="card-title my-0">riz </strong>
+                                                <p class="small text-muted mb-0">100 ar/j</p>
+                                              </div>
+                                            </div>
+                                          </div>
+                                          <!-- Modal -->
+                                          <div class="modal fade" id="defaultModal" tabindex="-1" role="dialog" aria-labelledby="defaultModalLabel" aria-hidden="true">
+                                            <div class="modal-dialog" role="document">
+                                              <div class="modal-content">
+                                                <div class="modal-header">
+                                                  <h5 class="modal-title" id="defaultModalLabel">Modal title</h5>
+                                                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                  </button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <p>detail 1</p>
+                                                    <p>detail 2</p>
+                                                    <p>detail 3</p>
+                                                    <p>detail 4</p>
+                                                    <p>detail 5</p>
+                                                </div>
+                                                <div class="modal-footer">
+                                                  <button type="button" class="btn mb-2 btn-secondary" data-dismiss="modal">Close</button>
+                                                  <button type="button" class="btn mb-2 btn-primary">Save changes</button>
+                                                </div>
+                                              </div>
+                                            </div>
+                                          </div>
+                                        </div>
+                                    </div>
+                            </div>
+                            <div class="tab-pane fade mb-4" id="v-pills-profile" role="tabpanel" aria-labelledby="v-pills-profile-tab">
+                                     <div class="row">
+                                        <div class="col-md-4" data-toggle="modal" data-target="#defaultModal2">
+                                          <div class="card shadow mb-4">
+                                            <div class="card-body text-center">
+                                              <div class="avatar avatar-lg mt-4">
+                                                <a href="">
+                                                  <img src="{% static '/assets/avatars/face-4.jpg'%}" alt="..." class="avatar-img rounded-circle">
+                                                </a>
+                                              </div>
+                                              <div class="card-text my-2">
+                                                <strong class="card-title my-0">riz </strong>
+                                                <p class="small text-muted mb-0">100 ar/j</p>
+                                              </div>
+                                            </div>
+                                          </div>
+                                          <!-- Modal -->
+                                          <div class="modal fade" id="defaultModal2" tabindex="-1" role="dialog" aria-labelledby="defaultModalLabel" aria-hidden="true">
+                                            <div class="modal-dialog" role="document">
+                                              <div class="modal-content">
+                                                <div class="modal-header">
+                                                  <h5 class="modal-title" id="defaultModalLabel">Modal title</h5>
+                                                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                  </button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <p>detail 1</p>
+                                                    <p>detail 2</p>
+                                                    <p>detail 3</p>
+                                                    <p>detail 4</p>
+                                                    <p>detail 5</p>
+                                                </div>
+                                                <div class="modal-footer">
+                                                  <button type="button" class="btn mb-2 btn-secondary" data-dismiss="modal">Close</button>
+                                                  <button type="button" class="btn mb-2 btn-primary">Save changes</button>
+                                                </div>
+                                              </div>
+                                            </div>
+                                          </div>
+                                        </div>
+
+                                     </div>
+                            </div>
+
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+            </div>
+          </div>
+        </div>
+</main>
+{% endblock %}

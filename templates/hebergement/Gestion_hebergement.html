@@ -1,0 +1,180 @@
+{% extends 'base/root_nav_sidebar.html' %}
+{#title#}
+{% block title %}
+gestion d'hébergement
+{% endblock %}
+
+{% block content %}
+ <main role="main" class="main-content">
+        <div class="container-fluid">
+          <div class="row justify-content-center">
+            <div class="col-12">
+                  <div class="row mb-5 align-items-center my-3 ">
+                    <div class="col">
+                      <h2 class="page-title">Gestion des hébergements</h2>
+                    </div>
+                    <div class="col-auto">
+                      <button type="button" class="btn" data-toggle="modal" data-target=".modal-calendar"><span class="fe fe-filter fe-16 text-muted"></span></button>
+                    </div>
+                  </div>
+                <div class="row mt-5">
+                    <div id='calendar' class="col-8"></div>
+                    <div class=" col-4">
+
+                        <div class="card shadow mb-4">
+                            <div class="card-body">
+                             <p class="mb-2"><strong>rechercher une date en particulier</strong></p>
+
+                                <form action="">
+                                    <div class="row">
+                                        <div class="form-group col-9 ">
+                                      <div class="input-group">
+                                        <input type="text"
+                                               class="form-control drgpicker"
+                                               id="date-input1"
+                                               value="04/24/2020" aria-describedby="button-addon2">
+                                        <div class="input-group-append">
+                                          <div class="input-group-text" id="button-addon-date"><span class="fe fe-calendar fe-16"></span></div>
+                                        </div>
+                                      </div>
+                                    </div>
+                                    <div class="form-group col-2">
+                                      <input type="submit" class="btn btn-outline-primary right" value="voir">
+                                    </div>
+                                    </div>
+                                </form>
+                            </div>
+
+                        </div>
+
+                        <div class="card shadow mb-4">
+                            <div class="card-body">
+                                <button class="btn btn-outline-primary">
+                                    détails des Hébergements
+                                </button>
+                            </div>
+
+                        </div>
+
+                        <div class="card shadow mb-4">
+                            <div class="card-body">
+                                <button class="btn btn-outline-primary">
+                                    <span class="badge badge-danger rounded-circle" >1</span>
+                                    <span>liste des demandes</span>
+                                </button>
+                            </div>
+
+                        </div>
+
+{#     verification des dates libres        #}
+                        <div class="card shadow mb-4">
+                            <div class="card-body">
+                              <p class="mb-2"><strong>verifications de dates libres</strong></p>
+                              <div class="">
+
+                                  <form action="">
+
+{#                                  date de debut #}
+                                <div class="form-group ">
+                                  <label for="date-input1">debut</label>
+                                  <div class="input-group">
+                                    <input type="text"
+                                           class="form-control drgpicker"
+                                           id="date-input1"
+                                           value="04/24/2020" aria-describedby="button-addon2">
+                                    <div class="input-group-append">
+                                      <div class="input-group-text" id="button-addon-date"><span class="fe fe-calendar fe-16"></span></div>
+                                    </div>
+                                  </div>
+                                </div>
+
+{#                                  date de fin #}
+
+                                  <div class="form-group ">
+                                  <label for="date-input1">fin</label>
+                                  <div class="input-group">
+                                    <input type="text"
+                                           class="form-control drgpicker"
+                                           id="date-input2"
+                                           value="04/24/2020" aria-describedby="button-addon2">
+                                    <div class="input-group-append">
+                                      <div class="input-group-text" id="button-addon-date"><span class="fe fe-calendar fe-16"></span></div>
+                                    </div>
+                                  </div>
+                                </div>
+
+                                  <div class="form-group">
+                                      <input type="submit" class="offset-9 btn btn-outline-primary right" value="vérifier">
+                                  </div>
+                                  </form>
+
+                              </div>
+                            </div> <!-- /.card-body -->
+                  </div> <!-- /.card -->
+                    </div>
+                </div>
+
+
+            </div> <!-- .col-12 -->
+          </div> <!-- .row -->
+        </div> <!-- .container-fluid -->
+      </main> <!-- m-->
+      <script>
+      /** full calendar */
+      var calendarEl = document.getElementById('calendar');
+      if (calendarEl)
+      {
+        document.addEventListener('DOMContentLoaded', function()
+        {
+          var calendar = new FullCalendar.Calendar(calendarEl,
+          {
+            plugins: ['dayGrid', 'timeGrid', 'list', 'bootstrap'],
+            timeZone: 'UTC',
+            themeSystem: 'bootstrap',
+            header:
+            {
+              left: 'today, prev, next',
+              center: 'title',
+              right: 'dayGridMonth,timeGridWeek,timeGridDay,listMonth'
+            },
+            buttonIcons:
+            {
+              prev: 'fe-arrow-left',
+              next: 'fe-arrow-right',
+              prevYear: 'left-double-arrow',
+              nextYear: 'right-double-arrow'
+            },
+            weekNumbers: true,
+            eventLimit: true, // allow "more" link when too many events
+            events: 'https://fullcalendar.io/demo-events.json'
+
+          });
+          calendar.render();
+        });
+      }
+    </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+{% endblock %}

@@ -1,0 +1,65 @@
+{% extends 'base/root_nav_sidebar.html' %}
+
+{% block title %}
+Formulaire d'ajout d'animaux
+{% endblock %}
+
+{% block content %}
+
+<main role="main" class="main-content">
+    <div class="container-fluid">
+        <div class="row justify-content-center">
+            <div class="col-12">
+                <h2 class="h3 mb-3 page-title">Ajouter animaux</h2>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="card shadow mb-4">
+                            <div class="card-header">
+                                <strong class="card-title">formulaire</strong>
+                            </div>
+                            <div class="card-body">
+                                <form class="needs-validation" >
+                                    <div class="form-row">
+
+
+                                        <div class="col-md-12 mb-3">
+                                            <label for="designation">Designation</label>
+                                            <input type="text" class="form-control" id="designation" value="Mark" required>
+                                            <div class="valid-feedback"> Looks good! </div>
+                                        </div>
+                                        <div class="col-md-6 mb-3">
+
+                                        </div>
+                                    </div>
+                                    <div class="form-row">
+
+                                        <div class="col-md-5 mb-3">
+                                            <label for="age">Age</label>
+                                            <input type="text" class="form-control" id="age" value="" required placeholder="debut age">
+                                            <div class="invalid-feedback"> Please select a valid age </div>
+                                        </div>
+                                        <div class="offset-2 col-md-5 mb-3">
+                                            <label for="validationCustom05">.</label>
+                                            <input type="text" class="form-control" id="validationCustom05" required placeholder="fin age">
+                                            <div class="invalid-feedback"> Please provide a valid zip. </div>
+                                        </div>
+                                        <div class="col-md-3 mb-3"></div>
+                                        <div class="col-md-12 mb-3">
+                                            <label for="designation">Validite</label>
+                                            <input type="text" class="form-control" id="validite" value="" required>
+                                            <div class="valid-feedback"> Looks good! </div>
+                                        </div>
+                                    </div>
+
+                                    <button class="btn btn-primary" type="submit">valider</button>
+                                </form>
+                            </div> <!-- /.card-body -->
+                        </div> <!-- /.card -->
+                    </div> <!-- /.col -->
+                    <!-- /.col -->
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+{% endblock %}
