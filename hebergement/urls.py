@@ -13,7 +13,7 @@ urlpatterns = [
 
 #   animaux
     path('new_type_animal',Animaux_hebergement_view.Add_new_type_animals,name="Add_new_type_animals") ,
-    path('list_hosted_anmals',Animaux_hebergement_view.show_list_hosted_animals,name="show_list_hosted_animals"),
+    path('list_hosted_animals',Animaux_hebergement_view.show_list_hosted_animals,name="show_list_hosted_animals"),
     path('list_can_be_hosted_animals',Animaux_hebergement_view.show_list_animals_that_can_be_hosted,name="show_list_animals_that_can_be_hosted"),
 
 #     nourriture

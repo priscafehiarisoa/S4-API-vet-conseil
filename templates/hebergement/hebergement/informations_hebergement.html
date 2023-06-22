@@ -1,4 +1,5 @@
 {% extends 'base/root_nav_sidebar.html' %}
+{% load static %}
 {% block title %}
 
 {% endblock %}
@@ -17,41 +18,51 @@
                                 <div class="row align-items-center">
                                     <div class="col-3 text-center">
                           <span class="circle circle-lg bg-light">
-                            <i class="fe fe-user fe-24 text-primary"></i>
+{#                            <?xml version="1.0" ?>#}
+                              <img src="{% static 'assets/icons/cat_fish.png' %}" alt="">
                           </span>
                                     </div> <!-- .col -->
                                     <div class="col">
-                                        <a href="#">
+
+{#        LIENS VERS ANIMAUX/LISTE_ANIMAUX_HEBERGES.html                                #}
+                                        <a href="/hebergement/list_can_be_hosted_animals">
                                             <h3 class="h5 mt-4 mb-1">Animaux</h3>
                                         </a>
-                                        <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris blandit nisl ullamcorper, rutrum metus in, congue lectus.</p>
+                                        <p class="text-muted">
+                                            c'est ici que voir aller voir la liste des animaux que <span class="text-primary">Mon vet Conseil</span> peux héberger
+                                        </p>
                                     </div> <!-- .col -->
                                 </div> <!-- .row -->
                             </div> <!-- .card-body -->
                             <div class="card-footer">
-                                <a href="" class="d-flex justify-content-between text-muted"><span>A propos des animaux</span><i class="fe fe-chevron-right"></i></a>
+                                <a href="/hebergement/list_can_be_hosted_animals" class="d-flex justify-content-between text-muted"><span>A propos des animaux</span><i class="fe fe-chevron-right"></i></a>
                             </div> <!-- .card-footer -->
                         </div> <!-- .card -->
                     </div> <!-- .col-md-->
+
+
                     <div class="col-md-4">
                         <div class="card mb-4 shadow">
                             <div class="card-body my-n3">
                                 <div class="row align-items-center">
                                     <div class="col-3 text-center">
-                          <span class="circle circle-lg bg-light">
-                            <i class="fe fe-shield fe-24 text-primary"></i>
-                          </span>
+{#                                        icone pour nourriture #}
+                                      <span class="circle circle-lg p-2 bg-light">
+                                          <img src="{% static 'assets/icons/dog-bone.png' %}" class="img-responsive" alt="">
+                                      </span>
                                     </div> <!-- .col -->
                                     <div class="col">
-                                        <a href="#">
+                                        <a href="/hebergement/list_foods">
                                             <h3 class="h5 mt-4 mb-1">Nourriture</h3>
                                         </a>
-                                        <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris blandit nisl ullamcorper, rutrum metus in, congue lectus.</p>
+                                        <p class="text-muted">
+                                            c'est ici que vous verrez plus d'informations sur la nourriture que l'on offre aux animaux domestiques
+                                        </p>
                                     </div> <!-- .col -->
                                 </div> <!-- .row -->
                             </div> <!-- .card-body -->
                             <div class="card-footer">
-                                <a href="" class="d-flex justify-content-between text-muted"><span>a propos de nourriture</span><i class="fe fe-chevron-right"></i></a>
+                                <a href="/hebergement/list_foods" class="d-flex justify-content-between text-muted"><span>a propos de nourriture</span><i class="fe fe-chevron-right"></i></a>
                             </div> <!-- .card-footer -->
                         </div> <!-- .card -->
                     </div> <!-- .col-md-->
