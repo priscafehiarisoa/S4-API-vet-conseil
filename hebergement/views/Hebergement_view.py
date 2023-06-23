@@ -10,5 +10,11 @@ def load_hosting_informations(request):
 def load_hosting_reservation(request):
     return render(request, "hebergement/hebergement/reservations_hebergement.html")
 
+
+
+# GERER LES DEMANDES D'HEBERGEMENTS
+
+# INITIALISATION de la page
 def load_hosting_request(request):
+
     return render(request, "hebergement/hebergement/demandes_hebergement.html")
