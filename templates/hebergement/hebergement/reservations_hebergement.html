@@ -37,6 +37,10 @@ reservations
                           </tr>
                         </thead>
                         <tbody>
+
+                        {% for re in reservation %}
+
+
                           <tr>
                             <td>
                               <div class="custom-control custom-checkbox">
@@ -45,10 +49,10 @@ reservations
                               </div>
                             </td>
 
-                            <td>368</td>
-                            <td>chien</td>
-                            <td>Imani Lara</td>
-                            <td>(478) 446-9234</td>
+                            <td>{{ re.id }}</td>
+                            <td>{{ re.patient.nature.designation }}</td>
+                            <td>{{ re.reservation.client.nom }} {{ re.reservation.client.prenom }}</td>
+                            <td>{{ re.reservation.client.contact }}</td>
 
 {#                              modal details #}
                                <td>
@@ -64,11 +68,69 @@ reservations
                                           </button>
                                         </div>
                                         <div class="modal-body">
+
     {#                                        contenu du modal pour les details #}
-                                            <p>details 1</p>
-                                            <p>details 2</p>
-                                            <p>details 3</p>
-                                            <p>details 4</p>
+{#                                            client #}
+                                                <div class="card">
+                                                    <div class="card_header">
+                                                        <h3>Client:  {{ re.reservation.client.nom }} {{ re.reservation.client.prenom }}</h3>
+                                                    </div>
+                                                    <div class="card_body">
+                                                        <p><strong>adresse : </strong>
+                                                        {{ re.reservation.client.adresse }}
+                                                        </p>
+                                                        <p><strong>contact : </strong>
+                                                        {{ re.reservation.client.contact }}
+                                                        </p>
+                                                        <p><strong>contact : </strong>
+                                                        {{ re.reservation.client.mail }}
+                                                        </p>
+                                                    </div>
+                                                </div>
+{#                                            patient #}
+                                                <div class="card">
+                                                    <div class="card_header">
+                                                        <h3>Patient:  {{ re.patient.nom }}</h3>
+                                                    </div>
+                                                    <div class="card_body">
+                                                        <p><strong>Age : </strong>
+                                                        {{ re.patient.age }}
+                                                        </p>
+                                                        <p><strong>contact : </strong>
+                                                        {{ re.patient.nature }}
+                                                        </p>
+                                                    </div>
+                                                </div>
+{#                                            medicaments #}
+                                                <div class="card">
+                                                    <div class="card_header">
+                                                        <h3>medicaments:  {{ re.medicaments }}</h3>
+                                                    </div>
+                                                    <div class="card_body">
+                                                        <p><strong>frequence : </strong>
+                                                        {{ re.frequence }}
+                                                        </p>
+                                                    </div>
+                                                </div>
+{#                                            nourriture #}
+{#                                            todo boucle here #}
+                                            <div class="card">
+                                                    <div class="card_header">
+                                                        <h3>nourriture: </h3>
+                                                    </div>
+                                                    <div class="card_body">
+{##}
+                                                        {% for no in re.nourriture.designation %}
+                                                        <p><strong>  </strong>
+                                                            {{ nourriture.designation }}
+                                                            </p>
+                                                        {% endfor %}
+
+{{ re.nourriture.designation }}
+
+                                                    </div>
+                                                </div>
+
                                         </div>
                                         <div class="modal-footer">
                                           <button type="button" class="btn mb-2 btn-secondary" data-dismiss="modal">fermer</button>
@@ -77,10 +139,11 @@ reservations
                                     </div>
                                   </div>
                             </td>
-                            <td><button class="btn btn-outline-danger">Annuler</button></td>
+                            <td><a href="{% url 'cancel_hosting' id_obj=re.reservation.id %}" class="btn btn-outline-danger">Annuler</a></td>
                             <td><button class="btn btn-outline-secondary">modifier</button></td>
                           </tr>
 
+                        {% endfor %}
 
 
 
@@ -94,4 +157,8 @@ reservations
           </div> <!-- .row -->
         </div> <!-- .container-fluid -->
 </main>
+
+
+
+
 {% endblock %}
