@@ -4,9 +4,9 @@ from hebergement.views import test, Hebergement_view,Nourriture_view,Animaux_heb
 
 urlpatterns = [
 #   hebergement_view
-#     path('',test.index,name="index"),
+    path('',Hebergement_view.add_new_hosting_request,name="add_new_hosting_request"),
     path('hosting_management', Hebergement_view.load_hosting_managemment, name="load_hosting_managemment"),
-    path("",Hebergement_view.load_hosting_managemment, name="load_hosting_managemment"),
+    # path("",Hebergement_view.load_hosting_managemment, name="load_hosting_managemment"),
     path('hosting_management/<str:allowed>', Hebergement_view.load_hosting_managemments, name="load_hosting_managemments"),
     path('check_date',Hebergement_view.check_if_valid_date,name="check_if_valid_date"),
     path('get_reservation',Hebergement_view.get_reservations,name="get_reservations"),

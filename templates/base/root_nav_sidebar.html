@@ -82,20 +82,20 @@
               </a>
               <ul class="collapse list-unstyled pl-4 w-100" id="ui-elements">
                 <li class="nav-item">
-                  <a class="nav-link pl-3" href="/hebergement/hosting_management"><span class="ml-1 item-text">gestion d'Hébergement </span>
+                  <a class="nav-link pl-3" href=" {% url 'load_hosting_managemment' %}"><span class="ml-1 item-text">gestion d'Hébergement </span>
                   </a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link pl-3" href="/hebergement/hosting_informations"><span class="ml-1 item-text">informations Hébergement</span></a>
+                  <a class="nav-link pl-3" href="{% url 'load_hosting_informations' %}"><span class="ml-1 item-text">informations Hébergement</span></a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link pl-3" href="/hebergement/list_hosted_animals"><span class="ml-1 item-text">liste des Hébergement</span></a>
+                  <a class="nav-link pl-3" href="{% url 'show_list_hosted_animals' %}"><span class="ml-1 item-text">liste des Hébergement</span></a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link pl-3" href="/hebergement/hosting_reservation"><span class="ml-1 item-text">reservations</span></a>
+                  <a class="nav-link pl-3" href="{% url 'load_hosting_reservation' %}"><span class="ml-1 item-text">reservations</span></a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link pl-3" href="/hebergement/hosting_request"><span class="ml-1 item-text">demandes d'Hébergement</span></a>
+                  <a class="nav-link pl-3" href="{% url 'load_hosting_request' %}"><span class="ml-1 item-text">demandes d'Hébergement</span></a>
                 </li>
 
               </ul>
@@ -108,16 +108,16 @@
               </a>
               <ul class="collapse list-unstyled pl-4 w-100" id="forms">
                 <li class="nav-item">
-                  <a class="nav-link pl-3" href="/hebergement/new_type_animal"><span class="ml-1 item-text">Ajouter</span></a>
+                  <a class="nav-link pl-3" href="{% url 'Add_new_type_animals' %}"><span class="ml-1 item-text">Ajouter</span></a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link pl-3" href="/hebergement/new_food"><span class="ml-1 item-text">ajouter alimentations</span></a>
+                  <a class="nav-link pl-3" href="{% url 'add_new_type_food' %}"><span class="ml-1 item-text">ajouter alimentations</span></a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link pl-3" href="/hebergement/list_can_be_hosted_animals"><span class="ml-1 item-text">liste animaux à heberger</span></a>
+                  <a class="nav-link pl-3" href="{% url 'show_list_animals_that_can_be_hosted' %}"><span class="ml-1 item-text">liste animaux à heberger</span></a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link pl-3" href="/hebergement/list_foods"><span class="ml-1 item-text">liste nourriture</span></a>
+                  <a class="nav-link pl-3" href="{% url 'load_list_animals_food' %}"><span class="ml-1 item-text">liste nourriture</span></a>
                 </li>
               </ul>
             </li>

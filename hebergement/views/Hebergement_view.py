@@ -1,8 +1,9 @@
 from datetime import datetime
 
+from django.utils import timezone
 from rest_framework.utils import json
 
-from hebergement.forms import Date_validation_form
+from hebergement.forms import Date_validation_form, Ajouter_hebergement_form
 from django.db.models import Q
 from django.http import HttpResponse, JsonResponse
 from django.shortcuts import render, redirect
@@ -13,13 +14,15 @@ from hebergement.models import Reservation, Details_reservation, Validation_rese
 # gestion des hebergements
 def load_hosting_managemment(request):
     formulaire = Date_validation_form()
-    context={"form":formulaire}
+    context = {"form": formulaire}
     return render(request, "hebergement/hebergement/Gestion_hebergement.html", context)
+
 
 def load_hosting_managemments(request, allowed):
     formulaire = Date_validation_form()
     return render(request, "hebergement/hebergement/Gestion_hebergement.html",
                   {"allowed": allowed, 'form': formulaire})
+
 
 def get_reservations(request):
     detail_reservations = Details_reservation.objects.all()
@@ -34,7 +37,7 @@ def get_reservations(request):
             background_color = 'red'
         else:
             background_color = 'gray'  # Default color for other etat values
-        title=d_reservation.reservation.client.nom," | ", d_reservation.patient.nom
+        title = d_reservation.reservation.client.nom, " | ", d_reservation.patient.nom
         event = {
             'title': title,
             'start': d_reservation.reservation.date_debut.isoformat(),
@@ -45,15 +48,16 @@ def get_reservations(request):
 
     return JsonResponse(events, safe=False)
 
+
 def get_list_animals_for_date(request):
     if request.method == 'POST':
-
         # todo mettre une condition pour relier au formulaire crée par jeddy
         # on obtient la requette venant du json
-        dict=json.loads(request.body)
+        dict = json.loads(request.body)
         print(dict['date'])
         response_data = {'message': 'Date received successfully'}
         return JsonResponse(dict)
+
 
 # verification de la validité des dates
 def check_if_valid_date(request):
@@ -62,20 +66,20 @@ def check_if_valid_date(request):
         if formulaire.is_valid():
             date_debut = formulaire.cleaned_data['date_debut']
             date_fin = formulaire.cleaned_data['date_fin']
-            print(date_debut,date_fin)
-            reservations=Reservation.objects.filter(
+            print(date_debut, date_fin)
+            reservations = Reservation.objects.filter(
                 Q(date_debut__range=(date_debut, date_fin)) | Q(date_fin__range=(date_debut, date_fin)),
                 etat=20
             )
-            if(reservations.count()>=10):
-                res="non",reservations.count()
+            if (reservations.count() >= 10):
+                res = "non", reservations.count()
                 return load_hosting_managemments(request, res)
             else:
                 res = "oui libre", reservations.count()
                 return load_hosting_managemments(request, res)
     else:
         formulaire = Date_validation_form()
-        return load_hosting_managemments(request,'non')
+        return load_hosting_managemments(request, 'non')
     return load_hosting_managemment(request)
 
 
@@ -119,3 +123,48 @@ def reject_request(request, id):
     reservation.etat = 0
     reservation.save()
     return load_hosting_request(request)
+
+
+# ajouter une demande d'hebergement
+
+def add_new_hosting_request(request):
+    if request.method == 'POST':
+        print("here")
+        form = Ajouter_hebergement_form(request.POST)
+        if form.is_valid():
+            print("here again")
+
+            client = form.cleaned_data['client']
+            animal = form.cleaned_data['animal']
+            date_debut = form.cleaned_data['date_debut_hebergement']
+            date_fin = form.cleaned_data['date_fin_hebergement']
+            nourriture = form.cleaned_data['type_nourriture']
+            quantite = form.cleaned_data['quantite']
+            frequence_nourriture = form.cleaned_data['frequence_nourriture']
+            medicaments = form.cleaned_data['medicaments']
+            frequence_medicaments = form.cleaned_data['frequence_medicament']
+
+            reservation = Reservation()
+            reservation.etat = 10
+            reservation.client = client
+            reservation.date_debut = date_debut
+            reservation.date_fin = date_fin
+            # todo mila calculer-na ny prix
+            reservation.prix = reservation.calcul_prix()
+            reservation.date_de_prise = timezone.now().date()
+            reservation.save()
+
+            detail_reservation = Details_reservation()
+            detail_reservation.reservation = reservation
+            detail_reservation.medicaments = medicaments
+            detail_reservation.patient = animal
+            detail_reservation.nourriture = nourriture
+            detail_reservation.frequence = frequence_medicaments
+            detail_reservation.save()
+
+        #     todo mila ampidirina le frequence ana nourriture io
+    else:
+        form = Ajouter_hebergement_form()
+    return render(request, 'hebergement/hebergement/ajout_hebergement/ajout_hebergement.html', {'form': form})
+
+
