@@ -1,0 +1,85 @@
+{% extends 'base/root_nav_sidebar.html' %}
+{% block title %}
+
+{% endblock %}
+{% block content %}
+
+<main role="main" class="main-content">
+    <div class="container-fluid">
+        <div class="row justify-content-center">
+            <div class="col-12">
+                <h2 class="h3 mb-3 page-title">liste des animaux que <span class="text-primary">Mon vet'Conseil </span> peut hébergés</h2>
+                <div class="row">
+                    <!-- Striped rows -->
+                    <div class="col-md-12 my-4">
+
+                        <div class="card shadow">
+                            <div class="card-body">
+                                <div class="toolbar row mb-3">
+                                    <div class="col">
+
+                                    </div>
+                                    <div class="col ml-auto">
+                                        <div class="dropdown float-right">
+                                            <button class="btn btn-primary float-right ml-3" type="button">ajouter +</button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- table -->
+                                <table class="table table-bordered">
+                                    <thead>
+
+                                    <tr role="row">
+                                        <th>
+                                            <div class="custom-control custom-checkbox">
+                                                <input type="checkbox" class="custom-control-input" id="all">
+                                                <label class="custom-control-label" for="all"></label>
+                                            </div>
+                                        </th>
+                                        <th>ID</th>
+                                        <th>race</th>
+                                        <th>-</th>
+
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr>
+                                        <td>
+                                            <div class="custom-control custom-checkbox">
+                                                <input type="checkbox" class="custom-control-input" id="4574">
+                                                <label class="custom-control-label" for="4574"></label>
+                                            </div>
+                                        </td>
+                                        <td>4574</td>
+                                        <td>bouledogue</td>
+
+                                        <td><button class="btn btn-sm dropdown-toggle more-horizontal" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            <span class="text-muted sr-only">Action</span>
+                                        </button>
+                                            <div class="dropdown-menu dropdown-menu-right p-3">
+                                                <a href="#" class=" btn btn-outline-primary ">modifier</a>
+                                                <a href="#" class="btn btn-outline-danger ">supprimer</a>
+                                            </div>
+                                        </td>
+                                    </tr>
+
+                                    </tbody>
+                                </table>
+                                <nav aria-label="Table Paging" class="mb-0 text-muted">
+                                    <ul class="pagination justify-content-end mb-0">
+                                        <li class="page-item"><a class="page-link" href="#">Previous</a></li>
+                                        <li class="page-item"><a class="page-link" href="#">1</a></li>
+                                        <li class="page-item"><a class="page-link" href="#">2</a></li>
+                                        <li class="page-item"><a class="page-link" href="#">3</a></li>
+                                        <li class="page-item"><a class="page-link" href="#">Next</a></li>
+                                    </ul>
+                                </nav>
+                            </div>
+                        </div>
+                    </div> <!-- simple table -->
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+{% endblock %}

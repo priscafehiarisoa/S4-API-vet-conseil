@@ -1,0 +1,211 @@
+{% extends 'base/root_nav_sidebar.html' %}
+{#title#}
+{% block title %}
+gestion d'hébergement
+{% endblock %}
+{% csrf_token %}
+{% block content %}
+ <main role="main" class="main-content">
+        <div class="container-fluid">
+          <div class="row justify-content-center">
+            <div class="col-12">
+                  <div class="row mb-5 align-items-center my-3 ">
+                    <div class="col">
+                      <h2 class="page-title">Gestion des hébergements</h2>
+                    </div>
+                    <div class="col-auto">
+                      <button type="button" class="btn" data-toggle="modal" data-target=".modal-calendar"><span class="fe fe-filter fe-16 text-muted"></span></button>
+                    </div>
+                  </div>
+                <div class="row mt-5">
+                <div id="selected-date"></div>
+                    <div id='calendar' class="col-8"></div>
+
+                    <div class=" col-4">
+
+                        <div class="card shadow mb-4">
+                            <div class="card-body">
+                             <p class="mb-2"><strong>rechercher une date en particulier</strong></p>
+
+                                <form action="">
+                                    <div class="row">
+                                        <div class="form-group col-9 ">
+                                      <div class="input-group">
+                                        <input type="text"
+                                               class="form-control drgpicker"
+                                               id="date-input1"
+                                               value="04/24/2020" aria-describedby="button-addon2">
+                                        <div class="input-group-append">
+                                          <div class="input-group-text" id="button-addon-date"><span class="fe fe-calendar fe-16"></span></div>
+                                        </div>
+                                      </div>
+                                    </div>
+                                    <div class="form-group col-2">
+                                      <input type="submit" class="btn btn-outline-primary right" value="voir">
+                                    </div>
+                                    </div>
+                                </form>
+                            </div>
+
+                        </div>
+
+                        <div class="card shadow mb-4">
+                            <div class="card-body">
+                                <a href="{% url 'load_hosting_informations' %}" class="btn btn-outline-primary">
+                                    détails des Hébergements
+                                </a>
+                            </div>
+
+                        </div>
+
+                        <div class="card shadow mb-4">
+                            <div class="card-body">
+                                <a href="{% url 'load_hosting_request' %}" class="btn btn-outline-primary">
+                                    <span class="badge badge-danger rounded-circle" >1</span>
+                                    <span>liste des demandes</span>
+                                </a>
+                            </div>
+
+                        </div>
+
+{#     verification des dates libres        #}
+                        <div class="card shadow mb-4">
+                            <div class="card-body">
+                              <p class="mb-2"><strong>verifications de dates libres</strong></p>
+                              <div class="">
+
+                                  <form action="{% url 'check_if_valid_date' %}" method="post">
+                                        {% csrf_token %}
+                                      {#                                  date de debut#}
+                                <div class="form-group ">
+                                  <label for="date-input1">debut</label>
+                                  <div class="input-group">
+                                      {{ form.date_debut }}
+                                    <div class="input-group-append">
+                                      <div class="input-group-text" id="button-addon-date"><span class="fe fe-calendar fe-16"></span></div>
+                                    </div>
+                                  </div>
+                                </div>
+{##}
+{#                                  date de fin#}
+{##}
+                                  <div class="form-group ">
+                                  <label for="date-input1">fin</label>
+                                  <div class="input-group">
+
+                                      {{ form.date_fin }}
+                                    <div class="input-group-append">
+                                      <div class="input-group-text" id="button-addon-date"><span class="fe fe-calendar fe-16"></span></div>
+                                    </div>
+                                  </div>
+                                </div>
+
+                                  <div class="form-group">
+                                      <input type="submit" class="offset-9 btn btn-outline-primary right" value="vérifier">
+                                  </div>
+                                  </form>
+
+                              </div>
+                            </div> <!-- /.card-body -->
+
+                            {% if allowed != None %}
+                            <div class="card shadow mb-4">
+                            <div class="card-body">
+                                <p>{{ allowed }}</p>
+                            </div>
+
+                        </div>
+                            {% endif %}
+                  </div> <!-- /.card -->
+                    </div>
+                </div>
+
+
+            </div> <!-- .col-12 -->
+          </div> <!-- .row -->
+        </div> <!-- .container-fluid -->
+      </main> <!-- m-->
+      <script>
+
+  document.addEventListener('DOMContentLoaded', function() {
+    var calendarEl = document.getElementById('calendar');
+
+    var calendar = new FullCalendar.Calendar(calendarEl, {
+      headerToolbar: {
+        left: 'prev,next today',
+        center: 'title',
+        right: 'dayGridMonth,timeGridWeek,timeGridDay'
+      },
+      initialDate: '2023-06-12',
+      themeSystem: 'bootstrap',
+
+      navLinks: true, // can click day/week names to navigate views
+      selectable: true,
+      selectMirror: true,
+
+        dateClick: function(info) {
+               var clickedDate = info.dateStr;
+
+              // Create an object with the data to send
+              var data = {
+                date: clickedDate
+              };
+              console.log(data)
+              // Make the AJAX request
+              fetch('{% url 'get_list_animals_for_date' %}', {
+                method: 'POST',
+                headers: {
+                  'Content-Type': 'application/json',
+                  'X-CSRFToken': '{{ csrf_token }}'  // Include CSRF token if required
+                },
+                body: JSON.stringify(data)
+              })
+              .then(response => {
+                  console.log("response ",response.json())
+                // ...
+                  console.log("voaray")
+              })
+              .catch(error => {
+                console.error('Error:', error);
+              });
+            },
+
+      eventClick: function(arg) {
+        if (confirm('Are you sure you want to delete this event?')) {
+          arg.event.remove()
+        }
+      },
+      editable: true,
+      dayMaxEvents: true, // allow "more" link when too many events
+      events: '{% url 'get_reservations' %}'
+    });
+
+    calendar.render();
+  });
+
+      </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+{% endblock %}

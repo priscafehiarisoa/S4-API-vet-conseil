@@ -3,4 +3,4 @@ from django.shortcuts import render
 
 # Create your views here.
 def index(request):
-    return render(request, "hebergement/reservations_hebergement.html")
+    return render(request, "hebergement/hebergement/liste_animaux_hebergees.html")

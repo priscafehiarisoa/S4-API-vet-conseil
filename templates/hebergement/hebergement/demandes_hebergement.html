@@ -1,0 +1,77 @@
+{% extends 'base/root_nav_sidebar.html' %}
+{% block title %}
+Demandes d'hébergement
+{% endblock %}
+
+{% block content %}
+<main role="main" class="main-content">
+        <div class="container-fluid">
+          <div class="row justify-content-center">
+            <div class="col-12">
+                <div class="row">
+                    <div class="col-5">
+                        <h2 class="mb-2 page-title">Demandes d'hébergement</h2>
+                    </div>
+                    <div class="offset-4 ">
+                        <a href="{% url 'load_hosting_reservation' %}" class="btn btn-outline-primary">voir les réservations</a>
+                    </div>
+
+                </div>
+
+              <div class="row my-4">
+                <!-- Small table -->
+                <div class="col-md-12">
+                  <div class="card shadow">
+                    <div class="card-body">
+                      <!-- table -->
+                      <table class="table datatables" id="dataTable-1">
+                        <thead>
+                          <tr>
+                            <th></th>
+                            <th>#</th>
+                            <th>nom du propriétaire</th>
+                            <th>téléphone</th>
+                            <th>animal de companie</th>
+                            <th>début d'hébergement</th>
+                            <th>fin d'hébergement</th>
+                              <th>date d'envoi de la reservation</th>
+                            <th>-</th>
+                            <th>-</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                     {% for re in reservation %}
+
+                          <tr>
+                            <td>
+                              <div class="custom-control custom-checkbox">
+                                <input type="checkbox" class="custom-control-input">
+                                <label class="custom-control-label"></label>
+                              </div>
+                            </td>
+                            <td>{{ re.id }}</td>
+                            <td>
+                                {{ re.reservation.client.nom }}
+
+                            </td>
+                            <td>{{ re.reservation.client.contact }}</td>
+                            <td>{{ re.patient.nature.designation }}</td>
+                            <td>{{ re.reservation.date_debut }}</td>
+                            <td>{{ re.reservation.date_fin }}</td>
+                            <td>{{ re.reservation.date_de_prise }}</td>
+                            <td><a href="{% url 'reject_request' id=re.reservation.id %}" class="btn btn-danger">refuser</a></td>
+                            <td><a href="{% url 'accept_request' id=re.reservation.id %}" class="btn btn-primary">accepter</a></td>
+
+                          </tr>
+ {% endfor %}
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                </div> <!-- simple table -->
+              </div> <!-- end section -->
+            </div> <!-- .col-12 -->
+          </div> <!-- .row -->
+        </div> <!-- .container-fluid -->
+</main>
+{% endblock %}
