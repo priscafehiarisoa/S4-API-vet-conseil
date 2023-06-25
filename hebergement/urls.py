@@ -15,6 +15,8 @@ urlpatterns = [
     # information hebergement
     path('hosting_informations',Hebergement_view.load_hosting_informations,name="load_hosting_informations"),
 
+    # tarifs
+    path('tarifs',Hebergement_view.load_tarifs,name="load_tarifs"),
     # reservation
     path('hosting_reservation',Hebergement_view.load_hosting_reservation,name="load_hosting_reservation"),
     path('cancel_hosting/<int:id_obj>',Hebergement_view.cancel_hosting, name="cancel_hosting"),
@@ -35,4 +37,10 @@ urlpatterns = [
 #     nourriture
     path('list_foods',Nourriture_view.load_list_animals_food,name="load_list_animals_food"),
     path('new_food',Nourriture_view.add_new_type_food,name="add_new_type_food"),
+
+
+
+
+
+
 ]

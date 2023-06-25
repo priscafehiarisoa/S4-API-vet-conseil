@@ -1,0 +1,78 @@
+
+{% extends 'base/root_nav_sidebar.html' %}
+{% block title %}
+Mon Vet Conseil - tarifs
+{% endblock %}
+
+{% block content %}
+<main role="main" class="main-content">
+    <div class="container-fluid">
+        <div class="row justify-content-center">
+            <div class="col-12">
+                <h2 class="h3 mb-3 page-title">les Tarifs d'hebergements de <span class="text-primary">Mon vet'Conseil </span> </h2>
+                <div class="row">
+                    <!-- Striped rows -->
+                    <div class="col-md-12 my-4">
+
+                        <div class="card shadow">
+                            <div class="card-body">
+                                <div class="toolbar row mb-3">
+
+                                </div>
+                                <!-- table -->
+                                <table class="table table-bordered">
+                                    <thead>
+
+                                    <tr role="row">
+                                        <th>
+                                            <div class="custom-control custom-checkbox">
+                                                <input type="checkbox" class="custom-control-input" id="all">
+                                                <label class="custom-control-label" for="all"></label>
+                                            </div>
+                                        </th>
+                                        <th>race</th>
+                                        <th>tarif journalier</th>
+                                        <th>tarif horaire</th>
+                                        <th>-</th>
+
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+
+                                    {% for tarifs in tarif %}
+
+
+                                    <tr>
+                                        <td>
+                                            <div class="custom-control custom-checkbox">
+                                                <input type="checkbox" class="custom-control-input" id="4574">
+                                                <label class="custom-control-label" for="4574"></label>
+                                            </div>
+                                        </td>
+                                        <td>{{ tarifs.race.designation }}</td>
+                                        <td>{{ tarifs.montant_journalier }}</td>
+                                        <td>{{ tarifs.montant_horaire }}</td>
+
+                                        <td><button class="btn btn-sm dropdown-toggle more-horizontal" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            <span class="text-muted sr-only">Action</span>
+                                        </button>
+                                            <div class="dropdown-menu dropdown-menu-right p-3">
+                                                <a href="#" class=" btn btn-outline-primary ">modifier</a>
+                                                <a href="#" class="btn btn-outline-danger ">supprimer</a>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    {% endfor %}
+
+                                    </tbody>
+                                </table>
+
+                            </div>
+                        </div>
+                    </div> <!-- simple table -->
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+{% endblock %}

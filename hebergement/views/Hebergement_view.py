@@ -8,7 +8,7 @@ from django.db.models import Q
 from django.http import HttpResponse, JsonResponse
 from django.shortcuts import render, redirect
 
-from hebergement.models import Reservation, Details_reservation, Validation_reservation
+from hebergement.models import Reservation, Details_reservation, Validation_reservation,Tarifs_Hebergement
 
 
 # gestion des hebergements
@@ -168,3 +168,6 @@ def add_new_hosting_request(request):
     return render(request, 'hebergement/hebergement/ajout_hebergement/ajout_hebergement.html', {'form': form})
 
 
+def load_tarifs(request):
+    tarif=Tarifs_Hebergement.objects.all()
+    return render(request,'hebergement/tarifs/details_tarifs.html',{'tarif':tarif})
