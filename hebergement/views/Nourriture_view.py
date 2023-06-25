@@ -12,15 +12,15 @@ def load_list_animals_food(request):
     if id_race == None:
         race = Race.objects.get(id=1)
         attributions = Attribution.objects.filter(race= race);
-        return render(request, "hebergement/liste_nourriture.html", {"attributions": attributions, "races": races})
+        return render(request, "hebergement/nourriture/liste_nourriture.html", {"attributions": attributions, "races": races})
 
     else:
         race = Race.objects.get(id=id_race)
         attributions = Attribution.objects.filter(race= race);
-        return render(request, "hebergement/liste_nourriture.html", {"attributions": attributions, "races":races})
+        return render(request, "hebergement/nourriture/liste_nourriture.html", {"attributions": attributions, "races":races})
 
 
 
 
 def add_new_type_food(request):
-    return render(request,"hebergement/ajouter_nourriture.html")
+    return render(request,"hebergement/nourriture/ajouter_nourriture.html")

@@ -9,14 +9,28 @@
   <div class="container-fluid">
     <div class="row justify-content-center">
       <div class="col-12">
+
+      <div class="row">
+                    <div class="col-5 m-3 p-3">
+                        <h2 class="mb-2 page-title">Liste des nourritures </h2>
+                    </div>
+
+                </div>
+
         <div class="col-md-10 mb-4">
           <div class="card shadow">
             <div class="card-body py-4 mb-1">
               <div class="row">
                 <div class="col-md-3">
-                  <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+                  <div class="nav flex-column nav-pills shadow" id="v-pills-tab" role="tablist" aria-orientation="vertical">
                     {% for race in races %}
-                    <a class="nav-link race-link" href="/hebergement/list_foods?id_race={{ race.id }}" aria-selected="false">{{ race.designation }}</a>
+                        {% if race == attributions.first.race %}
+                            <a class="nav-link p-2" href="/hebergement/list_foods?id_race={{ race.id }}" > <i class="fe fe-play fe-12 pr-2"></i>{{ race.designation }}</a>
+                        {% else %}
+                           <a class="nav-link p-2"  href="/hebergement/list_foods?id_race={{ race.id }}" >{{ race.designation }}</a>
+                        {% endif %}
+
+
                     {% endfor %}
                   </div>
                 </div>
@@ -30,7 +44,7 @@
                             <div class="card-body text-center">
                               <div class="avatar avatar-lg mt-4">
                                 <a href="">
-                                  <img src="{% static '/assets/avatars/face-4.jpg'%}" alt="..." class="avatar-img rounded-circle">
+                                  <img src="{% static '/assets/icons/ax-food.png'%}" alt="..." class="avatar-img rounded-circle">
                                 </a>
                               </div>
                               <div class="card-text my-2">
@@ -53,8 +67,7 @@
                                   <p>{{ attribution.nourriture.description }}</p>
                                 </div>
                                 <div class="modal-footer">
-                                  <button type="button" class="btn mb-2 btn-secondary" data-dismiss="modal">Close</button>
-                                  <button type="button" class="btn mb-2 btn-primary">Save changes</button>
+                                  <button type="button" class="btn mb-2 btn-outline-secondary" data-dismiss="modal">fermer</button>
                                 </div>
                               </div>
                             </div>
@@ -74,3 +87,8 @@
   </div>
 </main>
 {% endblock %}
+<style>
+    .selected{
+        background-color: red;
+    }
+</style>
