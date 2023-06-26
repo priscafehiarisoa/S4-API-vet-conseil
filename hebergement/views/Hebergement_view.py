@@ -79,14 +79,14 @@ def check_if_valid_date(request):
                 etat=20
             )
             if (reservations.count() >= 10):
-                res = "non", reservations.count()
+                res = "les dates sélectionnées "+ str(date_debut)+" et "+str(date_fin)+" ne sont pas valides "
                 return load_hosting_managemments(request, res)
             else:
-                res = "oui libre", reservations.count()
+                res = "les dates sélectionnés "+ str(date_debut)+" et "+str(date_fin)+" sont libres : il reste "+ (10-reservations.count()).__str__()+" place(s)"
                 return load_hosting_managemments(request, res)
     else:
         formulaire = Date_validation_form()
-        return load_hosting_managemments(request, 'non')
+        return load_hosting_managemment(request)
     return load_hosting_managemment(request)
 
 
