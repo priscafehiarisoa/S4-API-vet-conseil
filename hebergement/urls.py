@@ -17,6 +17,8 @@ urlpatterns = [
 
     # tarifs
     path('tarifs',Hebergement_view.load_tarifs,name="load_tarifs"),
+    path('tarifs_modifier/<int:id_tarif>',Hebergement_view.modify_tarifs,name="modify_tarif"),
+    path('modify_tarif_view',Hebergement_view.modifier_tarif_view,name="modifier_tarif_view"),
     # reservation
     path('hosting_reservation',Hebergement_view.load_hosting_reservation,name="load_hosting_reservation"),
     path('cancel_hosting/<int:id_obj>',Hebergement_view.cancel_hosting, name="cancel_hosting"),

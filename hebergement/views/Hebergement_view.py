@@ -3,12 +3,12 @@ from datetime import datetime
 from django.utils import timezone
 from rest_framework.utils import json
 
-from hebergement.forms import Date_validation_form, Ajouter_hebergement_form
+from hebergement.forms import Date_validation_form, Ajouter_hebergement_form, Modifier_tarif_form
 from django.db.models import Q
 from django.http import HttpResponse, JsonResponse
 from django.shortcuts import render, redirect
 
-from hebergement.models import Reservation, Details_reservation, Validation_reservation,Tarifs_Hebergement
+from hebergement.models import Reservation, Details_reservation, Validation_reservation, Tarifs_Hebergement
 
 
 # gestion des hebergements
@@ -169,5 +169,56 @@ def add_new_hosting_request(request):
 
 
 def load_tarifs(request):
-    tarif=Tarifs_Hebergement.objects.all()
-    return render(request,'hebergement/tarifs/details_tarifs.html',{'tarif':tarif})
+    tarif = Tarifs_Hebergement.objects.all()
+    return render(request, 'hebergement/tarifs/details_tarifs.html', {'tarif': tarif})
+
+
+def modify_tarifs(request, id_tarif):
+
+    tarif = Tarifs_Hebergement.objects.get(id=id_tarif)
+    form = Modifier_tarif_form()
+    form.initial['id_race'] = tarif.race_id
+    form.initial['id_tarif'] = tarif.id
+    form.initial['montant_horaire'] = tarif.montant_horaire
+    form.initial['montant_journalier'] = tarif.montant_journalier
+    form.initial['race']=tarif.race.designation
+    return render(request, 'hebergement/tarifs/modifier_tarif.html', {'form': form})
+
+def modifier_tarif_view(request):
+    if request.method == 'POST':
+        print("start")
+        form = Modifier_tarif_form(request.POST)
+        print("ok2")
+        try:
+            print(form.is_valid())
+            if form.is_valid():
+                print("ok1")
+                try:
+                    print(0)
+                    id_tarif = form.cleaned_data['id_tarif']
+                    print(form.cleaned_data['id_race'])
+                    montant_journalier = form.cleaned_data['montant_journalier']
+                    print(2)
+                    montant_horaire = form.cleaned_data['montant_horaire']
+                    print(3)
+                    tarif=Tarifs_Hebergement.objects.get(id=id_tarif)
+                    print(4)
+                    tarif.montant_horaire=montant_horaire
+                    print(5)
+                    tarif.montant_journalier=montant_journalier
+                    print(6)
+                    tarif.save()
+                    print("ok")
+                except:
+                    print(form.errors)
+
+                return redirect('load_tarifs')
+            else:
+                print(">> ",form.errors)
+        except:
+            print(form.errors)
+    else:
+        print("eto")
+        form = Modifier_tarif_form()
+
+    return render(request, 'hebergement/tarifs/modifier_tarif.html', {'form': form})

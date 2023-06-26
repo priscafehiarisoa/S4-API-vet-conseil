@@ -23,3 +23,12 @@ class Ajouter_hebergement_form(forms.Form):
     frequence_nourriture=forms.IntegerField(min_value=0,widget=forms.TextInput(attrs={'class': 'form-control','placeholder':'ex:2'}))
     medicaments=forms.BooleanField(required=False,widget=forms.CheckboxInput(attrs={'class': 'custom-control-input','type':'checkbox','id':'customSwitch1'}))
     frequence_medicament=forms.IntegerField(min_value=0,widget=forms.TextInput(attrs={'class': 'form-control','placeholder':'frequence du/des medicaments , ex: 3'}))
+
+
+
+class Modifier_tarif_form(forms.Form):
+    id_race=forms.IntegerField(widget=forms.TextInput({'class': 'form-control','type':'number'}),required=False)
+    id_tarif=forms.IntegerField(widget=forms.TextInput({'class': 'form-control','type':'number'}),required=False)
+    race=forms.CharField(widget=forms.TextInput({'class': 'form-control','disabled':'True'}),required=False)
+    montant_journalier=forms.DecimalField(max_digits=10,decimal_places=2,min_value=0,widget=forms.TextInput({'class': 'form-control','type':'number'}))
+    montant_horaire=forms.DecimalField(max_digits=10,decimal_places=2,min_value=0,widget=forms.TextInput({'class': 'form-control','type':'number'}))
