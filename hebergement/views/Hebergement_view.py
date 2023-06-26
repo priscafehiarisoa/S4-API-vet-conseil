@@ -14,14 +14,17 @@ from hebergement.models import Reservation, Details_reservation, Validation_rese
 # gestion des hebergements
 def load_hosting_managemment(request):
     formulaire = Date_validation_form()
-    context = {"form": formulaire}
+    nombre_hebergement_attentes= Reservation.objects.filter(etat=10).count()
+    context = {"form": formulaire, 'nombre_hebergement_attente':nombre_hebergement_attentes}
     return render(request, "hebergement/hebergement/Gestion_hebergement.html", context)
 
 
 def load_hosting_managemments(request, allowed):
     formulaire = Date_validation_form()
+    nombre_hebergement_attentes = Reservation.objects.filter(etat=10).count()
+    context = {"form": formulaire, 'nombre_hebergement_attente': nombre_hebergement_attentes,"allowed": allowed}
     return render(request, "hebergement/hebergement/Gestion_hebergement.html",
-                  {"allowed": allowed, 'form': formulaire})
+                  context)
 
 
 def get_reservations(request):
@@ -29,12 +32,16 @@ def get_reservations(request):
 
     events = []
     for d_reservation in detail_reservations:
+        # en attente
         if d_reservation.reservation.etat == 10:
-            background_color = 'yellow'
+            background_color = '#F5BEBD'
+        #     validé
         elif d_reservation.reservation.etat == 20:
-            background_color = 'green'
-        elif d_reservation.reservation.etat == 30:
-            background_color = 'red'
+            background_color = '#1979EC'
+
+        #     annulé
+        elif d_reservation.reservation.etat == -10:
+            background_color = '#F47174'
         else:
             background_color = 'gray'  # Default color for other etat values
         title = d_reservation.reservation.client.nom, " | ", d_reservation.patient.nom
@@ -96,7 +103,7 @@ def load_hosting_reservation(request):
 
 def cancel_hosting(request, id_obj):
     res = Reservation.objects.get(id=id_obj)
-    res.etat = 30
+    res.etat = -10
     res.save()
     return load_hosting_reservation(request)
 
