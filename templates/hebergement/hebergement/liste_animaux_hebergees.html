@@ -27,16 +27,18 @@ Demandes d'hébergement
                           <tr>
                             <th></th>
                             <th>#</th>
-                           <th>animal de companie</th>
-                            <th>nom du propriétaire</th>
-                            <th>téléphone</th>
+                           <th>race</th>
+                            <th>debut intervalle age</th>
+                            <th>fin intervalle age</th>
                             <th>début d'hébergement</th>
                             <th>fin d'hébergement</th>
                             <th>details</th>
 
                           </tr>
+
                         </thead>
                         <tbody>
+                        {% for animaux in animal %}
                           <tr>
                             <td>
                               <div class="custom-control custom-checkbox">
@@ -44,12 +46,12 @@ Demandes d'hébergement
                                 <label class="custom-control-label"></label>
                               </div>
                             </td>
-                            <td>368</td>
-                              <td>chien</td>
-                            <td>Imani Lara</td>
-                            <td>(478) 446-9234</td>
-                            <td>12-12-2023</td>
-                            <td>13-12-2023.</td>
+                            <td>{{ animaux.id }}</td>
+                              <td>{{ animaux.race }}</td>
+                            <td>{{ animaux.debut_interval_age }}</td>
+                            <td>{{ animaux.fin_interval_age }}</td>
+                            <td>{{ animaux.debut_interval_validite }}</td>
+                            <td>{{ animaux.fin_interval_validite }}</td>
                             <td>
                                  <button type="button" class="btn mb-2 btn-outline-primary" data-toggle="modal" data-target=".modal-right">voir les details</button>
                                 <!-- Slide Modal -->
@@ -77,6 +79,8 @@ Demandes d'hébergement
                             </td>
 
                           </tr>
+                        {% endfor %}
+
 
                         </tbody>
                       </table>
