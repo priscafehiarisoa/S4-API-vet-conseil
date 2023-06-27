@@ -142,11 +142,11 @@ sup {
   top: -.5em; }
 
 a {
-  color: #1979EC;
+  color: var(--secondary);
   text-decoration: none;
   background-color: transparent; }
   a:hover {
-    color: #014AAD ;
+    color: var(--white) ;
     text-decoration: underline; }
 
 a:not([href]) {
@@ -2031,11 +2031,11 @@ fieldset:disabled a.btn {
     border-color: #050506; }
     .btn-dark:not(:disabled):not(.disabled):active:focus, .btn-dark:not(:disabled):not(.disabled).active:focus,
     .show > .btn-dark.dropdown-toggle:focus {
-      box-shadow: 0 0 0 0.2rem rgba(66, 70, 73, 0.5); }
+      box-shadow: 0 0 0 0.2rem rgba(228, 250, 255, 0.5); }
 
-btn-outline-primary {
-  color: #1979EC;
-  border-color: #1979EC; }
+.btn-outline-primary {
+  color: #1979EC;!important;
+  border-color: #1979EC; !important;}
   .btn-outline-primary:hover {
     color: #FAF0EF;
     background-color: #014AAD;
@@ -3595,8 +3595,8 @@ input[type="button"].btn-block {
     box-shadow: 0 0 0 0.2rem rgba(27, 104, 255, 0.5); }
 
 .badge-secondary {
-  color: #ffffff;
-  background-color: #6c757d; }
+  color: var(--primary);
+  background-color: var(--secondary); }
   a.badge-secondary:hover, a.badge-secondary:focus {
     color: #ffffff;
     background-color: #545b62; }
@@ -3962,7 +3962,7 @@ input[type="button"].btn-block {
       border-bottom-width: 0; }
 
 .list-group-item-primary {
-  color: #0e3685;
+  color: var(--primary);
   background-color: #bfd5ff; }
   .list-group-item-primary.list-group-item-action:hover, .list-group-item-primary.list-group-item-action:focus {
     color: #0e3685;
@@ -7011,7 +7011,7 @@ button.bg-dark:focus {
   color: #ffffff !important; }
 
 .text-primary {
-  color: #1b68ff !important; }
+  color: var(--primary) !important; }
 
 a.text-primary:hover, a.text-primary:focus {
   color: #0045ce !important; }
@@ -8088,11 +8088,11 @@ svg.navbar-brand-img {
 .nav-tabs .nav-link {
   color: #adb5bd; }
   .nav-tabs .nav-link.active {
-    color: #1b68ff;
+    color: var(--primary);
     border-color: #1b68ff; }
 
 .shadow {
-  box-shadow: 0 0.75rem 1.5rem rgba(26, 26, 26, 0.1) !important; }
+  box-shadow: 0 0.75rem 1.5rem rgba(196, 228, 246, 0.1) !important; }
 
 .shadow-lg {
   box-shadow: 0 0.75rem 1.5rem rgba(26, 26, 26, 0.1) !important; }
@@ -8155,8 +8155,8 @@ svg.navbar-brand-img {
   border-color: #212529; }
   .fc-bootstrap .fc-toolbar .btn.active {
     color: #dee2e6;
-    background-color: #1b68ff;
-    border-color: #1b68ff; }
+    background-color: var(--primary);
+    border-color:  var(--primary); }
 
 .fc-bootstrap .fc-event {
   color: #343a40;

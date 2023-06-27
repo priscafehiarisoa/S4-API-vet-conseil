@@ -32,6 +32,7 @@
     <link rel="stylesheet" href="{% static 'css/app-light.css'%}" id="lightTheme">
     <link rel="stylesheet" href="{% static 'css/app-dark.css'%}" id="darkTheme" disabled>
     <link rel="stylesheet" href="{% static 'css/personalized.css'%}" >
+    <link rel="stylesheet" href="{% static 'css/badge.css'%}" >
 
   {% block head %}
 
@@ -90,9 +91,16 @@
     <script src="{% static 'js/dropzone.min.js'%}"></script>
     <script src="{% static 'js/uppy.min.js'%}"></script>
     <script src="{% static 'js/quill.min.js'%}"></script>
-      <script src="{% static  'js/fullcalendar.js'%}"></script>
-    <script src="{% static 'js/fullcalendar.custom.js' %}"></script>
+  <script src={% static '/fullcalendar-6.1.8/dist/index.global.js' %}></script>
+
+{#      <script src="{% static  'js/fullcalendar.js'%}"></script>#}
+{#    <script src="{% static 'js/fullcalendar.custom.js' %}"></script>#}
+{#<script src="{% static 'packages/interaction/main.js' %}"></script>#}
+{#<script src={% static 'packages/daygrid/main.js' %}></script>#}
+{#<script src="{% static 'packages/timegrid/main.js' %}"></script>#}
+
 <script>
+
       $('.select2').select2(
       {
         theme: 'bootstrap4',

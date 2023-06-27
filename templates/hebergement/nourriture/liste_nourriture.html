@@ -4,120 +4,96 @@
 
 {% endblock %}
 
-{#todo ne pas oublier de changer les id dans les modals sinon ça ne marche#}
 {% block content %}
 <main role="main" class="main-content">
-        <div class="container-fluid">
-          <div class="row justify-content-center">
-            <div class="col-12">
-                <div class="col-md-10 mb-4">
-                  <div class="card shadow">
-                    <div class="card-body py-4 mb-1">
+  <div class="container-fluid">
+    <div class="row justify-content-center">
+      <div class="col-12">
+
+      <div class="row">
+                <div class="row col-5 m-3 p-3">
+                        <h2 class="mb-2 page-title">Liste des nourritures </h2>
+                    </div>
+                    <div class="col m-5 pr-2">
+                       <div class="dropdown float-right">
+                             <a href="{% url 'add_new_type_food' %}" class="btn btn-primary float-right ml-3" type="button">ajouter +</a>
+                       </div>
+                     </div>
+
+                </div>
+
+        <div class="col-md-10 mb-4">
+          <div class="card shadow">
+            <div class="card-body py-4 mb-1">
+              <div class="row">
+                <div class="col-md-3">
+                  <div class="nav flex-column nav-pills shadow" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+                    {% for race in races %}
+                        {% if race == attributions.first.race %}
+                            <a class="nav-link p-2" href="/hebergement/list_foods?id_race={{ race.id }}" > <i class="fe fe-play fe-12 pr-2"></i>{{ race.designation }}</a>
+                        {% else %}
+                           <a class="nav-link p-2"  href="/hebergement/list_foods?id_race={{ race.id }}" >{{ race.designation }}</a>
+                        {% endif %}
+
+
+                    {% endfor %}
+                  </div>
+                </div>
+                <div class="col-md-9">
+                  <div class="tab-content mb-4" id="v-pills-tabContent">
+                    <div class="tab-pane fade show active" id="v-pills-home" role="tabpanel" aria-labelledby="v-pills-home-tab">
                       <div class="row">
-                        <div class="col-3">
-                          <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
-                            <a class="nav-link active" id="v-pills-home-tab" data-toggle="pill" href="#v-pills-home" role="tab" aria-controls="v-pills-home" aria-selected="true">chien</a>
-                            <a class="nav-link" id="v-pills-profile-tab" data-toggle="pill" href="#v-pills-profile" role="tab" aria-controls="v-pills-profile" aria-selected="false">chat</a>
+                        {% for attribution in attributions %}
+                        <div class="col-md-4">
+                          <div class="card shadow mb-4" data-toggle="modal" data-target="#defaultModal{{ forloop.counter }}">
+                            <div class="card-body text-center">
+                              <div class="avatar avatar-lg mt-4">
+                                <a href="">
+                                  <img src="{% static '/assets/icons/ax-food.png'%}" alt="..." class="avatar-img rounded-circle">
+                                </a>
+                              </div>
+                              <div class="card-text my-2">
+                                <strong class="card-title my-0">{{ attribution.nourriture.designation }}</strong>
+                                <p class="small text-muted mb-0">{{ attribution.nourriture.prix_par_unite }}/{{ attribution.nourriture.unite }}g</p>
+                              </div>
+                            </div>
+                          </div>
+                          <!-- Modal -->
+                          <div class="modal fade" id="defaultModal{{ forloop.counter }}" tabindex="-1" role="dialog" aria-labelledby="defaultModalLabel" aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                              <div class="modal-content">
+                                <div class="modal-header">
+                                  <h5 class="modal-title" id="defaultModalLabel">{{ attribution.nourriture.designation }}</h5>
+                                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                  </button>
+                                </div>
+                                <div class="modal-body">
+                                  <p>{{ attribution.nourriture.description }}</p>
+                                </div>
+                                <div class="modal-footer">
+                                  <button type="button" class="btn mb-2 btn-outline-secondary" data-dismiss="modal">fermer</button>
+                                </div>
+                              </div>
+                            </div>
                           </div>
                         </div>
-                        <div class="col-8">
-                          <div class="tab-content mb-4" id="v-pills-tabContent">
-                            <div class="tab-pane fade show active" id="v-pills-home" role="tabpanel" aria-labelledby="v-pills-home-tab">
-                                    <div class="row">
-                                        <div class="col-md-4">
-                                          <div class="card shadow mb-4 "data-toggle="modal" data-target="#defaultModal">
-                                            <div class="card-body text-center">
-                                              <div class="avatar avatar-lg mt-4">
-                                                <a href="">
-                                                  <img src="{% static '/assets/avatars/face-4.jpg' %}" alt="..." class="avatar-img rounded-circle">
-                                                </a>
-                                              </div>
-                                              <div class="card-text my-2">
-                                                <strong class="card-title my-0">riz </strong>
-                                                <p class="small text-muted mb-0">100 ar/j</p>
-                                              </div>
-                                            </div>
-                                          </div>
-                                          <!-- Modal -->
-                                          <div class="modal fade" id="defaultModal" tabindex="-1" role="dialog" aria-labelledby="defaultModalLabel" aria-hidden="true">
-                                            <div class="modal-dialog" role="document">
-                                              <div class="modal-content">
-                                                <div class="modal-header">
-                                                  <h5 class="modal-title" id="defaultModalLabel">Modal title</h5>
-                                                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                    <span aria-hidden="true">&times;</span>
-                                                  </button>
-                                                </div>
-                                                <div class="modal-body">
-                                                    <p>detail 1</p>
-                                                    <p>detail 2</p>
-                                                    <p>detail 3</p>
-                                                    <p>detail 4</p>
-                                                    <p>detail 5</p>
-                                                </div>
-                                                <div class="modal-footer">
-                                                  <button type="button" class="btn mb-2 btn-secondary" data-dismiss="modal">Close</button>
-                                                  <button type="button" class="btn mb-2 btn-primary">Save changes</button>
-                                                </div>
-                                              </div>
-                                            </div>
-                                          </div>
-                                        </div>
-                                    </div>
-                            </div>
-                            <div class="tab-pane fade mb-4" id="v-pills-profile" role="tabpanel" aria-labelledby="v-pills-profile-tab">
-                                     <div class="row">
-                                        <div class="col-md-4" data-toggle="modal" data-target="#defaultModal2">
-                                          <div class="card shadow mb-4">
-                                            <div class="card-body text-center">
-                                              <div class="avatar avatar-lg mt-4">
-                                                <a href="">
-                                                  <img src="{% static '/assets/avatars/face-4.jpg' %}" alt="..." class="avatar-img rounded-circle">
-                                                </a>
-                                              </div>
-                                              <div class="card-text my-2">
-                                                <strong class="card-title my-0">riz </strong>
-                                                <p class="small text-muted mb-0">100 ar/j</p>
-                                              </div>
-                                            </div>
-                                          </div>
-                                          <!-- Modal -->
-                                          <div class="modal fade" id="defaultModal2" tabindex="-1" role="dialog" aria-labelledby="defaultModalLabel" aria-hidden="true">
-                                            <div class="modal-dialog" role="document">
-                                              <div class="modal-content">
-                                                <div class="modal-header">
-                                                  <h5 class="modal-title" id="defaultModalLabel">Modal title</h5>
-                                                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                    <span aria-hidden="true">&times;</span>
-                                                  </button>
-                                                </div>
-                                                <div class="modal-body">
-                                                    <p>detail 1</p>
-                                                    <p>detail 2</p>
-                                                    <p>detail 3</p>
-                                                    <p>detail 4</p>
-                                                    <p>detail 5</p>
-                                                </div>
-                                                <div class="modal-footer">
-                                                  <button type="button" class="btn mb-2 btn-secondary" data-dismiss="modal">Close</button>
-                                                  <button type="button" class="btn mb-2 btn-primary">Save changes</button>
-                                                </div>
-                                              </div>
-                                            </div>
-                                          </div>
-                                        </div>
-
-                                     </div>
-                            </div>
-
-                          </div>
-                        </div>
+                        {% endfor %}
                       </div>
                     </div>
                   </div>
                 </div>
+              </div>
             </div>
           </div>
         </div>
+      </div>
+    </div>
+  </div>
 </main>
 {% endblock %}
+<style>
+    .selected{
+        background-color: red;
+    }
+</style>

@@ -13,7 +13,7 @@ Demandes d'hébergement
                         <h2 class="mb-2 page-title">Demandes d'hébergement</h2>
                     </div>
                     <div class="offset-4 ">
-                        <button class="btn btn-outline-primary">voir les réservations</button>
+                        <a href="{% url 'load_hosting_reservation' %}" class="btn btn-outline-primary">voir les réservations</a>
                     </div>
 
                 </div>
@@ -34,11 +34,14 @@ Demandes d'hébergement
                             <th>animal de companie</th>
                             <th>début d'hébergement</th>
                             <th>fin d'hébergement</th>
+                              <th>date d'envoi de la reservation</th>
                             <th>-</th>
                             <th>-</th>
                           </tr>
                         </thead>
                         <tbody>
+                     {% for re in reservation %}
+
                           <tr>
                             <td>
                               <div class="custom-control custom-checkbox">
@@ -46,17 +49,21 @@ Demandes d'hébergement
                                 <label class="custom-control-label"></label>
                               </div>
                             </td>
-                            <td>368</td>
-                            <td>Imani Lara</td>
-                            <td>(478) 446-9234</td>
-                            <td>chien</td>
-                            <td>12-12-2023</td>
-                            <td>13-12-2023.</td>
-                            <td><button class="btn btn-danger">refuser</button></td>
-                            <td><button class="btn btn-primary">accepter</button></td>
+                            <td>{{ re.id }}</td>
+                            <td>
+                                {{ re.reservation.client.nom }}
+
+                            </td>
+                            <td>{{ re.reservation.client.contact }}</td>
+                            <td>{{ re.patient.nature.designation }}</td>
+                            <td>{{ re.reservation.date_debut }}</td>
+                            <td>{{ re.reservation.date_fin }}</td>
+                            <td>{{ re.reservation.date_de_prise }}</td>
+                            <td><a href="{% url 'reject_request' id=re.reservation.id %}" class="btn btn-danger">refuser</a></td>
+                            <td><a href="{% url 'accept_request' id=re.reservation.id %}" class="btn btn-primary">accepter</a></td>
 
                           </tr>
-
+ {% endfor %}
                         </tbody>
                       </table>
                     </div>
