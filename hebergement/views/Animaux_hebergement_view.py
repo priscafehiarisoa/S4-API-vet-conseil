@@ -1,5 +1,5 @@
 from django.http import HttpResponse
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.views.decorators.csrf import csrf_protect
 from hebergement.models import Animal_accepte
 from hebergement.models.race import Race
@@ -47,6 +47,6 @@ def traiter_formulaire(request):
         animal.save()
 
         # Redirigez vers une autre vue ou affichez un message de confirmation
-        return render(request, 'hebergement/hebergement/Gestion_hebergement.html')
+        return redirect('load_hosting_managemment')
     return render(request,"hebergement/animaux/Ajouter_Animaux.html" )
 
