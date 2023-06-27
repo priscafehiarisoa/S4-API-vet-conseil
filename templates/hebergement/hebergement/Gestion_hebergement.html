@@ -31,25 +31,7 @@ gestion d'hébergement
                         </div>
                     </div>
                 </div>
-                    <style>
-                        .rect-attente{
-                            background-color:#F5BEBD;
-                            border-radius:10px;
 
-                            width: 30px;
-                            height: 30px;
-                            align-items: center;
-                        }
-                        .rect-valide{
-                            background-color:#1979EC; border-radius:10px;width: 30px;height: 30px
-                        }
-                        .rect-annule{
-                            background-color:#F47174; border-radius:10px;width: 30px;height: 30px
-                        }
-                        .rect-autre{
-                            background-color:gray; border-radius:10px;width: 30px;height: 30px
-                        }
-                    </style>
 
 
                     <div class=" col-4">
@@ -113,7 +95,7 @@ gestion d'hébergement
                                 </div>
 
                                 <div class="row">
-                                    <a href="{% url 'load_hosting_reservation' %}" class="btn btn-outline-primary col-8 m-2">
+                                    <a href="{% url 'add_new_hosting_request' %}" class="btn btn-outline-primary col-8 m-2">
                                    <i class="fe fe-plus-circle fe-16"></i>
                                     <span>nouvelle demande </span>
                                 </a>
@@ -241,10 +223,29 @@ gestion d'hébergement
     calendar.render();
   });
 
+
+
       </script>
 
 
-
+<style>
+    .rect-attente{
+    background-color:#F5BEBD;
+    border-radius:10px;
+    width: 30px;
+    height: 30px;
+    align-items: center;
+}
+.rect-valide{
+    background-color:#1979EC; border-radius:10px;width: 30px;height: 30px
+}
+.rect-annule{
+    background-color:#F47174; border-radius:10px;width: 30px;height: 30px
+}
+.rect-autre{
+    background-color:gray; border-radius:10px;width: 30px;height: 30px
+}
+</style>
 
 
 
@@ -267,3 +268,4 @@ gestion d'hébergement
 
 
 {% endblock %}
+
