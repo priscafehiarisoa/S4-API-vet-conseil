@@ -18,6 +18,15 @@
                             <div class="card-body">
                                 <form class="needs-validation" action="{% url 'add_new_hosting_request' %}" method="post">
                                     {% csrf_token %}
+                                    {% if form.errors %}
+                                        <ul class="errorlist">
+                                            {% for field in form %}
+                                                {% for error in field.errors %}
+                                                    <li>{{ error }}</li>
+                                                {% endfor %}
+                                            {% endfor %}
+                                        </ul>
+                                    {% endif %}
                                     <div>
                                         <h4>details clients  </h4>
                                     </div>
