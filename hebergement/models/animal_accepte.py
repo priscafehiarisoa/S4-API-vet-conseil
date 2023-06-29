@@ -9,3 +9,7 @@ class Animal_accepte(models.Model):
     fin_interval_age=models.IntegerField()
     debut_interval_validite=models.DateField()
     fin_interval_validite=models.DateField()
+
+    def __str__(self):
+        return f"Animal_accepte {self.pk}"
+
