@@ -4,9 +4,21 @@ ajouter une nourriture pour animaux
 {% endblock %}
 
 {% block content %}
-
     <main role="main" class="main-content">
      <div class="container-fluid">
+     {% if messages %}
+         {% for message in messages %}
+             {% if message.tags == 'success' %}
+                 <div id="success-message" class="alert alert-success">
+                    {{ message.message }}
+                 </div>
+             {% elif message.tags == 'error' %}
+                 <div class="alert alert-danger">
+                    {{ message.message }}
+                 </div>
+             {% endif %}
+         {% endfor %}
+     {% endif %}
           <div class="row justify-content-center">
             <div class="col-12">
               <h2 class="page-title mb-5">ajouter une nourriture pour animaux </h2>
