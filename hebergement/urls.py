@@ -4,9 +4,9 @@ from hebergement.views import test, Hebergement_view,Nourriture_view,Animaux_heb
 
 urlpatterns = [
 #   hebergement_view
-    path('',Hebergement_view.add_new_hosting_request,name="add_new_hosting_request"),
+    path('new_hosting_request',Hebergement_view.add_new_hosting_request,name="add_new_hosting_request"),
     path('hosting_management', Hebergement_view.load_hosting_managemment, name="load_hosting_managemment"),
-    # path("",Hebergement_view.load_hosting_managemment, name="load_hosting_managemment"),
+    path("",Hebergement_view.load_hosting_managemment, name="load_hosting_managemment"),
     path('hosting_management/<str:allowed>', Hebergement_view.load_hosting_managemments, name="load_hosting_managemments"),
     path('check_date',Hebergement_view.check_if_valid_date,name="check_if_valid_date"),
     path('get_reservation',Hebergement_view.get_reservations,name="get_reservations"),
@@ -33,8 +33,11 @@ urlpatterns = [
 #   animaux
     path('new_type_animal',Animaux_hebergement_view.Add_new_type_animals,name="Add_new_type_animals") ,
     path('list_hosted_animals',Animaux_hebergement_view.show_list_hosted_animals,name="show_list_hosted_animals"),
+    path('list_hosted_animal',Animaux_hebergement_view.show_list_hosted_animal,name="show_list_hosted_animal"),
     path('list_can_be_hosted_animals',Animaux_hebergement_view.show_list_animals_that_can_be_hosted,name="show_list_animals_that_can_be_hosted"),
+    path('new_form_animals',Animaux_hebergement_view.traiter_formulaire,name="traiter_formulaire"),
 
+    path('redirect_calendar_to_list_hosted_animals/<str:date_value_test>',Animaux_hebergement_view.redirect_calendar_to_list_hosted_animals,name='redirect_calendar_to_list_hosted_animals'),
 
 #     nourriture
     path('list_foods',Nourriture_view.load_list_animals_food,name="load_list_animals_food"),

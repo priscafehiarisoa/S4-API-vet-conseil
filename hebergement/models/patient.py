@@ -13,3 +13,9 @@ class Patient(models.Model):
     def __str__(self):
         res = self.nom+" | "+ self.nature.designation
         return res
+
+
+    def check_if_owned_by_client(self,client):
+        if self.proprietaire==client:
+            return True
+        return False

@@ -31,25 +31,7 @@ gestion d'hébergement
                         </div>
                     </div>
                 </div>
-                    <style>
-                        .rect-attente{
-                            background-color:#F5BEBD;
-                            border-radius:10px;
 
-                            width: 30px;
-                            height: 30px;
-                            align-items: center;
-                        }
-                        .rect-valide{
-                            background-color:#1979EC; border-radius:10px;width: 30px;height: 30px
-                        }
-                        .rect-annule{
-                            background-color:#F47174; border-radius:10px;width: 30px;height: 30px
-                        }
-                        .rect-autre{
-                            background-color:gray; border-radius:10px;width: 30px;height: 30px
-                        }
-                    </style>
 
 
                     <div class=" col-4">
@@ -61,14 +43,16 @@ gestion d'hébergement
                             </div>
                             <div class="card-body">
 
-                                <form action="">
+                                <form action="{% url 'show_list_hosted_animal' %}" method="post">
+                                     {% csrf_token %}
                                     <div class="row">
                                         <div class="form-group col-9 ">
                                       <div class="input-group">
-                                        <input type="text"
-                                               class="form-control drgpicker"
+                                        <input type="date"
+                                               class="form-control "
                                                id="date-input1"
-                                               value="04/24/2020" aria-describedby="button-addon2">
+                                               name="date_test"
+                                                aria-describedby="button-addon2">
                                         <div class="input-group-append">
                                           <div class="input-group-text" id="button-addon-date"><span class="fe fe-calendar fe-16"></span></div>
                                         </div>
@@ -108,12 +92,13 @@ gestion d'hébergement
                                 </a>
 
                                 <a href="{% url 'load_hosting_reservation' %}" class="btn btn-outline-primary col-5 m-1">
+                                    <span class="indicator" >{{ nombre_reservations }}</span>
                                     <span>liste des reservations</span>
                                 </a>
                                 </div>
 
                                 <div class="row">
-                                    <a href="{% url 'load_hosting_reservation' %}" class="btn btn-outline-primary col-8 m-2">
+                                    <a href="{% url 'add_new_hosting_request' %}" class="btn btn-outline-primary col-8 m-2">
                                    <i class="fe fe-plus-circle fe-16"></i>
                                     <span>nouvelle demande </span>
                                 </a>
@@ -179,6 +164,7 @@ gestion d'hébergement
                 </div>
 
 
+
             </div> <!-- .col-12 -->
           </div> <!-- .row -->
         </div> <!-- .container-fluid -->
@@ -210,19 +196,28 @@ gestion d'hébergement
               };
               console.log(data)
               // Make the AJAX request
-              fetch('{% url 'get_list_animals_for_date' %}', {
+              fetch('{% url 'show_list_hosted_animals' %}', {
                 method: 'POST',
                 headers: {
                   'Content-Type': 'application/json',
                   'X-CSRFToken': '{{ csrf_token }}'  // Include CSRF token if required
                 },
                 body: JSON.stringify(data)
+
               })
-              .then(response => {
-                  console.log("response ",response.json())
-                // ...
-                  console.log("voaray")
+              .then(response =>  {
+
+                  if (!response.ok) {
+                    throw new Error('Network response was not OK');
+                  }
+                  else{
+                      return response.json()
+                  }
               })
+                  .then(data => {
+                      window.location.href = data.redirecting;
+                    })
+
               .catch(error => {
                 console.error('Error:', error);
               });
@@ -241,10 +236,29 @@ gestion d'hébergement
     calendar.render();
   });
 
+
+
       </script>
 
 
-
+<style>
+    .rect-attente{
+    background-color:#F5BEBD;
+    border-radius:10px;
+    width: 30px;
+    height: 30px;
+    align-items: center;
+}
+.rect-valide{
+    background-color:#1979EC; border-radius:10px;width: 30px;height: 30px
+}
+.rect-annule{
+    background-color:#F47174; border-radius:10px;width: 30px;height: 30px
+}
+.rect-autre{
+    background-color:gray; border-radius:10px;width: 30px;height: 30px
+}
+</style>
 
 
 
@@ -267,3 +281,4 @@ gestion d'hébergement
 
 
 {% endblock %}
+
