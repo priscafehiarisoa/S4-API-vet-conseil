@@ -10,3 +10,7 @@ class Reservation(models.Model):
     date_fin=models.DateField()
     prix=models.FloatField()
     etat=models.IntegerField()# 0 if still waiting for acceptation, 1 if accepted, -1 if denied
+
+
+    def calcul_prix(self):
+        return 1

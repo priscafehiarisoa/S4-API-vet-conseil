@@ -19,13 +19,47 @@ gestion d'hébergement
                   </div>
                 <div class="row mt-5">
                 <div id="selected-date"></div>
-                    <div id='calendar' class="col-8"></div>
+                <div class="col-8">
+                    <div id='calendar' class="col-12"></div>
+                    <div class="card m-3">
+                        <div class="card-header"><h4>legendes</h4></div>
+                        <div class="card-body row">
+                            <div class="mb-2 m-4 text-center"><div class="rect-attente ml-5"></div> <div class=" ">demandes en attente</div></div>
+                            <div class="mb-2 m-4"><div class="rect-valide ml-5 "></div> <div class="">demandes validés</div></div>
+                            <div class="mb-2 m-4"><div class="rect-annule ml-5"></div> <div class="">demandes annulés</div></div>
+                            <div class="mb-2 m-4"><div class="rect-autre ml-1"></div> <div class="">autres</div> </div>
+                        </div>
+                    </div>
+                </div>
+                    <style>
+                        .rect-attente{
+                            background-color:#F5BEBD;
+                            border-radius:10px;
+
+                            width: 30px;
+                            height: 30px;
+                            align-items: center;
+                        }
+                        .rect-valide{
+                            background-color:#1979EC; border-radius:10px;width: 30px;height: 30px
+                        }
+                        .rect-annule{
+                            background-color:#F47174; border-radius:10px;width: 30px;height: 30px
+                        }
+                        .rect-autre{
+                            background-color:gray; border-radius:10px;width: 30px;height: 30px
+                        }
+                    </style>
+
 
                     <div class=" col-4">
 
                         <div class="card shadow mb-4">
+                            <div class="card-header">
+                              <p class="mb-2"><strong>rechercher une date en particulier</strong></p>
+
+                            </div>
                             <div class="card-body">
-                             <p class="mb-2"><strong>rechercher une date en particulier</strong></p>
 
                                 <form action="">
                                     <div class="row">
@@ -50,6 +84,9 @@ gestion d'hébergement
                         </div>
 
                         <div class="card shadow mb-4">
+                            <div class="card-header">
+                                informations
+                            </div>
                             <div class="card-body">
                                 <a href="{% url 'load_hosting_informations' %}" class="btn btn-outline-primary">
                                     détails des Hébergements
@@ -59,19 +96,45 @@ gestion d'hébergement
                         </div>
 
                         <div class="card shadow mb-4">
+                            <div class="card-header">
+                                reservations
+                            </div>
                             <div class="card-body">
-                                <a href="{% url 'load_hosting_request' %}" class="btn btn-outline-primary">
-                                    <span class="badge badge-danger rounded-circle" >1</span>
-                                    <span>liste des demandes</span>
+
+                                <div class="row">
+                                    <a href="{% url 'load_hosting_request' %}" class="btn btn-outline-primary col-5 m-1">
+                                    <span class="indicator" >{{ nombre_hebergement_attente }}</span>
+                                        <span class="text-center">liste des demandes</span>
                                 </a>
+
+                                <a href="{% url 'load_hosting_reservation' %}" class="btn btn-outline-primary col-5 m-1">
+                                    <span>liste des reservations</span>
+                                </a>
+                                </div>
+
+                                <div class="row">
+                                    <a href="{% url 'load_hosting_reservation' %}" class="btn btn-outline-primary col-8 m-2">
+                                   <i class="fe fe-plus-circle fe-16"></i>
+                                    <span>nouvelle demande </span>
+                                </a>
+                                </div>
                             </div>
 
                         </div>
 
 {#     verification des dates libres        #}
                         <div class="card shadow mb-4">
+                        <div class="card-header">
+                           <p class="mb-2"><strong>verifications de dates libres</strong></p>
+                        </div>
                             <div class="card-body">
-                              <p class="mb-2"><strong>verifications de dates libres</strong></p>
+                                {% if allowed != None %}
+                                 <div class="alert alert-primary" role="alert">
+                                     <span class="fe fe-alert-circle fe-16 mr-2"></span> {{ allowed }}
+                                 </div>
+
+                                {% endif %}
+
                               <div class="">
 
                                   <form action="{% url 'check_if_valid_date' %}" method="post">
@@ -108,14 +171,9 @@ gestion d'hébergement
                               </div>
                             </div> <!-- /.card-body -->
 
-                            {% if allowed != None %}
-                            <div class="card shadow mb-4">
-                            <div class="card-body">
-                                <p>{{ allowed }}</p>
-                            </div>
+
 
                         </div>
-                            {% endif %}
                   </div> <!-- /.card -->
                     </div>
                 </div>

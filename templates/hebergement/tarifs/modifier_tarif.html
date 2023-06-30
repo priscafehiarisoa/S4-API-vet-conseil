@@ -1,0 +1,44 @@
+{% extends 'base/root_nav_sidebar.html' %}
+{% block title %}
+
+{% endblock %}
+
+{% block content %}
+<main role="main" class="main-content">
+    <div class="container-fluid">
+        <div class="row justify-content-center">
+            <div class="col-12">
+                <h2 class="h3 mb-3 page-title">modifications des tarifs </h2>
+                <div class="row ">
+                    <div class="card shadow col-12">
+                        <form action="{% url 'modifier_tarif_view' %}" method="post">
+                        {% csrf_token %}
+                        <div class="form-group mb-3 mr-3 ml-4 col-5">
+                              <label for="designation"> id race </label>
+                            {{ form.id_tarif }}
+                        </div>
+
+                            <div class="form-group mb-3 mr-3 ml-4 col-5">
+                              <label for="designation"> race</label>
+                            {{ form.race }}
+                        </div>
+                            <div class="form-group mb-3 mr-3 ml-4 col-5">
+                              <label for="designation">montant horaire</label>
+                             {{ form.montant_horaire }}
+                        </div>
+                        <div class="form-group mb-3 mr-3 ml-4 col-5">
+                              <label for="designation">montant journalier</label>
+                             {{ form.montant_journalier }}
+                        </div>
+                            <div class="form-group">
+                                <input type="submit" value="valider la modification" class="form-control">
+                            </div>
+                    </form>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+{% endblock %}

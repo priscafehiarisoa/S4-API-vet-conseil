@@ -6,3 +6,6 @@ class Nourriture(models.Model):
     description = models.CharField(max_length=500)
     prix_par_unite = models.FloatField()
     unite = models.FloatField()
+
+    def __str__(self):
+        return self.designation
