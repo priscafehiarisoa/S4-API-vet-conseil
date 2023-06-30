@@ -10,17 +10,18 @@ from hebergement.models import Nourriture
 
 def load_list_animals_food(request):
     id_race = request.GET.get('id_race')
-
     races = Race.objects.all()
-    if id_race == None:
-        race = Race.objects.get(id=1)
-        attributions = Attribution.objects.filter(race= race);
-        return render(request, "hebergement/nourriture/liste_nourriture.html", {"attributions": attributions, "races": races})
 
+    if id_race == None:
+        race = Race.objects.first()
     else:
-        race = Race.objects.get(id=id_race)
-        attributions = Attribution.objects.filter(race= race);
-        return render(request, "hebergement/nourriture/liste_nourriture.html", {"attributions": attributions, "races":races})
+        try:
+            race = Race.objects.get(id=id_race)
+        except Race.DoesNotExist:
+            pass
+
+    attributions = Attribution.objects.filter(race=race);
+    return render(request, "hebergement/nourriture/liste_nourriture.html", {"attributions": attributions, "races":races})
 
 
 
