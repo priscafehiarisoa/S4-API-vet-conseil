@@ -8,21 +8,23 @@ from django.db.models import Q
 from django.http import HttpResponse, JsonResponse
 from django.shortcuts import render, redirect
 
-from hebergement.models import Reservation, Details_reservation, Validation_reservation, Tarifs_Hebergement
+from hebergement.models import Reservation, Details_reservation, Validation_reservation, Tarifs_Hebergement, Attribution
 
 
 # gestion des hebergements
 def load_hosting_managemment(request):
     formulaire = Date_validation_form()
     nombre_hebergement_attentes= Reservation.objects.filter(etat=10).count()
-    context = {"form": formulaire, 'nombre_hebergement_attente':nombre_hebergement_attentes}
+    nombre_reservations=Reservation.objects.filter(etat=20,date_fin__gt=datetime.now().date()).count()
+    context = {"form": formulaire, 'nombre_hebergement_attente':nombre_hebergement_attentes,'nombre_reservations':nombre_reservations}
     return render(request, "hebergement/hebergement/Gestion_hebergement.html", context)
 
 
 def load_hosting_managemments(request, allowed):
     formulaire = Date_validation_form()
     nombre_hebergement_attentes = Reservation.objects.filter(etat=10).count()
-    context = {"form": formulaire, 'nombre_hebergement_attente': nombre_hebergement_attentes,"allowed": allowed}
+    nombre_reservations=Reservation.objects.filter(etat=20,date_fin__gt=datetime.now().date()).count()
+    context = {"form": formulaire, 'nombre_hebergement_attente': nombre_hebergement_attentes,"allowed": allowed,'nombre_reservations':nombre_reservations}
     return render(request, "hebergement/hebergement/Gestion_hebergement.html",
                   context)
 
@@ -44,7 +46,7 @@ def get_reservations(request):
             background_color = '#F47174'
         else:
             background_color = 'gray'  # Default color for other etat values
-        title = d_reservation.reservation.client.nom, " | ", d_reservation.patient.nom
+        title = "client : "+d_reservation.reservation.client.nom, " | patient : ", d_reservation.patient.nom
         event = {
             'title': title,
             'start': d_reservation.reservation.date_debut.isoformat(),
@@ -138,6 +140,8 @@ def add_new_hosting_request(request):
     if request.method == 'POST':
         form = Ajouter_hebergement_form(request.POST)
         if form.is_valid():
+
+
             client = form.cleaned_data['client']
             animal = form.cleaned_data['animal']
             date_debut = form.cleaned_data['date_debut_hebergement']
@@ -147,28 +151,48 @@ def add_new_hosting_request(request):
             frequence_nourriture = form.cleaned_data['frequence_nourriture']
             medicaments = form.cleaned_data['medicaments']
             frequence_medicaments = form.cleaned_data['frequence_medicament']
+            okay=True
 
-            reservation = Reservation()
-            reservation.etat = 10
-            reservation.client = client
-            reservation.date_debut = date_debut
-            reservation.date_fin = date_fin
-            # todo mila calculer-na ny prix
-            reservation.prix = reservation.calcul_prix()
-            reservation.date_de_prise = timezone.now().date()
-            reservation.save()
+        # verifications de la validité des dates
+            is_date_available = check_date(date_debut,date_fin)
+        # verifications si la nourriture choisie n'est pas adapté a l'animal
+            is_adapted_food=Attribution.check_if_available(animal.nature_id,nourriture)
+        # verification si l'animal appartient au client
+            is_owned_by_client=animal.check_if_owned_by_client(client)
+        # redirections
+            if not is_date_available or not is_adapted_food or not is_owned_by_client:
+                if not is_owned_by_client:
+                    form.add_error('client', 'le patient sélectionné n\'appartient pas au client')
+                if not is_date_available:
+                    form.add_error('date_debut_hebergement','la date n\'est pas libre ou bien elle n\'est pas valide' )
+                if not is_adapted_food:
+                    form.add_error('type_nourriture','l\'aliment sélectionnée ne correspond pas au patient')
 
-            detail_reservation = Details_reservation()
-            detail_reservation.reservation = reservation
-            detail_reservation.medicaments = medicaments
-            detail_reservation.patient = animal
-            detail_reservation.nourriture = nourriture
-            detail_reservation.frequence = frequence_medicaments
-            detail_reservation.save()
+                okay=False
+                return render(request, 'hebergement/hebergement/ajout_hebergement/ajout_hebergement.html',{'form': form})
+
+            if okay:
+
+                reservation = Reservation()
+                reservation.etat = 10
+                reservation.client = client
+                reservation.date_debut = date_debut
+                reservation.date_fin = date_fin
+                # todo mila calculer-na ny prix
+                reservation.prix = reservation.calcul_prix()
+                reservation.date_de_prise = timezone.now().date()
+                reservation.save()
+
+                detail_reservation = Details_reservation()
+                detail_reservation.reservation = reservation
+                detail_reservation.medicaments = medicaments
+                detail_reservation.patient = animal
+                detail_reservation.nourriture = nourriture
+                detail_reservation.frequence = frequence_medicaments
+                detail_reservation.save()
 
         #     todo mila ampidirina le frequence ana nourriture io
-    else:
-        form = Ajouter_hebergement_form()
+    form = Ajouter_hebergement_form()
     return render(request, 'hebergement/hebergement/ajout_hebergement/ajout_hebergement.html', {'form': form})
 
 
@@ -216,7 +240,15 @@ def modifier_tarif_view(request):
     return render(request, 'hebergement/tarifs/modifier_tarif.html', {'form': form})
 
 
-# verifications des dates
+# validations
+def check_date(date_debut,date_fin):
+     isa=Reservation.objects.filter(
+        Q(date_debut__range=(date_debut, date_fin)) | Q(date_fin__range=(date_debut, date_fin)), etat=20).count() < 10
+     if(date_debut>date_fin):
+        return False
+     if isa >=10:
+         return False
+     return True
 
 
 

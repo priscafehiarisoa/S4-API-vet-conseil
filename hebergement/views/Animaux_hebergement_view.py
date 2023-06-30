@@ -1,5 +1,6 @@
 from datetime import datetime
 
+from django.db.models import Q
 from django.http import HttpResponse, JsonResponse
 from django.shortcuts import render, redirect
 from django.views.decorators.csrf import csrf_protect
@@ -40,6 +41,8 @@ def show_list_hosted_animal(request):
     return render(request, "hebergement/hebergement/liste_animaux_hebergees.html",context)
 
 def show_list_animals_that_can_be_hosted(request):
+    current_date=datetime.now().date()
+    animal_accepte=Animal_accepte.objects.filter(Q(debut_interval_validite__gt=current_date )| Q(fin_interval_validite__gt=current_date))
     return render(request, "hebergement/animaux/liste_animaux_on_peut_heberger.html")
 
 
