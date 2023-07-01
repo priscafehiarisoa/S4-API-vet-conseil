@@ -7,7 +7,7 @@ from django.views.decorators.csrf import csrf_protect
 from rest_framework.utils import json
 
 from hebergement.models import Animal_accepte
-from hebergement.models.race import Race
+from globale.models.race import Race
 
 
 def Add_new_type_animals(request):

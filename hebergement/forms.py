@@ -1,6 +1,7 @@
 from django import forms
 
-from hebergement.models import Client, Patient, Nourriture
+from hebergement.models import  Nourriture
+from globale.models import Client, Patient
 
 
 class Date_validation_form(forms.Form):
