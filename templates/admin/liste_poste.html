@@ -1,0 +1,61 @@
+{% extends 'base/root_nav_sidebar.html' %}
+{% block title %}
+Liste des postes
+{% endblock %}
+
+{% block content %}
+<main role="main" class="main-content">
+    <div class="container-fluid">
+        <div class="row justify-content-center">
+            <div class="col-12">
+                <div class="row">
+                    <div class="col-5">
+                        <h2 class="mb-2 page-title">liste postes</h2>
+                    </div>
+
+
+                </div>
+                <div class="row my-4">
+                    <a type="button" class="btn mb-2 btn-primary" href="{% url 'form_insert_poste' %}">Ajouter poste</a>
+                </div>
+                <div class="row my-4">
+                    <!-- Small table -->
+                    <div class="col-md-12">
+                        <div class="card shadow">
+                            <div class="card-body">
+                                <!-- table -->
+                                <table class="table datatables" id="dataTable-1">
+                                    <thead>
+                                    <tr>
+                                        <th></th>
+                                        <th>designation</th>
+                                        <th>-</th>
+                                        <th>-</th>
+
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr>
+                                        <td><span class="fe fe-24 fe-user"></span></td>
+                                        <td>dentiste</td>
+                                        <td><button class="btn btn-outline-primary">modifier</button></td>
+                                        <td><button class="btn btn-outline-danger">supprimer</button></td>
+                                    </tr>
+                                    <tr>
+                                        <td><span class="fe fe-24 fe-user"></span></td>
+                                        <td>assistant</td>
+                                        <td><button class="btn btn-outline-primary">modifier</button></td>
+                                        <td><button class="btn btn-outline-danger">supprimer</button></td>
+                                    </tr>
+
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div> <!-- simple table -->
+                </div> <!-- end section -->
+            </div> <!-- .col-12 -->
+        </div> <!-- .row -->
+    </div> <!-- .container-fluid -->
+</main>
+{% endblock %}
