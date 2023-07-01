@@ -16,16 +16,20 @@ Including another URLconf
 """
 # from django.shortcuts import redirect
 from django.urls import path
-from globale.views import test,form_insert_race,save_race,form_insert_poste,save_poste,liste_poste,delete_poste,detail_poste,modify_poste,form_insert_personnel,save_personnel,liste_personnel,delete_personnel,detail_personnel,modify_personnel,save_login
+from globale.views import list_race,delete_race,modify_race,form_insert_race,save_race,form_insert_poste,save_poste,liste_poste,delete_poste,detail_poste,modify_poste,form_insert_personnel,save_personnel,liste_personnel,delete_personnel,detail_personnel,modify_personnel,save_login
 
 
 
 
 
 urlpatterns = [
-    path('test',test, name='index'),
     path('form_insert_race',form_insert_race, name='form_insert_race'),
     path('save_race',save_race, name='save_race'),
+    path('race/<int:idRace>/delete',delete_race, name='delete_race'), #supprimer race
+    path('race/<int:idRace>/modify',modify_race, name='modify_race'), #modifier race
+    path('liste_race',list_race, name='liste_race'),
+
+
     path('form_insert_poste',form_insert_poste, name='form_insert_poste'), #miditra amn insertion ana poste
     path('save_poste',save_poste, name='save_poste'), #save poste
     path('liste_poste',liste_poste, name='liste_poste'), #lister les postes
@@ -39,5 +43,8 @@ urlpatterns = [
     path('personnel/<int:idPersonnel>/modifier',modify_personnel, name='modify_personnel'), #modifier personnel
     path('personnel/<int:idPersonnel>/detail',detail_personnel, name='detail_personnel'),#detailler personnel modifée
     path('save_login',save_login, name='save_login'), #sauvegarder le compte du personnel
+
+
+
 
 ]
