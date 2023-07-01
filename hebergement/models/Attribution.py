@@ -1,6 +1,6 @@
 from django.db import models
 
-from hebergement.models import Race
+from globale.models import Race
 from hebergement.models.nourriture import Nourriture
 
 

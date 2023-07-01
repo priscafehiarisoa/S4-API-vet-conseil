@@ -1,6 +1,6 @@
 from django.db import models
 
-from hebergement.models import Patient
+from globale.models import Patient
 from hebergement.models.nourriture import Nourriture
 from hebergement.models.reservation import Reservation
 

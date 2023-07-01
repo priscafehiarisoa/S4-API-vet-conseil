@@ -1,6 +1,6 @@
 from django.db import models
 
-from hebergement.models import Client
+from globale.models import Client
 
 
 class Reservation(models.Model): 

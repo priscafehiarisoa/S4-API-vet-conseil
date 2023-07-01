@@ -6,4 +6,6 @@ class Client(models.Model):
     adresse = models.CharField(max_length=255)
     mail = models.CharField(max_length=255)
     contact = models.CharField(max_length=255)
-    
+
+    def __str__(self):
+        return self.nom

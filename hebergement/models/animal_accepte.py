@@ -1,6 +1,6 @@
 from django.db import models
 
-from hebergement.models import Race
+from globale.models import Race
 
 
 class Animal_accepte(models.Model):
