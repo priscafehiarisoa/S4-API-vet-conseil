@@ -37,6 +37,7 @@ ALLOWED_HOSTS = []
 INSTALLED_APPS = (
     #
     'hebergement.apps.HebergementConfig',
+    'globale.apps.GlobaleConfig',
     # ----
     'django.contrib.admin',
     'django.contrib.auth',

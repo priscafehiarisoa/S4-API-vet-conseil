@@ -170,9 +170,7 @@ def add_new_hosting_request(request):
 
                 okay=False
                 return render(request, 'hebergement/hebergement/ajout_hebergement/ajout_hebergement.html',{'form': form})
-
             if okay:
-
                 reservation = Reservation()
                 reservation.etat = 10
                 reservation.client = client
