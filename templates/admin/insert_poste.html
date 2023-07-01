@@ -1,1 +1,49 @@
-<h1>ATOOO</h1>
+{% extends 'base/root_nav_sidebar.html' %}
+{% block title %}
+Liste des postes
+{% endblock %}
+
+{% block content %}
+<main role="main" class="main-content">
+    <div class="container-fluid">
+        <div class="row justify-content-center">
+            <div class="col-12">
+                <h2 class="page-title mb-5">ajouter un poste</h2>
+                <div class="card col-8 shadow mb-4">
+                    <div class="card-header ">
+                        <strong class="card-title">formulaire</strong>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-12">
+
+                                <form {% if poste1 %} action="{% url 'modify_poste' idPoste=poste1.id %}"{% else  %} action="{% url 'save_poste' %}" {% endif %}" method="post">
+                                    {% csrf_token %}
+                                    <div class="form-group mb-3">
+                                        <label >designation</label>
+                                        <input type="text" name="designation" {% if poste1 %} value="{{poste1.designation}}" {% endif  %}>
+<!--                                        {{forms.designation}}-->
+                                    </div>
+                                    <div class="form-group mb-3">
+                                        <label >rang</label>
+                                        <input type="number" name="rang" {% if poste1 %} value="{{poste1.rang}}" {% endif  %}>
+<!--                                        {{forms.rang}}-->
+                                    </div>
+
+                                    <div class="form-group">
+                                        <button class="btn btn-outline-primary" type="submit">valider</button>
+                                    </div>
+                                </form>
+
+                            </div> <!-- /.col -->
+
+                        </div>
+                    </div>
+                </div>
+            </div> <!-- / .card -->
+
+
+        </div>
+    </div>
+</main>
+{% endblock %}

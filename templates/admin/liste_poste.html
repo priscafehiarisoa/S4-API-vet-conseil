@@ -35,19 +35,14 @@ Liste des postes
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    <tr>
-                                        <td><span class="fe fe-24 fe-user"></span></td>
-                                        <td>dentiste</td>
-                                        <td><button class="btn btn-outline-primary">modifier</button></td>
-                                        <td><button class="btn btn-outline-danger">supprimer</button></td>
-                                    </tr>
-                                    <tr>
-                                        <td><span class="fe fe-24 fe-user"></span></td>
-                                        <td>assistant</td>
-                                        <td><button class="btn btn-outline-primary">modifier</button></td>
-                                        <td><button class="btn btn-outline-danger">supprimer</button></td>
-                                    </tr>
-
+                                        {% for poste in postes %}
+                                            <tr>
+                                                <td><span class="fe fe-24 fe-user"></span></td>
+                                                <td>{{poste.designation}}</td>
+                                                <td><a class="btn btn-outline-primary" href="{% url 'modify_poste' idPoste=poste.id %}" >modifier</a></td>
+                                                <td><a class="btn btn-outline-danger" href="{% url 'delete_poste' idPoste=poste.id %}" >supprimer</a></td>
+                                            </tr>
+                                        {% endfor%}
                                     </tbody>
                                 </table>
                             </div>

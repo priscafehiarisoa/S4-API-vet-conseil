@@ -15,32 +15,52 @@ from globale.models import Login
 
 
 # Create your views here.
-def test(request):
-    return render(request, 'admin/index.html', {})
-
+# def test(request):
+#     return render(request, 'admin/index.html', {})
+#
 def form_insert_race(request):
-    context={
-        'id':1,
-    }
-    return render(request,'admin/insert_race.html',context)
+    return render(request,'admin/insert_race.html',{})
+
+
 
 def save_race(request):
-    context = {
-        'saved': 'vita',
-    }
     race=Race(designation=request.POST['designation'])
     race.save()
-    return render(request, 'admin/insert_race.html', context)
+    return redirect('liste_race')
+
+
+
+def list_race(request):
+    liste=Race.objects.all()
+    return render(request, 'admin/liste_race.html', {'races':liste})
+
+def modify_race(request,idRace):
+    race = get_object_or_404(Race, id=idRace)
+    if request.method == 'POST':
+        race.designation=request.POST['designation']
+        race.save()
+        return redirect('liste_race')
+    else:
+        return render(request,'admin/insert_race.html',{'race1':race})
+
+
+def delete_race(request,idRace):
+    Race.objects.get(id=idRace).delete()
+    return redirect('liste_race')
 
 #POSTE
 
 def form_insert_poste(request):
-    return render(request,'admin/insert_poste.html',{})
+    p=PosteForm()
+    return render(request,'admin/insert_poste.html',{'forms':p})
 
 def save_poste(request):
-    poste=Poste(designation=request.POST['designation'])
+    formulaire=PosteForm(request.POST)
+    poste=Poste()
+    poste.designation=formulaire['designation'].value()
+    poste.rang=formulaire['rang'].value()
     poste.save()
-    return redirect('admin/index.html')
+    return redirect('liste_poste')
 
 def liste_poste(request):
     liste_poste = Poste.objects.all()
@@ -49,9 +69,8 @@ def liste_poste(request):
 
 def delete_poste(request, idPoste):
     Poste.objects.get(id=idPoste).delete()
-    liste_poste = Poste.objects.all()
-    context = {'postes' : liste_poste}
-    return render(request, 'admin/liste_poste.html', context)
+    return redirect('liste_poste')
+
 
 def detail_poste(request, idPoste):
     poste = Poste.objects.get(id=idPoste)
@@ -63,10 +82,10 @@ def modify_poste(request, idPoste):
         form = PosteForm(request.POST, instance=poste)
         if form.is_valid():
             form.save()
-            return HttpResponseRedirect(reverse('detail_poste', args=[idPoste]))
+            return redirect('liste_poste')
     else:
         form = PosteForm(instance=poste)
-    return render(request, 'admin/modify_poste.html',{'form': form, 'poste': poste})
+    return render(request, 'admin/insert_poste.html',{'form': form, 'poste1': poste})
     
 
 # PERSONNEL
