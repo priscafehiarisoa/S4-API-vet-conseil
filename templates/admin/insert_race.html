@@ -16,7 +16,6 @@ Liste des postes
                     <div class="card-body">
                         <div class="row">
                             <div class="col-md-12">
-
                                 <form {% if race1 %} action="{% url 'modify_race' idRace=race1.id %}"{% else  %} action="{% url 'save_race' %}" {% endif %} method="post">
                                 {% csrf_token %}
                                 <div class="form-group mb-3">
