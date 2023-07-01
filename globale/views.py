@@ -12,21 +12,52 @@ from globale.models import Race
 from globale.models import Poste
 from globale.models import Personnel
 from globale.models import Login
+from globale.models import Client
 
 
 # Create your views here.
 # def test(request):
 #     return render(request, 'admin/index.html', {})
-#
+
+#client
+
+def form_insert_client(request):
+    return render(request,'admin/client/insertion.html',{})
+
+def select_client(request):
+    clients = Client.objects.all()
+    context = {'clients': clients}
+    return render(request, 'admin/client/liste.html', context)
+
+def save_client(request):
+    context = {
+        'saved': 'vita',
+    }
+    client=Client(nom=request.POST['nom'],prenom=request.POST['prenom'],adresse=request.POST['adresse'],mail=request.POST['mail'],contact=request.POST['contact'],facebook=request.POST['facebook'])
+    client.save()
+    return redirect('liste_client')
+
+def modify_client(request,idClient):
+    client = get_object_or_404(Race, id=idClient)
+    if request.method == 'POST':
+        client.nom=request.POST['nom']
+        client.prenom=request.POST['prenom']
+        client.adresse=request.POST['mail']
+        client.mail=request.POST['mail']
+        client.contact=request.POST['contact']
+        client.facebook=request.POST['facebook']
+        return redirect('liste_client')
+    else:
+        return render(request,'admin/client/insertion.html',{'client1':client})
+
+#race
 def form_insert_race(request):
     return render(request,'admin/insert_race.html',{})
-
-
-
 def save_race(request):
     race=Race(designation=request.POST['designation'])
     race.save()
     return redirect('liste_race')
+
 
 
 
