@@ -10,3 +10,8 @@ class Client(models.Model):
 
     def __str__(self):
         return self.nom
+
+
+    def get_animaux(self):
+        liste_animaux=Patient.objects.filter(proprietaire=this.id)
+        return liste_animaux

@@ -13,14 +13,49 @@ from globale.models import Poste
 from globale.models import Personnel
 from globale.models import Login
 from globale.models import Client
-
+from globale.models import Patient
 
 # Create your views here.
 # def test(request):
 #     return render(request, 'admin/index.html', {})
 
-#client
 
+#patient
+def liste_patient(request):
+    patients = Patient.objects.all()
+    context = {'patients': patients}
+    return render(request, 'admin/patient/liste.html', context)
+def form_insert_patient(request):
+    context={'cients':Client.objects.all()}
+    return render(request,'admin/patient/insertion.html',context)
+
+def save_patient(request):
+    patient=Patient()
+    patient.nom=request.POST['nom']
+    patient.proprietaire=request.POST['proprietaire']
+    patient.nature=request.POST['nature']
+    patient.age=request.POST['age']
+    patient.save()
+    return redirect('liste_patient')
+
+def modify_patient(request,idPatient):
+    patient=Patient.get_object_or_404(Patient, id=idPatient)
+    if(request.method=='POST'):
+        patient.nom = request.POST['nom']
+        patient.proprietaire = request.POST['proprietaire']
+        patient.nature = request.POST['nature']
+        patient.age = request.POST['age']
+        patient.save()
+        return redirect('liste_patient')
+    else:
+        return render(request, 'admin/patient/insertion.html', {'patient1': patient})
+
+def delete_patient(request,idPatient):
+    Patient.get_object_or_404(Patient, id=idPatient).delete()
+    return redirect('liste_patient')
+
+
+#client
 def form_insert_client(request):
     return render(request,'admin/client/insertion.html',{})
 
@@ -38,7 +73,7 @@ def save_client(request):
     return redirect('liste_client')
 
 def modify_client(request,idClient):
-    client = get_object_or_404(Race, id=idClient)
+    client = get_object_or_404(Client, id=idClient)
     if request.method == 'POST':
         client.nom=request.POST['nom']
         client.prenom=request.POST['prenom']
@@ -46,9 +81,15 @@ def modify_client(request,idClient):
         client.mail=request.POST['mail']
         client.contact=request.POST['contact']
         client.facebook=request.POST['facebook']
+        client.save()
         return redirect('liste_client')
     else:
-        return render(request,'admin/client/insertion.html',{'client1':client})
+        return render(request, 'admin/client/insertion.html', {'client1': client})
+
+
+def delete_client(request,idClient):
+    client = Client.objects.get(id=idClient).delete()
+    return redirect('liste_client')
 
 #race
 def form_insert_race(request):
