@@ -255,7 +255,7 @@ def check_date(date_debut, date_fin):
 
 def calcul_prix(reservation, patient, quantite_nourriture, frequence_nourriture, nourriture, is_tarif_horaire):
     # patient =Patient()
-    tarifs = Tarifs_Hebergement.objects.filter(race=patient.nature)
+    tarifs = Tarifs_Hebergement.objects.filter(race=patient.nature).first()
     tarif = 0
     prix_hebergement = 0
     # calcul prix hebergement
