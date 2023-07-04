@@ -22,5 +22,5 @@ urlpatterns = [
     path('',include("hebergement.urls")),
     path('hebergement/',include("hebergement.urls")),
     path('administration/',include("globale.urls")),
-
+    path('vet/',include("vet.urls")),
 ]

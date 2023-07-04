@@ -1,0 +1,97 @@
+{% extends 'base/root_nav_sidebar.html' %}
+{% block title %}
+Liste des postes
+{% endblock %}
+
+{% block content %}
+<main role="main" class="main-content">
+    <div class="container-fluid">
+        <div class="row justify-content-center">
+            <div class="col-12">
+                <h2 class="page-title mb-5">ajouter un patient</h2>
+                <div class="card col-8 shadow mb-4">
+                    <div class="card-header ">
+                        <strong class="card-title">formulaire</strong>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <form {% if patient1 %} action="{% url 'modify_patient' idPatient=patient1.id %}"{% else  %} action="{% url 'save_patient' %}" {% endif %} method="post">
+                                    {% csrf_token %}
+                                <div class="col-md-12 mb-3">
+                                    <label >Client</label>
+                                    <select  class="form-control" name="proprietaire">
+                                        {% if not patient1 %}
+                                        <option selected>Choose...</option>
+                                        {% endif %}
+                                        {% for client in clients %}
+                                            {% if patient1 and patient1.proprietaire.id == client.id %}
+                                                <option value="{{ client.id }}">{{ client.nom }}  {{client.prenom }}   {{client.contact}}</option>
+                                            {% endif %}
+                                        {% endfor %}
+                                        {% if patient1 %}
+                                            {% for client in clients %}
+                                                {% if patient1.proprietaire.id != client.id %}
+                                                    <option value="{{ client.id }}">{{ client.nom }}  {{client.prenom }}   {{client.contact}}</option>
+                                                {% endif %}
+                                            {% endfor %}
+                                        {% else %}
+                                            {% for client in clients %}
+                                                <option value="{{ client.id }}">{{ client.nom }}  {{client.prenom }}   {{client.contact}}</option>
+                                            {% endfor %}
+                                        {% endif %}
+                                    </select>
+                                </div>
+                                <div class="col-md-12 mb-3">
+                                    <label >Race</label>
+                                    <select class="form-control" name="nature">
+                                        {% if not patient1 %}
+                                        <option selected>Choose...</option>
+                                        {% endif %}
+                                        {% if patient1 %}
+                                            {% for race in races %}
+                                                {% if patient1.nature.id == race.id %}
+                                                    <option value="{{ race.id }}">{{ race.designation }}</option>
+                                                {% endif %}
+                                            {% endfor %}
+                                        {% endif %}
+                                        {% for race in races %}
+                                            {% if patient1 and patient1.proprietaire.id == client.id %}
+                                                <option value="{{ race.id }}">{{ race.designation }}</option>
+                                            {% else %}}
+                                                {% if not patient1 %}
+                                                    <option value="{{ race.id }}">{{ race.designation }}</option>
+                                                {% endif %}
+                                            {% endif %}
+                                        {% endfor %}
+                                    </select>
+
+                                </div>
+                                <div class="form-group mb-3">
+                                    <label >Nom</label>
+                                    <input class="form-control" type="text" name="nom" {% if patient1 %} value="{{patient1.nom}}" {% endif  %}>
+                                    <!--                                        {{forms.designation}}-->
+                                </div>
+                                <div class="form-group mb-3">
+                                    <label >Age</label>
+                                    <input class="form-control" type="number" name="age" {% if patient1 %} value="{{patient1.age}}" {% endif  %}>
+                                    <!--                                        {{forms.designation}}-->
+                                </div>
+
+                                <div class="form-group">
+                                    <button class="btn btn-outline-primary" type="submit">valider</button>
+                                </div>
+                                </form>
+
+                            </div> <!-- /.col -->
+
+                        </div>
+                    </div>
+                </div>
+            </div> <!-- / .card -->
+
+
+        </div>
+    </div>
+</main>
+{% endblock %}
