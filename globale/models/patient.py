@@ -11,6 +11,7 @@ class Patient(models.Model):
     nom = models.CharField(max_length=30, default="")
 
 
+
     def __str__(self):
         res = self.nom + " | " + self.nature.designation
         return res

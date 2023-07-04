@@ -1,0 +1,148 @@
+{% extends 'base/root_nav_sidebar.html' %}
+
+{% block title %}
+Dates libres
+{% endblock %}
+
+{% block content %}
+
+
+<main role="main" class="main-content">
+        <div class="container-fluid">
+          <div class="row justify-content-center">
+            <div class="col-12">
+                  <div class="row mb-5 align-items-center my-3 ">
+                    <div class="col">
+                      <h2 class="page-title">Dates et heures libres</h2>
+                    </div>
+                    <div class="col-auto">
+                      <button type="button" class="btn" data-toggle="modal" data-target=".modal-calendar"><span class="fe fe-filter fe-16 text-muted"></span></button>
+                    </div>
+                  </div>
+                <div class="row mt-5">
+                    <div id='calendar' class="col-8"></div>
+                    <div class=" col-4">
+
+{#     verification des dates libres        #}
+                        <div class="card shadow mb-4">
+                            <div class="card-body">
+                              <p class="mb-2"><strong>verifications de dates libres</strong></p>
+                              <div class="">
+
+                                <form action="{% url "recherche_date_libre" %}" method="post">
+{#                                  date de debut #}
+                                    {% csrf_token %}
+                                    <div class="form-group ">
+                                    <label for="date-input1">debut</label>
+                                    <div class="input-group">
+                                        <input type="datetime-local" name="date_debut"
+                                            class="form-control"
+                                            id="date-input1"
+                                            value="04/24/2020" aria-describedby="button-addon2" required>
+                                        <div class="input-group-append">
+                                        <div class="input-group-text" id="button-addon-date"><span class="fe fe-calendar fe-16"></span></div>
+                                        </div>
+                                    </div>
+                                    </div>
+
+    {#                                  date de fin #}
+
+                                    <div class="form-group ">
+                                    <label for="date-input1">fin</label>
+                                    <div class="input-group">
+                                        <input type="datetime-local" name="date_fin"
+                                            class="form-control"
+                                            id="date-input2"
+                                            value="04/24/2020" aria-describedby="button-addon2" required>
+                                        <div class="input-group-append">
+                                        <div class="input-group-text" id="button-addon-date"><span class="fe fe-calendar fe-16"></span></div>
+                                        </div>
+                                        
+                                    </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <input type="submit" class="offset-9 btn btn-outline-primary right" value="vérifier">
+                                    </div>
+                                  </form>
+
+                              </div>
+                            </div> <!-- /.card-body -->
+                        </div> <!-- /.card -->
+                        {% if date_occupées %}
+                        <div class="card shadow mb-4">
+                            <div class="card-body">
+                              <p class="mb-2"><strong>Dates libres entre {{ date_debut}} et {{ date_fin }}</strong></p>
+                              <div class="">
+                                <ul class="list-group list-group-flush">
+                                    {% for rendez_vous in date_occupées %}
+                                        <li class="list-group-item">
+                                            De {{ rendez_vous.date_de_prise }}
+                                            à {{ rendez_vous.date_fin }}<br>
+                                            <a href="/vet/Ajouter_a_ces_date/{{ rendez_vous.date_de_prise|date:'Y-m-d H:i:s' }}/{{ rendez_vous.date_fin|date:'Y-m-d H:i:s' }}"><button class="offset-9 btn btn-primary right">Ajouter</button></a>
+                                        </li>
+                                    {% endfor %}
+                                </ul>
+                              </div>
+                            </div> <!-- /.card-body -->
+                        </div> <!-- /.card -->
+                        {% endif %}
+                    </div>
+                </div>
+            </div> <!-- .col-12 -->
+          </div> <!-- .row -->
+        </div> <!-- .container-fluid -->
+      </main> <!-- m-->
+      <script>
+      
+          document.addEventListener('DOMContentLoaded', function() {
+          var calendarEl = document.getElementById('calendar');
+
+          var calendar = new FullCalendar.Calendar(calendarEl, {
+            headerToolbar: {
+              left: 'prev,next today',
+              center: 'title',
+              right: 'dayGridMonth,timeGridWeek,timeGridDay'
+            },
+            themeSystem: 'bootstrap',
+
+            navLinks: true, // can click day/week names to navigate views
+            selectable: true,
+            selectMirror: true,
+
+
+            eventClick: function(arg) {
+              alert(arg);
+            },
+            dateClick: function(info) {
+              var clickedDate = info.date;
+              var dateObj = new Date(clickedDate);
+
+              var day = dateObj.getDate().toString().padStart(2, '0');
+              var month = (dateObj.getMonth() + 1).toString().padStart(2, '0'); // Les mois commencent à partir de 0
+              var year = dateObj.getFullYear().toString();
+
+              var formattedDate = year + '-' + day + '-' + month;
+
+              window.location.href = "/vet/Nouveau_rendez_vous_pour_jour/" + formattedDate;
+            },
+            editable: true,
+            dayMaxEvents: true, 
+            
+                events: [
+                      {% for rendez_vous in date_occupées %}
+                      {   
+                          title: 'Libre',
+                          start: '{{ rendez_vous.date_de_prise|date:"Y-m-d H:i:s" }}',
+                          end: '{{ rendez_vous.date_fin|date:"Y-m-d H:i:s" }}',
+                          // Autres propriétés du rendez-vous à ajouter s i nécessaire
+                      },
+                      {% endfor %}
+                  ],
+          });
+
+          calendar.render();
+        });
+    </script>
+{% endblock %}
+

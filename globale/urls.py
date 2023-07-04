@@ -16,19 +16,32 @@ Including another URLconf
 """
 # from django.shortcuts import redirect
 from django.urls import path
-from globale.views import list_race,delete_race,modify_race,form_insert_race,save_race,form_insert_poste,save_poste,liste_poste,delete_poste,detail_poste,modify_poste,form_insert_personnel,save_personnel,liste_personnel,delete_personnel,detail_personnel,modify_personnel,save_login
+from globale.views import *
 
 
 
 
 
 urlpatterns = [
+
+    path('form_insert_patient',form_insert_patient, name='form_insert_patient'),
+    path('save_patient',save_patient, name='save_patient'),
+    path('patient/<int:idPatient>/delete',delete_patient, name='delete_patient'), #supprimer patient
+    path('patient/<int:idPatient>/modify',modify_patient, name='modify_patient'), #modifier patient
+    path('liste_patient',liste_patient, name='liste_patient'),
+
     path('form_insert_race',form_insert_race, name='form_insert_race'),
     path('save_race',save_race, name='save_race'),
     path('race/<int:idRace>/delete',delete_race, name='delete_race'), #supprimer race
     path('race/<int:idRace>/modify',modify_race, name='modify_race'), #modifier race
     path('liste_race',list_race, name='liste_race'),
 
+
+    path('form_insert_client',form_insert_client, name='form_insert_client'),
+    path('select_client',select_client, name='liste_client'),
+    path('save_client',save_client, name='save_client'),
+    path('client/<int:idClient>/modify',modify_client,name='modify_client'),
+    path('client/<int:idClient>/delete',delete_client,name='delete_client'),
 
     path('form_insert_poste',form_insert_poste, name='form_insert_poste'), #miditra amn insertion ana poste
     path('save_poste',save_poste, name='save_poste'), #save poste
