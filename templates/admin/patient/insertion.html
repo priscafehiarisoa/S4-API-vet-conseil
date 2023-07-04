@@ -22,7 +22,6 @@ Liste des postes
                                     <label >Client</label>
                                     <select  class="form-control" name="proprietaire">
                                         {% if not patient1 %}
-                                        <option selected>Choose...</option>
                                         {% endif %}
                                         {% for client in clients %}
                                             {% if patient1 and patient1.proprietaire.id == client.id %}
@@ -46,7 +45,6 @@ Liste des postes
                                     <label >Race</label>
                                     <select class="form-control" name="nature">
                                         {% if not patient1 %}
-                                        <option selected>Choose...</option>
                                         {% endif %}
                                         {% if patient1 %}
                                             {% for race in races %}
@@ -69,12 +67,12 @@ Liste des postes
                                 </div>
                                 <div class="form-group mb-3">
                                     <label >Nom</label>
-                                    <input class="form-control" type="text" name="nom" {% if patient1 %} value="{{patient1.nom}}" {% endif  %}>
+                                    <input class="form-control" required type="text" name="nom" {% if patient1 %} value="{{patient1.nom}}" {% endif  %}>
                                     <!--                                        {{forms.designation}}-->
                                 </div>
                                 <div class="form-group mb-3">
                                     <label >Age</label>
-                                    <input class="form-control" type="number" name="age" {% if patient1 %} value="{{patient1.age}}" {% endif  %}>
+                                    <input class="form-control" required type="number" name="age" {% if patient1 %} value="{{patient1.age}}" {% endif  %}>
                                     <!--                                        {{forms.designation}}-->
                                 </div>
 

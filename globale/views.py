@@ -58,6 +58,9 @@ def delete_patient(request,idPatient):
 #client
 def form_insert_client(request):
     return render(request,'admin/client/insertion.html',{})
+def form_insert_client(request,erreurs):
+
+    return render(request,'admin/client/insertion.html',{"erreurs":erreurs})
 
 def select_client(request):
     clients = Client.objects.all()
@@ -68,8 +71,11 @@ def save_client(request):
     context = {
         'saved': 'vita',
     }
-    client=Client(nom=request.POST['nom'],prenom=request.POST['prenom'],adresse=request.POST['adresse'],mail=request.POST['mail'],contact=request.POST['contact'],facebook=request.POST['facebook'])
-    client.save()
+    if request.method=="POST":
+        client=Client(nom=request.POST['nom'],prenom=request.POST['prenom'],adresse=request.POST['adresse'],mail=request.POST['mail'],contact=request.POST['contact'],facebook=request.POST['facebook'])
+        client.save()
+    else:
+        return form_insert_client(request,"le client n'a pas été inséré")
     return redirect('liste_client')
 
 def modify_client(request,idClient):

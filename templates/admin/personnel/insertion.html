@@ -45,22 +45,22 @@ Liste des patients
 
                   <div class="form-group mb-3">
                     <label >Nom</label>
-                    <input class="form-control col-10" type="text" name="nom" {% if personnel1 %} value="{{personnel1.nom}}" {% endif  %}>
+                    <input class="form-control col-10" required type="text" name="nom" {% if personnel1 %} value="{{personnel1.nom}}" {% endif  %}>
                     <!--                                        {{forms.designation}}-->
                   </div>
                   <div class="form-group mb-3 col-10">
                     <label >Prenom</label>
-                    <input class="form-control" type="text" name="prenom" {% if personnel1 %} value="{{personnel1.prenom}}" {% endif  %}>
+                    <input class="form-control" type="text" required name="prenom" {% if personnel1 %} value="{{personnel1.prenom}}" {% endif  %}>
                     <!--                                        {{forms.designation}}-->
                   </div>
                   <div class="form-group mb-3 col-10">
                     <label >Adresse</label>
-                    <input class="form-control col-10" type="text" name="adresse" {% if personnel1 %} value="{{personnel1.adresse}}" {% endif  %}>
+                    <input class="form-control col-10" required type="text" name="adresse" {% if personnel1 %} value="{{personnel1.adresse}}" {% endif  %}>
                     <!--                                        {{forms.designation}}-->
                   </div>
                   <div class="form-group mb-3 col-10">
                     <label >Contact</label>
-                    <input class="form-control" type="text" name="contact" {% if personnel1 %} value="{{personnel1.contact}}" {% endif  %}>
+                    <input class="form-control" type="text" required name="contact" {% if personnel1 %} value="{{personnel1.contact}}" {% endif  %}>
                     <!--                                        {{forms.designation}}-->
                   </div>
 

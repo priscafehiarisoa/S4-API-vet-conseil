@@ -127,7 +127,12 @@ gestion d'hébergement
                                  </div>
 
                                 {% endif %}
+                                {% if allowed != None %}
+                                 <div class="alert alert-primary" role="alert">
+                                     <span class="fe fe-alert-circle fe-16 mr-2"></span> {{ allowed }}
+                                 </div>
 
+                                {% endif %}
                               <div class="">
 
                                   <form action="{% url 'check_if_valid_date' %}" method="post">

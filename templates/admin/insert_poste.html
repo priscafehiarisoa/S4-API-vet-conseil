@@ -21,12 +21,12 @@ Liste des postes
                                     {% csrf_token %}
                                     <div class="form-group mb-3">
                                         <label >{{ "désignation"|title }}</label>
-                                        <input type="text" class="form-control" name="designation" {% if poste1 %} value="{{poste1.designation}}" {% endif  %}>
+                                        <input type="text" class="form-control" required name="designation" {% if poste1 %} value="{{poste1.designation}}" {% endif  %}>
 <!--                                        {{forms.designation}}-->
                                     </div>
                                     <div class="form-group mb-3">
                                         <label >{{ "rang"|title }}</label>
-                                        <input type="number" class="form-control" name="rang" {% if poste1 %} value="{{poste1.rang}}" {% endif  %}>
+                                        <input type="number" class="form-control" required name="rang" {% if poste1 %} value="{{poste1.rang}}" {% endif  %}>
 <!--                                        {{forms.rang}}-->
                                     </div>
 
