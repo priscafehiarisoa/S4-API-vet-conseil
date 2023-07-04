@@ -60,7 +60,7 @@ def Inserer_rendez_vous(request):
         error_messages = e.message
         patients = Patient.objects.all()
         context = { 'patients' : patients, "error" : error_messages}
-        return render(request, 'rendez_vous/rendez/Inserer_rendez_vous.html', context)
+        return render(request, 'rendez_vous/rendez_vous_crud/Inserer_rendez_vous.html', context)
     return redirect("/vet/Nouveau_rendez_vous")
     
     
