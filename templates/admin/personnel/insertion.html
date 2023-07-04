@@ -1,6 +1,6 @@
 {% extends 'base/root_nav_sidebar.html' %}
 {% block title %}
-Liste des postes
+Liste des patients
 {% endblock %}
 
 {% block content %}
@@ -8,7 +8,7 @@ Liste des postes
   <div class="container-fluid">
     <div class="row justify-content-center">
       <div class="col-12">
-        <h2 class="page-title mb-5">ajouter un patient</h2>
+        <h2 class="page-title mb-5">{{ "ajouter un patient"|title}}</h2>
         <div class="card col-8 shadow mb-4">
           <div class="card-header ">
             <strong class="card-title">formulaire</strong>
@@ -45,20 +45,20 @@ Liste des postes
 
                   <div class="form-group mb-3">
                     <label >Nom</label>
-                    <input class="form-control" type="text" name="nom" {% if personnel1 %} value="{{personnel1.nom}}" {% endif  %}>
+                    <input class="form-control col-10" type="text" name="nom" {% if personnel1 %} value="{{personnel1.nom}}" {% endif  %}>
                     <!--                                        {{forms.designation}}-->
                   </div>
-                  <div class="form-group mb-3">
+                  <div class="form-group mb-3 col-10">
                     <label >Prenom</label>
                     <input class="form-control" type="text" name="prenom" {% if personnel1 %} value="{{personnel1.prenom}}" {% endif  %}>
                     <!--                                        {{forms.designation}}-->
                   </div>
-                  <div class="form-group mb-3">
+                  <div class="form-group mb-3 col-10">
                     <label >Adresse</label>
-                    <input class="form-control" type="text" name="adresse" {% if personnel1 %} value="{{personnel1.adresse}}" {% endif  %}>
+                    <input class="form-control col-10" type="text" name="adresse" {% if personnel1 %} value="{{personnel1.adresse}}" {% endif  %}>
                     <!--                                        {{forms.designation}}-->
                   </div>
-                  <div class="form-group mb-3">
+                  <div class="form-group mb-3 col-10">
                     <label >Contact</label>
                     <input class="form-control" type="text" name="contact" {% if personnel1 %} value="{{personnel1.contact}}" {% endif  %}>
                     <!--                                        {{forms.designation}}-->

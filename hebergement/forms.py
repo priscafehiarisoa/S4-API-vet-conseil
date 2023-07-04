@@ -35,7 +35,7 @@ class Ajouter_hebergement_form(forms.Form):
     tarif_journalier = forms.BooleanField(required=False, widget=forms.CheckboxInput(
         attrs={'class': 'custom-control-input', 'type': 'checkbox', 'id': 'customSwitch2'}))
     frequence_medicament = forms.IntegerField(min_value=0, widget=forms.TextInput(
-        attrs={'class': 'form-control', 'placeholder': 'frequence du/des medicaments , ex: 3'}))
+        attrs={'class': 'form-control', 'placeholder': 'fréquence du/des medicaments , ex: 3'}))
 
 
 class Modifier_tarif_form(forms.Form):

@@ -10,14 +10,14 @@ reservations
                 <div class="col-12">
                     <div class="row">
                         <div class="col-5">
-                            <h2 class="mb-2 page-title">liste patients</h2>
+                            <h2 class="mb-2 page-title">{{ "liste des patients"|title}}</h2>
                         </div>
-
+                    <div class="offset-4">
+                        <a type="button" class="btn mb-2 btn-outline-primary" href="{% url 'form_insert_patient' %}">Ajouter un nouveau patient</a>
+                    </div>
 
                     </div>
-                    <div class="row my-4">
-                        <a type="button" class="btn mb-2 btn-primary" href="{% url 'form_insert_patient' %}">Ajouter patient</a>
-                    </div>
+
 
                     <div class="row my-4">
                         <!-- Small table -->
@@ -28,7 +28,6 @@ reservations
                                     <table class="table datatables" id="dataTable-1">
                                         <thead>
                                         <tr>
-                                            <th></th>
                                             <th>#</th>
                                             <th>Patient</th>
                                             <th>Nature</th>
@@ -44,25 +43,19 @@ reservations
 
                                         {% for patient in patients %}
                                         <tr>
-                                            <td>
-                                                <div class="custom-control custom-checkbox">
-                                                    <input type="checkbox" class="custom-control-input">
-                                                    <label class="custom-control-label"></label>
-                                                </div>
-                                            </td>
 
                                             <td>{{patient.nom}}</td>
                                             <td>{{patient.nature}}</td>
 
                                             {#                              modal details #}
                                             <td>
-                                                <button type="button" class="btn mb-2 btn-outline-primary" data-toggle="modal" data-target=".modal-right">voir les details</button>
+                                                <button type="button" class="btn mb-2 btn-outline-primary" data-toggle="modal" data-target=".modal-right">voir les détails</button>
                                                 <!-- Slide Modal -->
                                                 <div class="modal fade modal-right modal-slide" tabindex="-1" role="dialog" aria-labelledby="defaultModalLabel" aria-hidden="true">
                                                     <div class="modal-dialog modal-sm" role="document">
                                                         <div class="modal-content">
                                                             <div class="modal-header">
-                                                                <h5 class="modal-title" id="defaultModalLabel">details sur le personnel</h5>
+                                                                <h5 class="modal-title" id="defaultModalLabel">{{ "détails sur le personnel"|title}}</h5>
                                                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                                     <span aria-hidden="true">&times;</span>
                                                                 </button>
@@ -70,7 +63,7 @@ reservations
                                                             <div class="modal-body">
                                                                 <div class="card p-2 m-3">
                                                                     <div class="card-header">
-                                                                        <h5>informations personnelles </h5>
+                                                                        <h5>{{ "informations personnelles "|title}}</h5>
                                                                     </div>
                                                                     <div class="card-body">
                                                                         <p><strong>Age :  </strong>

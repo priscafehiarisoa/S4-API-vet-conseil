@@ -34,7 +34,7 @@ Demandes d'hébergement
                             <th>animal de companie</th>
                             <th>début d'hébergement</th>
                             <th>fin d'hébergement</th>
-                              <th>date d'envoi de la reservation</th>
+                              <th>date d'envoi de la réservation</th>
                             <th>-</th>
                             <th>-</th>
                           </tr>
@@ -59,8 +59,8 @@ Demandes d'hébergement
                             <td>{{ re.reservation.date_debut }}</td>
                             <td>{{ re.reservation.date_fin }}</td>
                             <td>{{ re.reservation.date_de_prise }}</td>
-                            <td><a href="{% url 'reject_request' id=re.reservation.id %}" class="btn btn-danger">refuser</a></td>
-                            <td><a href="{% url 'accept_request' id=re.reservation.id %}" class="btn btn-primary">accepter</a></td>
+                            <td><a href="{% url 'reject_request' id=re.reservation.id %}" class="btn btn-outline-danger">refuser</a></td>
+                            <td><a href="{% url 'accept_request' id=re.reservation.id %}" class="btn btn-outline-primary">accepter</a></td>
 
                           </tr>
  {% endfor %}

@@ -25,14 +25,13 @@ Demandes d'hébergement
                       <table class="table datatables" id="dataTable-1">
                         <thead>
                           <tr>
-                            <th></th>
                             <th>#</th>
                            <th>race</th>
                             <th>debut intervalle age</th>
                             <th>fin intervalle age</th>
                             <th>début d'hébergement</th>
                             <th>fin d'hébergement</th>
-                            <th>details</th>
+                            <th>détails</th>
 
                           </tr>
 
@@ -40,12 +39,7 @@ Demandes d'hébergement
                         <tbody>
                         {% for animaux in animal %}
                           <tr>
-                            <td>
-                              <div class="custom-control custom-checkbox">
-                                <input type="checkbox" class="custom-control-input">
-                                <label class="custom-control-label"></label>
-                              </div>
-                            </td>
+
                             <td>{{ animaux.id }}</td>
                               <td>{{ animaux.race }}</td>
                             <td>{{ animaux.debut_interval_age }}</td>
@@ -59,17 +53,17 @@ Demandes d'hébergement
                                 <div class="modal-dialog modal-sm" role="document">
                                   <div class="modal-content">
                                     <div class="modal-header">
-                                      <h5 class="modal-title" id="defaultModalLabel">details sur l'animal de companie à héberger</h5>
+                                      <h5 class="modal-title" id="defaultModalLabel">{{ "détails"| title }} sur l'animal de companie à héberger</h5>
                                       <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                         <span aria-hidden="true">&times;</span>
                                       </button>
                                     </div>
-                                    <div class="modal-body">
-                                            <p>details 1</p>
-                                            <p>details 2</p>
-                                            <p>details 3</p>
-                                            <p>details 4</p>
-                                    </div>
+{#                                    <div class="modal-body">#}
+{#                                            <p>details 1</p>#}
+{#                                            <p>details 2</p>#}
+{#                                            <p>details 3</p>#}
+{#                                            <p>details 4</p>#}
+{#                                    </div>#}
                                     <div class="modal-footer">
                                       <button type="button" class="btn mb-2 btn-secondary" data-dismiss="modal">fermer</button>
                                     </div>
