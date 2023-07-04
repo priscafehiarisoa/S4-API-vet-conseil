@@ -40,13 +40,13 @@ Insertion rendez vous
             </div>
 
             <div class="form-group">
-                <label for="date_consultation">Date Consultation:</label>
+                <label for="date_prise">Date Prise:</label>
                 <input type="datetime-local" name="date_consultation" id="date_consultation" class="form-control" required>
                 <div class="invalid-feedback">Please select a date and time for the consultation.</div>
             </div>
 
             <div class="form-group">
-                <label for="date_prise">Date Prise:</label>
+                <label for="date_consultation">Date Consultation:</label>
                 <input type="datetime-local" name="date_prise" id="date_prise" class="form-control" 
                 {% if date_choisie  %}
                     value = "{{ date_choisie }}T08:00"

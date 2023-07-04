@@ -36,6 +36,7 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = (
     #
+    'frontVetConseil.apps.FrontvetconseilConfig',
     'hebergement.apps.HebergementConfig',
     'vet.apps.VetConfig',
     'globale.apps.GlobaleConfig',

@@ -29,7 +29,6 @@ def nouveau_pour_jour(request, date_choisie):
 
 
 def Inserer_rendez_vous(request):
-
     tarif = Tarif_rendez_vous.objects.latest('id')
     client = request.POST.get('client')
     patient = Patient.objects.get(pk=client)
