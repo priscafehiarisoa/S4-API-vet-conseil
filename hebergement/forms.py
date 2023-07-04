@@ -7,11 +7,11 @@ from globale.models import Client, Patient
 class Date_validation_form(forms.Form):
     date_debut = forms.DateField(
         widget=forms.TextInput(attrs={'type': 'date', 'class': 'form-control'}),
-        input_formats=['%Y-%m-%d']
+        input_formats=['%Y-%m-%d'],required=True
     )
     date_fin = forms.DateField(
         widget=forms.TextInput(attrs={'type': 'date', 'class': 'form-control'}),
-        input_formats=['%Y-%m-%d']
+        input_formats=['%Y-%m-%d'],required=True
     )
 
 
@@ -43,6 +43,6 @@ class Modifier_tarif_form(forms.Form):
     id_tarif = forms.IntegerField(widget=forms.TextInput({'class': 'form-control', 'type': 'number'}), required=False)
     race = forms.CharField(widget=forms.TextInput({'class': 'form-control', 'disabled': 'True'}), required=False)
     montant_journalier = forms.DecimalField(max_digits=10, decimal_places=2, min_value=0,
-                                            widget=forms.TextInput({'class': 'form-control', 'type': 'number'}))
+                                            widget=forms.TextInput({'class': 'form-control', 'type': 'number'}),required=True)
     montant_horaire = forms.DecimalField(max_digits=10, decimal_places=2, min_value=0,
-                                         widget=forms.TextInput({'class': 'form-control', 'type': 'number'}))
+                                         widget=forms.TextInput({'class': 'form-control', 'type': 'number'}),required=True)

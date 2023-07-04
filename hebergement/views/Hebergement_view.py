@@ -21,14 +21,15 @@ def load_hosting_managemment(request):
     return render(request, "hebergement/hebergement/Gestion_hebergement.html", context)
 
 
-def load_hosting_managemments(request, allowed):
-    formulaire = Date_validation_form()
+def load_hosting_managemments(request, form):
+    formulaire = form
     nombre_hebergement_attentes = Reservation.objects.filter(etat=10).count()
     nombre_reservations = Reservation.objects.filter(etat=20, date_fin__gt=datetime.now().date()).count()
-    context = {"form": formulaire, 'nombre_hebergement_attente': nombre_hebergement_attentes, "allowed": allowed,
+    context = {"form": formulaire, 'nombre_hebergement_attente': nombre_hebergement_attentes,
                'nombre_reservations': nombre_reservations}
     return render(request, "hebergement/hebergement/Gestion_hebergement.html",
                   context)
+
 
 
 def get_reservations(request):
@@ -82,13 +83,16 @@ def check_if_valid_date(request):
                 Q(date_debut__range=(date_debut, date_fin)) | Q(date_fin__range=(date_debut, date_fin)),
                 etat=20
             )
+            if(date_fin<date_debut):
+                formulaire.add_error("date_debut","la date de fin be peux pas être antérieure au début")
+                return load_hosting_managemments(request,formulaire)
             if (reservations.count() >= 10):
                 res = "les dates sélectionnées " + str(date_debut) + " et " + str(date_fin) + " ne sont pas valides "
-                return load_hosting_managemments(request, res)
+                return load_hosting_managemments(request, formulaire)
             else:
                 res = "les dates sélectionnés " + str(date_debut) + " et " + str(
-                    date_fin) + " sont libres : il reste " + (10 - reservations.count()).__str__() + " place(s)"
-                return load_hosting_managemments(request, res)
+                    date_fin) + " sont libres "
+                return load_hosting_managemments(request, formulaire)
     else:
         formulaire = Date_validation_form()
         return load_hosting_managemment(request)
