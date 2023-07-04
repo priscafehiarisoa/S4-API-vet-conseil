@@ -1,6 +1,7 @@
 from django import forms
 
-from hebergement.models import Client, Patient, Nourriture
+from hebergement.models import  Nourriture
+from globale.models import Client, Patient
 
 
 class Date_validation_form(forms.Form):
@@ -25,11 +26,14 @@ class Ajouter_hebergement_form(forms.Form):
     type_nourriture = forms.ModelChoiceField(queryset=Nourriture.objects.all(),
                                              widget=forms.Select(attrs={'class': 'form-control'}))
     quantite = forms.FloatField(min_value=0,
-                                widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'ex : 2.5'}))
+                                widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'veuillez entrer la quantité à administrer par ration'}))
     frequence_nourriture = forms.IntegerField(min_value=0, widget=forms.TextInput(
         attrs={'class': 'form-control', 'placeholder': 'ex:2'}))
     medicaments = forms.BooleanField(required=False, widget=forms.CheckboxInput(
         attrs={'class': 'custom-control-input', 'type': 'checkbox', 'id': 'customSwitch1'}))
+
+    tarif_journalier = forms.BooleanField(required=False, widget=forms.CheckboxInput(
+        attrs={'class': 'custom-control-input', 'type': 'checkbox', 'id': 'customSwitch2'}))
     frequence_medicament = forms.IntegerField(min_value=0, widget=forms.TextInput(
         attrs={'class': 'form-control', 'placeholder': 'frequence du/des medicaments , ex: 3'}))
 

@@ -1,0 +1,70 @@
+{% extends 'base/root_nav_sidebar.html' %}
+{% block title %}
+Liste des postes
+{% endblock %}
+
+{% block content %}
+<main role="main" class="main-content">
+    <div class="container-fluid">
+        <div class="row justify-content-center">
+            <div class="col-12">
+                <h2 class="page-title mb-5">ajouter un poste</h2>
+                <div class="card col-8 shadow mb-4">
+                    <div class="card-header ">
+                        <strong class="card-title">formulaire</strong>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-12">
+
+                                <form {% if client1 %} action="{% url 'modify_client' idClient=client1.id %}"{% else  %} action="{% url 'save_client' %}" {% endif %} method="post">
+                                {% csrf_token %}
+                                <div class="form-group mb-3">
+                                    <label >Nom</label>
+                                    <input class="form-control" type="text" name="nom" {% if client1 %} value="{{client1.nom}}" {% endif  %}>
+                                    <!--                                        {{forms.designation}}-->
+                                </div>
+                                <div class="form-group mb-3">
+                                    <label >Prenom</label>
+                                    <input  class="form-control" type="text" name="prenom" {% if client1 %} value="{{client1.prenom}}" {% endif  %}>
+                                    <!--                                        {{forms.designation}}-->
+                                </div>
+                                <div class="form-group mb-3">
+                                    <label >Adresse</label>
+                                    <input  class="form-control" type="text" name="adresse" {% if client1 %} value="{{client1.adresse}}" {% endif  %}>
+                                    <!--                                        {{forms.designation}}-->
+                                </div>
+                                    <div class="form-group mb-3">
+                                        <label >Contact</label>
+                                        <input class="form-control" type="text" name="contact" {% if client1 %} value="{{client1.contact}}" {% endif  %}>
+                                        <!--                                        {{forms.designatio}}-->
+                                    </div>
+                                <div class="form-group mb-3">
+                                    <label >Email</label>
+                                    <input class="form-control" type="text" name="mail" {% if client1 %} value="{{client1.mail}}" {% endif  %}>
+                                    <!--                                        {{forms.designatio}}-->
+                                </div>
+
+                                <div class="form-group mb-3">
+                                    <label >Facebook</label>
+                                    <input class="form-control" type="text" name="facebook" {% if client1 %} value="{{client1.facebook}}" {% endif  %}>
+                                    <!--                                        {{forms.designation}}-->
+                                </div>
+
+                                <div class="form-group">
+                                    <button class="btn btn-outline-primary" type="submit">valider</button>
+                                </div>
+                                </form>
+
+                            </div> <!-- /.col -->
+
+                        </div>
+                    </div>
+                </div>
+            </div> <!-- / .card -->
+
+
+        </div>
+    </div>
+</main>
+{% endblock %}

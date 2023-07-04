@@ -3,7 +3,7 @@ from django.http import HttpRequest
 from django.shortcuts import render
 
 from hebergement.models import  Attribution
-from hebergement.models import Race
+from globale.models import Race
 from hebergement.models import Nourriture
 
 def load_list_animals_food(request):
