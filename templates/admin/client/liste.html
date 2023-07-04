@@ -4,7 +4,6 @@ reservations
 {% endblock %}
 
 {% block content %}
-<main role="main" class="main-content">
     <main role="main" class="main-content">
         <div class="container-fluid">
             <div class="row justify-content-center">
@@ -29,7 +28,6 @@ reservations
                                     <table class="table datatables" id="dataTable-1">
                                         <thead>
                                         <tr>
-                                            <th></th>
                                             <th>#</th>
                                             <th>Clients</th>
                                             <th>contact</th>
@@ -45,12 +43,7 @@ reservations
 
                                         {% for client in clients %}
                                         <tr>
-                                            <td>
-                                                <div class="custom-control custom-checkbox">
-                                                    <input type="checkbox" class="custom-control-input">
-                                                    <label class="custom-control-label"></label>
-                                                </div>
-                                            </td>
+
 
                                             <td>{{client.nom}}   {{client.prenom}}</td>
                                             <td>{{client.contact}}</td>
@@ -121,6 +114,5 @@ reservations
             </div> <!-- .row -->
         </div> <!-- .container-fluid -->
     </main>
-</main>
 
 {% endblock %}
