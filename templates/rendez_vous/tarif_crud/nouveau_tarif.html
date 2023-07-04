@@ -5,13 +5,20 @@ Insertion rendez vous
 {% endblock %}
 
 {% block content %}
-<main role="main" class="main-content">*
+<main role="main" class="main-content">
+                <div class="row m-2 p-2">
+                    <div class="col-5">
+                        <h2 class="mb-2 page-title">Tarifs</h2>
+                    </div>
+
+                </div>
      
        
-        <div class="row">
-            <div class="col-lg-12">
+        <div class="row m-2 p-2">
+
+            <div class="col-lg-12 mb-5">
                 <div class="card shadow">
-                        <div class="card-header">
+                    <div class="card-header">
                       <strong class="card-title mb-0">Récentes modifications</strong>
                       <span class="badge badge-light float-right mr-2">30 days</span>
                       <span class="badge badge-light float-right mr-2">7 days</span>
@@ -20,11 +27,13 @@ Insertion rendez vous
                     <div class="card-body">
                       <canvas id="lineChartjs" width="400" height="300"></canvas>
                     </div> <!-- /.card-body -->
-                  </div> <!-- /.card -->
+                </div> <!-- /.card -->
             </div>
-            <div class="col-lg-4">
+
+
+            <div class="col-lg-4 mb-5">
                 <div class="col-md-12" >
-                    <h1>Tarif</h1> 
+                    <h4>Tarif</h4>
                     <div class="card shadow bg-primary text-white">
                         <div class="card-body">
                         <div class="row align-items-center">
@@ -43,7 +52,7 @@ Insertion rendez vous
                     </div>
                 </div>
                 <div class="col-md-12" >
-                     <h1>Cour de change</h1> 
+                     <h4>Cour de change</h4>
                     <div class="card shadow bg-primary text-white">
                         <div class="card-body">
                         <div class="row align-items-center">
