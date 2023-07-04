@@ -65,9 +65,8 @@
 {#                dashboard  #}
               <a href="{% url 'load_hosting_managemment' %}" >
                 <i class="fe fe-home fe-16"></i>
-                <span class="ml-3 item-text">Dashboard</span><span class="sr-only">(current)</span>
+                <span class="ml-3 item-text">Mon Vet'Conseil</span><span class="sr-only">(current)</span>
               </a>
-
 
             </li>
           </ul>
@@ -81,8 +80,81 @@
                 <span class="ml-3 item-text">Gestion d'Hebergement </span>
               </a>
             </li>
+              <li class="nav-item">
+                   <a href="{% url 'Add_new_type_animals' %}" class="nav-link" >
+                <i class="fe fe-home fe-16"></i>
+                <span class="ml-3 item-text">ax</span><span class="sr-only">(current)</span>
+              </a>
+              </li>
 
           </ul>
+            <p class="text-muted nav-heading mt-4 mb-1">
+                <span>Administration</span>
+            </p>
+            <ul class="navbar-nav flex-fill w-100 mb-2">
+                <li class="nav-item ">
+                    <a href="{% url 'liste_poste' %}" class=" nav-link">
+                        <i class="fe fe-box fe-16"></i>
+                        <span class="ml-3 item-text">Postes </span>
+                    </a>
+                </li>
+                <li class="nav-item ">
+                    <a href="{% url 'liste_personnel' %}" class=" nav-link">
+                        <i class="fe fe-box fe-16"></i>
+                        <span class="ml-3 item-text">Personnels</span>
+                    </a>
+                </li>
+                <li class="nav-item ">
+                    <a href="{% url 'liste_race' %}" class=" nav-link">
+                        <i class="fe fe-box fe-16"></i>
+                        <span class="ml-3 item-text">Races </span>
+                    </a>
+                </li>
+                <li class="nav-item ">
+                    <a href="{% url 'liste_client' %}" class=" nav-link">
+                        <i class="fe fe-box fe-16"></i>
+                        <span class="ml-3 item-text">Clients </span>
+                    </a>
+                </li>
+
+                <li class="nav-item ">
+                    <a href="{% url 'liste_patient' %}" class=" nav-link">
+                        <i class="fe fe-box fe-16"></i>
+                        <span class="ml-3 item-text">Patients</span>
+                    </a>
+                </li>
+
+
+
+            </ul>
+<p class="text-muted nav-heading mt-4 mb-1">
+            <span>Rendez vous</span>
+          </p>
+          <ul class="navbar-nav flex-fill w-100 mb-2">
+            <li class="nav-item dropdown">
+              <a href="#ui-elements" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle nav-link">
+                <i class="fe fe-box fe-16"></i>
+                <span class="ml-3 item-text">Rendez-vous </span>
+              </a>
+              <ul class="collapse list-unstyled pl-4 w-100" id="ui-elements">
+                <li class="nav-item">
+                  <a class="nav-link pl-3" href="{% url 'Nouveau_rendez_vous'%}"><span class="ml-1 item-text">Nouveau rendez-vous</span>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link pl-3" href="{% url 'calendar'%}"><span class="ml-1 item-text">Afficher rendez-vous</span></a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link pl-3" href="/vet/demande_de_rendez_vous"><span class="ml-1 item-text">Demande</span></a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link pl-3" href="/vet/nouveau_tarif"><span class="ml-1 item-text">Tarif</span></a>
+                </li>
+                
+              </ul>
+            </li>
+          </ul>
+
 
         </nav>
       </aside>

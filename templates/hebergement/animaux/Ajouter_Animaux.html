@@ -18,14 +18,20 @@ Formulaire d'ajout d'animaux
                                 <strong class="card-title">formulaire</strong>
                             </div>
                             <div class="card-body">
-                                <form class="needs-validation" >
+                                <form class="needs-validation" method="post" action="{% url 'traiter_formulaire' %}">
+                                {% csrf_token %}
                                     <div class="form-row">
 
 
                                         <div class="col-md-12 mb-3">
-                                            <label for="designation">Designation</label>
-                                            <input type="text" class="form-control" id="designation" value="Mark" required>
-                                            <div class="valid-feedback"> Looks good! </div>
+                                              <label for="inputState">Race</label>
+                                              <select id="inputState" class="form-control" name="race_animal">
+                                               <option selected>Choose...</option>
+                                                  {% for race in races %}
+                                                    <option value="{{ race.id }}">{{ race.designation }}</option>
+                                                  {% endfor %}
+                                              </select>
+
                                         </div>
                                         <div class="col-md-6 mb-3">
 
@@ -35,20 +41,29 @@ Formulaire d'ajout d'animaux
 
                                         <div class="col-md-5 mb-3">
                                             <label for="age">Age</label>
-                                            <input type="text" class="form-control" id="age" value="" required placeholder="debut age">
+                                            <input type="text" class="form-control" id="age" name="debut_age" required placeholder="debut age">
                                             <div class="invalid-feedback"> Please select a valid age </div>
                                         </div>
                                         <div class="offset-2 col-md-5 mb-3">
                                             <label for="validationCustom05">.</label>
-                                            <input type="text" class="form-control" id="validationCustom05" required placeholder="fin age">
+                                            <input type="text" class="form-control" id="validationCustom05" name="fin_age" required placeholder="fin age">
                                             <div class="invalid-feedback"> Please provide a valid zip. </div>
                                         </div>
                                         <div class="col-md-3 mb-3"></div>
-                                        <div class="col-md-12 mb-3">
-                                            <label for="designation">Validite</label>
-                                            <input type="text" class="form-control" id="validite" value="" required>
-                                            <div class="valid-feedback"> Looks good! </div>
+                                    </div>
+                                 <div class="form-row">
+
+                                        <div class="col-md-5 mb-3">
+                                            <label for="age">debut de validite</label>
+                                            <input type="date" class="form-control" id="validite" name="debut_validite">
+                                            <div class="invalid-feedback"> Please select a validite </div>
                                         </div>
+                                        <div class="offset-2 col-md-5 mb-3">
+                                            <label for="validationCustom05">fin de validite</label>
+                                            <input type="date" class="form-control" id="fin_validite" name="fin_validite">
+                                            <div class="invalid-feedback"> Please provide a valid zip. </div>
+                                        </div>
+                                        <div class="col-md-3 mb-3"></div>
                                     </div>
 
                                     <button class="btn btn-primary" type="submit">valider</button>

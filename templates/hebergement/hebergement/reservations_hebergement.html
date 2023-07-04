@@ -60,22 +60,22 @@ reservations
                                 <!-- Slide Modal -->
                                   <div class="modal fade modal-right modal-slide" tabindex="-1" role="dialog" aria-labelledby="defaultModalLabel" aria-hidden="true">
                                     <div class="modal-dialog modal-sm" role="document">
-                                      <div class="modal-content">
+                                      <div class="modal-content ">
                                         <div class="modal-header">
                                           <h5 class="modal-title" id="defaultModalLabel">details sur l'animal de companie à héberger</h5>
                                           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                             <span aria-hidden="true">&times;</span>
                                           </button>
                                         </div>
-                                        <div class="modal-body">
-
+                                        <div class="modal-body ">
     {#                                        contenu du modal pour les details #}
 {#                                            client #}
-                                                <div class="card">
-                                                    <div class="card_header">
-                                                        <h3>Client:  {{ re.reservation.client.nom }} {{ re.reservation.client.prenom }}</h3>
+                                                <div class="card p-2 m-3">
+                                                    <div class="card-header">
+                                                        <h5>Client:  </h5>
                                                     </div>
-                                                    <div class="card_body">
+                                                    <div class="card-body">
+                                                        <p><strong>nom: </strong> {{ re.reservation.client.nom }} {{ re.reservation.client.prenom }}</p>
                                                         <p><strong>adresse : </strong>
                                                         {{ re.reservation.client.adresse }}
                                                         </p>
@@ -88,11 +88,11 @@ reservations
                                                     </div>
                                                 </div>
 {#                                            patient #}
-                                                <div class="card">
-                                                    <div class="card_header">
-                                                        <h3>Patient:  {{ re.patient.nom }}</h3>
+                                                <div class="card p-2 m-3">
+                                                    <div class="card-header">
+                                                        <h5>Patient:  {{ re.patient.nom }}</h5>
                                                     </div>
-                                                    <div class="card_body">
+                                                    <div class="card-body">
                                                         <p><strong>Age : </strong>
                                                         {{ re.patient.age }}
                                                         </p>
@@ -102,11 +102,13 @@ reservations
                                                     </div>
                                                 </div>
 {#                                            medicaments #}
-                                                <div class="card">
-                                                    <div class="card_header">
-                                                        <h3>medicaments:  {{ re.medicaments }}</h3>
+                                                <div class="card p-2 m-3">
+                                                    <div class="card-header">
+                                                        <div class="card_header">
+                                                        <h5>medicaments:</h5>
                                                     </div>
-                                                    <div class="card_body">
+                                                    </div>
+                                                    <div class="card-body">
                                                         <p><strong>frequence : </strong>
                                                         {{ re.frequence }}
                                                         </p>
@@ -114,11 +116,13 @@ reservations
                                                 </div>
 {#                                            nourriture #}
 {#                                            todo boucle here #}
-                                            <div class="card">
-                                                    <div class="card_header">
-                                                        <h3>nourriture: </h3>
+                                            <div class="card p-2 m-3">
+
+                                                    <div class="card-header">
+                                                        <h5>nourriture: </h5>
                                                     </div>
-                                                    <div class="card_body">
+
+                                                    <div class="card-body">
 {##}
                                                         {% for no in re.nourriture.designation %}
                                                         <p><strong>  </strong>
@@ -126,23 +130,24 @@ reservations
                                                             </p>
                                                         {% endfor %}
 
-{{ re.nourriture.designation }}
+                                                {{ re.nourriture.designation }}
 
                                                     </div>
-                                                </div>
+                                            </div>
 
-                                        </div>
-                                        <div class="modal-footer">
-                                          <button type="button" class="btn mb-2 btn-secondary" data-dismiss="modal">fermer</button>
+                                            <div class="modal-footer">
+                                              <button type="button" class="btn mb-2 btn-secondary" data-dismiss="modal">fermer</button>
+                                            </div>
                                         </div>
                                       </div>
                                     </div>
                                   </div>
+                                </div>
                             </td>
-                            <td><a href="{% url 'cancel_hosting' id_obj=re.reservation.id %}" class="btn btn-outline-danger">Annuler</a></td>
-                            <td><button class="btn btn-outline-secondary">modifier</button></td>
+                            <td><a href="" class="btn btn-outline-danger">Annuler</a></td>
+                            <td><a class="btn btn-outline-secondary">modifier</a></td>
                           </tr>
-
+                            </div>
                         {% endfor %}
 
 

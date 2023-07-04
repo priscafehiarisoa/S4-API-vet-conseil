@@ -1,0 +1,122 @@
+{% extends 'base/root_nav_sidebar.html'%}
+{%load static %}
+{% block title %}
+Insertion rendez vous
+{% endblock %}
+
+{% block content %}
+<main role="main" class="main-content">
+    <a href="/vet/demande_de_rendez_vous">Demande</a>
+    
+    <div class="row">
+        
+    <div class="col-lg-6">
+        <div class="card-header">
+            <strong>Validation</strong>
+        </div>
+        <div class="card-body card shadow">
+        {% if date_choisie  %}
+            Nouveau rendez-vous pour {{ date_choisie }}
+        {% endif %}
+        <form action="{% url 'Inserer_rendez_vous' %}" method="post" class="needs-validation" novalidate>
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="client">Client:</label>
+                <select name="client" id="client" class="form-control">
+                    {% for patient in patients %}
+                        <option value="{{patient.id}}">{{patient.nom}}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="motif">Motif:</label>
+                <input type="text" name="raison" id="motif" class="form-control" required>
+                <div class="invalid-feedback">Please provide a motif.</div>
+            </div>
+            <div class="form-group">
+                <label for="date_prise">Durée (heure):</label>
+                <input type="number" name="duree" id="duree" class="form-control" required>
+                <div class="invalid-feedback">Pick a valide input.</div>
+            </div>
+
+            <div class="form-group">
+                <label for="date_consultation">Date Consultation:</label>
+                <input type="datetime-local" name="date_consultation" id="date_consultation" class="form-control" required>
+                <div class="invalid-feedback">Please select a date and time for the consultation.</div>
+            </div>
+
+            <div class="form-group">
+                <label for="date_prise">Date Prise:</label>
+                <input type="datetime-local" name="date_prise" id="date_prise" class="form-control" 
+                {% if date_choisie  %}
+                    value = "{{ date_choisie }}T08:00"
+                {% endif %}
+                required>
+                <div class="invalid-feedback">Please select a date and time for the prise.</div>
+            </div>
+            
+            <button type="submit" class="btn btn-primary">Inserer</button>
+            <br>
+            <br>
+            
+            {% if error %}
+                <div class="alert alert-danger" role="alert">
+                    {{ error }}
+                </div>
+            {% endif %}
+        </form>
+            <a href="/vet/"><button class="btn btn-primary">Voir les dates libre</button></a>
+    </div>
+    </div>
+        <div class="col-lg-6">
+            <div class="card shadow">
+                <div class="card-header">
+                    <strong class="card-title mb-0">Cycle dernier rendez-vous</strong>
+                    <span class="badge badge-light float-right mr-2">30 days</span>
+                    <span class="badge badge-light float-right mr-2">7 days</span>
+                    <span class="badge badge-secondary float-right mr-2">Today</span>
+                </div>
+                <div class="card-body">
+                    <canvas id="lineChartjs" width="400" height="300"></canvas>
+                </div> <!-- /.card-body -->
+                </div> <!-- /.card -->
+        </div>
+    </div>
+</main>
+<script>
+    document.addEventListener("DOMContentLoaded", function(event) {
+        var labels = {{ labels|safe }};
+        var valeurs = {{ valeurs|safe }};
+        
+        var ctx = document.getElementById('lineChartjs').getContext('2d');
+        var chart = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: labels,
+                datasets: [{
+                    label: 'Tarifs',
+                    data: valeurs,
+                    borderColor: 'rgba(52, 152, 219, 1)',  // Couleur de la ligne
+                    backgroundColor: 'rgba(52, 152, 219, 0.2)',  // Couleur de remplissage
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                scales: {
+                    x: {
+                        type: 'time',  // Utilisez le type 'time' pour l'axe des abscisses
+                        time: {
+                            unit: 'day'  // Choisissez l'unité de temps souhaitée (jour, mois, année, etc.)
+                        }
+                    },
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+    });
+</script>
+
+{% endblock %}

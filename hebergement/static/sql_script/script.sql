@@ -1,4 +1,4 @@
-INSERT INTO hebergement_race(designation) VALUES
+INSERT INTO globale_race(designation) VALUES
     ('Chien'),
     ('Chat'),
     ('Poisson'),
@@ -43,13 +43,13 @@ INSERT INTO hebergement_attribution(debut_interval_poids, fin_interval_poids, no
     (0, 100,14, 5),
     (0, 100,15, 7);
 
-insert into hebergement_client (nom,prenom,adresse,mail,contact)
+insert into globale_client (nom,prenom,adresse,mail,contact)
 values
        ('Andriamilamina','Manohy Arivelo','Ambohipo','mail@gmail.com','+2610345667889'),
        ('Rakotondrabary','Ravo hary','ambohipo','mail2@gmail.com','+261324545645'),
        ('andriamanarinivo ','aina daniella','ambohipo','mail3@gmail.com','+261345645643');
 
-insert into hebergement_patient(age, nom, nature_id, proprietaire_id) VALUES
+insert into globale_patient(age, nom, nature_id, proprietaire_id) VALUES
                     (4,'milou',1,1),
                     (3,'max',2,2),
                     (2,'boby',3,3);

@@ -4,7 +4,7 @@ from django.shortcuts import render
 from django.contrib import messages
 
 from hebergement.models import  Attribution
-from hebergement.models import Race
+from globale.models import Race
 from hebergement.models import Nourriture
 
 
