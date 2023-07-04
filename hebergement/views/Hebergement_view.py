@@ -29,6 +29,15 @@ def load_hosting_managemments(request, form):
                'nombre_reservations': nombre_reservations}
     return render(request, "hebergement/hebergement/Gestion_hebergement.html",
                   context)
+def load_hosting_managemments_permission(request, allowed):
+    formulaire = Date_validation_form()
+    nombre_hebergement_attentes = Reservation.objects.filter(etat=10).count()
+    nombre_reservations = Reservation.objects.filter(etat=20, date_fin__gt=datetime.now().date()).count()
+    context = {"form": formulaire, 'nombre_hebergement_attente': nombre_hebergement_attentes, "allowed": allowed,
+               'nombre_reservations': nombre_reservations}
+    return render(request, "hebergement/hebergement/Gestion_hebergement.html",
+                  context)
+
 
 
 
@@ -88,11 +97,11 @@ def check_if_valid_date(request):
                 return load_hosting_managemments(request,formulaire)
             if (reservations.count() >= 10):
                 res = "les dates sélectionnées " + str(date_debut) + " et " + str(date_fin) + " ne sont pas valides "
-                return load_hosting_managemments(request, formulaire)
+                return load_hosting_managemments_permission(request, res)
             else:
                 res = "les dates sélectionnés " + str(date_debut) + " et " + str(
                     date_fin) + " sont libres "
-                return load_hosting_managemments(request, formulaire)
+                return load_hosting_managemments_permission(request, res)
     else:
         formulaire = Date_validation_form()
         return load_hosting_managemment(request)
