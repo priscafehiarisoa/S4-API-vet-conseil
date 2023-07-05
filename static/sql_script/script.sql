@@ -61,3 +61,7 @@ INSERT INTO public.hebergement_tarifs_hebergement (id, date_changement_tarif, mo
 INSERT INTO public.hebergement_tarifs_hebergement (id, date_changement_tarif, montant_journalier, montant_horaire, race_id) VALUES (5, '2023-06-26', 20000.00, 2000.00, 5);
 INSERT INTO public.hebergement_tarifs_hebergement (id, date_changement_tarif, montant_journalier, montant_horaire, race_id) VALUES (6, '2023-06-26', 20000.00, 2000.00, 6);
 INSERT INTO public.hebergement_tarifs_hebergement (id, date_changement_tarif, montant_journalier, montant_horaire, race_id) VALUES (7, '2023-06-26', 20000.00, 2000.00, 7);
+
+INSERT INTO globale_poste (designation, rang) VALUES ('Admin', 10);
+INSERT INTO globale_personnel (nom, prenom, adresse, contact, poste_id) VALUES ('Admin', 'Admin', '', '', 1);
+INSERT INTO globale_login (mail, mot_de_passe, personnel_id) VALUES ('admin@admin.admin', 'admin', 1);

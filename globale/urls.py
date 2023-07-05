@@ -19,10 +19,9 @@ from django.urls import path
 from globale.views import *
 
 
-
-
-
 urlpatterns = [
+    path('login', login_view, name='login'),
+    path('logout', logout_view, name='logout'),
 
     path('form_insert_patient',form_insert_patient, name='form_insert_patient'),
     path('save_patient',save_patient, name='save_patient'),

@@ -217,3 +217,22 @@ def save_login(request):
     login = Login(mail = email, mot_de_passe = password, personnel = personnel)
     login.save()
     return redirect('admin/index')
+
+
+def login_view(request):
+    context = {}
+    if request.method == "POST":
+        email = request.POST.get("email")
+        password = request.POST.get("password")
+        try:
+            user = Login.objects.get(mail=email, mot_de_passe=password)
+            request.session['id'] = user.id
+            return redirect('load_hosting_managemment')
+        except Login.DoesNotExist:
+            context['error'] = "Email ou mot de passe invalide!"
+    return render(request, 'admin/login.html', context)
+
+
+def logout_view(request):
+    request.session.delete('id')
+    return redirect('login')

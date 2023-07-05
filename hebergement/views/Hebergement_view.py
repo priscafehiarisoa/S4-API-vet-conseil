@@ -13,6 +13,8 @@ from hebergement.models import Reservation, Details_reservation, Validation_rese
 
 # gestion des hebergements
 def load_hosting_managemment(request):
+    if request.session.get('id') is None:
+        return redirect('logout')
     formulaire = Date_validation_form()
     nombre_hebergement_attentes = Reservation.objects.filter(etat=10).count()
     nombre_reservations = Reservation.objects.filter(etat=20, date_fin__gt=datetime.now().date()).count()
