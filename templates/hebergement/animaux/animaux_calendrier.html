@@ -6,96 +6,83 @@
 
 {% block content %}
 <main role="main" class="main-content">
-  <div class="container-fluid">
-    <div class="row justify-content-center">
-      <div class="col-12">
-
-      <div class="row">
-                <div class="row col-5 m-3 p-3">
-                        <h2 class="mb-2 page-title">Calendrier d'animaux </h2>
+        <div class="container-fluid">
+          <div class="row justify-content-center">
+            <div class="col-12">
+                <div class="row">
+                    <div class="">
+                        <h2 class="mb-2 page-title">Planing pour l'hébergement d'animaux</h2>
                     </div>
-                    <div class="col m-5 pr-2">
-                       <div class="dropdown float-right">
-                             <a href="{% url 'add_new_type_food' %}" class="btn btn-primary float-right ml-3" type="button"></a>
-                       </div>
-                     </div>
+
 
                 </div>
+            <div class="row">
+{% for race in races %}
 
-        <div class="col-md-10 mb-4">
-          <div class="card shadow">
-            <div class="card-body py-4 mb-1">
-              <div class="row">
-                <div class="col-md-3">
-                  <div class="nav flex-column nav-pills shadow" id="v-pills-tab" role="tablist" aria-orientation="vertical">
-                    {% for race in races %}
-                        {% if race == attributions.first.race %}
-                            <a class="nav-link p-2 nos_liens" href="{% url 'show_animaux_calendrier' race_id=race.id %}" > <i class="fe fe-play fe-12 pr-2"></i>{{ race.designation }}</a>
-                        {% else %}
-                           <a class="nav-link p-2 nos_liens"  href="{% url 'show_animaux_calendrier' race_id=race.id %}" >{{ race.designation }}</a>
-                        {% endif %}
-
-                    {% endfor %}
-                  </div>
+                <div class="card col-2 m-2" >
+                    <div class="card-body">
+                      <div class="row align-items-center">
+                        <a class="col pr-0" href="{% url 'show_animaux_calendrier' race_id=race.id %}">
+                          <span class="h4 mb-0">{{ race.designation }}</span>
+                        </a>
+                      </div>
+                    </div>
                 </div>
-                <div class="col-md-9">
-                  <div class="tab-content mb-4" id="v-pills-tabContent">
-                    <div class="tab-pane fade show active" id="v-pills-home" role="tabpanel" aria-labelledby="v-pills-home-tab">
-                        <div id='calendar' class="col-12"></div>
+
+{% endfor %}
+             </div>
+              <div class="row my-4">
+                <!-- Small table -->
+                <div class="col-md-12">
+                  <div class="card shadow">
+                    <div class="card-body">
+                      <!-- table -->
+                      <table class="table datatables" id="dataTable-1">
+                        <thead>
+                          <tr>
+                            <th>#</th>
+                           <th>race</th>
+                            <th>début de la date de validité</th>
+                            <th>fin de la date de validité</th>
+                            <th>début age accepté</th>
+                            <th>fin age accepté</th>
+
+
+                          </tr>
+                        </thead>
+                        <tbody>
+
+                        {% for re in animal_accepte %}
+
+
+                          <tr>
+
+                            <td>{{ re.id }}</td>
+                            <td>{{ re.race.designation}}</td>
+                            <td>{{ re.debut_interval_validite }}</td>
+                            <td>{{ re.fin_interval_validite }} </td>
+                            <td>{{ re.debut_interval_age }}</td>
+                            <td>{{ re.fin_interval_age }}</td>
+
+{#                              modal details #}
+
+                          </tr>
+                        {% endfor %}
+
+
+
+                        </tbody>
+                      </table>
                     </div>
                   </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
+                </div> <!-- simple table -->
+              </div> <!-- end section -->
+            </div> <!-- .col-12 -->
+          </div> <!-- .row -->
+        </div> <!-- .container-fluid -->
 </main>
-    <script>
-
-  document.addEventListener('DOMContentLoaded', function() {
-    var calendarEl = document.getElementById('calendar');
-
-    var liens = document.getElementsByClassName("nos_liens");
-    var url = ""
-    for(var i = 0; i<liens.length; i++){
-        liens[i].addEventListener("click", function(event) {
-            //event.preventDefault();
-            url = this.href;
-            console.log(url)
-        })
-    }
-
-    var calendar = new FullCalendar.Calendar(calendarEl, {
-      headerToolbar: {
-        left: 'prev,next today',
-        center: 'title',
-        right: 'dayGridMonth,timeGridWeek,timeGridDay'
-      },
-      initialDate: '2023-06-12',
-      themeSystem: 'bootstrap',
-
-      navLinks: true, // can click day/week names to navigate views
-      selectable: true,
-      selectMirror: true,
-
-
-      editable: false,
-      dayMaxEvents: true, // allow "more" link when too many events
-      events: url
-    });
-
-    calendar.render();
-  });
 
 
 
-      </script>
+
 {% endblock %}
-<style>
-    .selected{
-        background-color: red;
-    }
-</style>
