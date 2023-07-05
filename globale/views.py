@@ -58,9 +58,9 @@ def delete_patient(request,idPatient):
 #client
 def form_insert_client(request):
     return render(request,'admin/client/insertion.html',{})
-def form_insert_client(request,erreurs):
 
-    return render(request,'admin/client/insertion.html',{"erreurs":erreurs})
+#def form_insert_client(request,erreurs):
+ #   return render(request,'admin/client/insertion.html',{"erreurs":erreurs})
 
 def select_client(request):
     clients = Client.objects.all()

@@ -1,0 +1,69 @@
+{% extends 'base/root.html'%}
+
+{% block title %}
+Insertion rendez-vous
+{% endblock %}
+
+{% block content %}
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+<main role="main" class="main-content">
+    <div class="row mb-5">
+        <div class="col-12 text-center"> <!-- Ajoutez la classe text-center pour centrer le titre -->
+            <h2 class="mb-2 page-title text-primary">Demande de rendez vous</h2> <!-- Ajoutez la classe text-primary pour changer la couleur en bleu -->
+        </div>
+    </div>
+    <div class="row justify-content-center">
+        <div class="col-lg-6">
+            <div class="card-header">
+                <strong>Validation</strong>
+            </div>
+            <div class="card-body card shadow">
+                {% if date_choisie  %}
+                Nouveau rendez-vous pour {{ date_choisie }}
+                {% endif %}
+                <form action="{% url 'inserer_rendez_vous' %}" method="post" class="needs-validation" novalidate>
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <label for="client">Client:</label>
+                        <select name="client" id="client" class="form-control">
+                            {% for patient in patients %}
+                                <option value="{{patient.id}}">{{patient.nom}}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="motif">Motif:</label>
+                        <input type="text" name="raison" id="motif" class="form-control" required>
+                        <div class="invalid-feedback">Please provide a motif.</div>
+                    </div>
+                    <div class="form-group">
+                        <label for="date_prise">Durée (heure):</label>
+                        <input type="number" name="duree" id="duree" class="form-control" required>
+                        <div class="invalid-feedback">Pick a valide input.</div>
+                    </div>
+                    <div class="form-group">
+                        <label for="date_consultation">Date de Prise:</label>
+                        <input type="datetime-local" name="date_consultation" id="date_consultation" class="form-control" required>
+                        <div class="invalid-feedback">Veuillez sélectionner une date libre pour la consultation .</div>
+                    </div>
+                    <div class="form-group">
+                        <label for="date_prise">Date Consultation:</label>
+                        <input type="datetime-local" name="date_prise" id="date_prise" class="form-control" {% if date_choisie  %} value="{{ date_choisie }}T08:00" {% endif %} required>
+                        <div class="invalid-feedback">Veuillez sélectionner une date libre .</div>
+                    </div>
+                    <button type="submit" class="btn btn-outline-primary mb-3">Inserer</button>
+                    {% if error %}
+                    <div class="alert alert-danger" role="alert">
+                        {{ error }}
+                    </div>
+                    {% endif %}
+                </form>
+            </div>
+        </div>
+      
+    </div>
+</main>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
+{% endblock %}

@@ -1,48 +1,38 @@
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+{% load static %}
 
-<style>
-    .login-form {
-        max-width: 300px;
-        margin: 0 auto;
-        padding: 20px;
-        background: #f5f5f5;
-        border: 1px solid #ddd;
-        border-radius: 5px;
-    }
-
-    .login-form input[type="email"],
-    .login-form input[type="password"] {
-        width: 100%;
-        padding: 10px;
-        margin-bottom: 10px;
-        border: 1px solid #ddd;
-        border-radius: 3px;
-    }
-
-    .login-form input[type="submit"] {
-        width: 100%;
-        padding: 10px;
-        background: #4CAF50;
-        color: #fff;
-        border: none;
-        border-radius: 3px;
-        cursor: pointer;
-    }
-
-    .login-form input[type="submit"]:hover {
-        background: #45a049;
-    }
-</style>
-
-<form class="login-form" action="{% url 'authentification' %}" method="post">
-    {% csrf_token %}
-    <div class="form-group">
-        <input type="email" value="t@g" class="form-control" name="email" placeholder="Email" required>
-    </div>
-    <div class="form-group">
-        <input type="password" value=" " class="form-control" name="password" placeholder="Password" required>
-    </div>
-    <button type="submit" class="btn btn-primary">Log In</button>
-</form>
-
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/style_login.css' %}">
+    <title>Document</title>
+</head>
+<body>
+    <div class="wrapper fadeInDown">
+        <div id="formContent">
+          <!-- Tabs Titles -->
+          <h2 class="active"> Sign In </h2>
+          <a href="{% url 'inscription' %}"<h2 class="inactive underlineHover">Sign Up </h2></a>
+      
+          <div class="fadeIn first">
+            <h1><a href="index.html"><img src='{% static "images/logo.png" %}' alt=""></a></h1>
+          </div>
+          <!-- Icon -->
+      
+          <!-- Login Form -->
+          <form class="login-form" action="{% url 'authentification' %}" method="post">
+            <input type="text" id="login" class="fadeIn second" name="email" placeholder="Email">
+            <input type="text" id="password" class="fadeIn third" name="password" placeholder="password">
+            <input type="submit" class="fadeIn fourth" value="Log In">
+          </form>
+      
+          <!-- Remind Passowrd -->
+          <div id="formFooter">
+            <a class="underlineHover" href="#">Forgot Password?</a>
+          </div>
+      
+        </div>
+      </div>
+</body>
+</html>
