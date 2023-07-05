@@ -1,0 +1,108 @@
+{% extends 'base/root.html'%}
+{% block title %}
+    Ajouter une reservation
+{% endblock %}
+
+{% block content %}
+    <main role="main" class="main-content">
+    <div class="container-fluid">
+        <div class="row justify-content-center">
+            <div class="col-12">
+                <h2 class="h3 mb-3 page-title">Ajouter une nouvelle réservation </h2>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="card shadow m-4 ">
+                            <div class="card-header">
+                                <strong class="card-title">formulaire</strong>
+                            </div>
+                            <div class="card-body">
+                                <form class="needs-validation" action="{% url 'traitement_demande_hebergement' %}" method="post">
+                                    {% csrf_token %}
+                                    
+                                    <div>
+                                        <h4>{{ "détails clients"|title }}  </h4>
+                                    </div>
+{#                                        choix client #}
+
+{#                                        choix animal de companie #}
+                                        <div class="form-group mb-3 ml-4 col-5">
+                                          <label for="">sélectioner un patient </label>
+                                          {{ form.animal }}
+                                        </div>
+
+                                    </div>
+
+                                    <div>
+                                        <h4>{{ "dates" | title}} </h4>
+                                    </div>
+{#                                        dates de reservations #}
+                                        <div class="form-row col-12 mb-3">
+
+                                            <div class="mb-3 mr-3 ml-4 col-5">
+                                                <label for="designation">Date de début d'hébergement</label>
+                                                {{ form.date_debut_hebergement }}
+                                            </div>
+                                            <div class="mb-3 ml-4 col-5">
+                                                <label for="designation">Date de fin d'hébergement</label>
+                                                {{ form.date_fin_hebergement }}
+                                            </div>
+                                        </div>
+                                    <div>
+                                        <h4>{{ "Nourriture"|title }} </h4>
+                                    </div>
+                                    <div class="mb-3">
+                                        {# type de nourriture #}
+                                    <div class="form-group mb-3 mr-3 ml-4 col-5">
+                                          <label for="">{{ "sélectionez"|title }} une nourriture pour le patient </label>
+                                          {{ form.type_nourriture }}
+                                        </div>
+                                    <div class="form-row p-3">
+                                        <div class="mb-3 mr-3 ml-4 col-5">
+                                            <label for="age">{{ "quantité totale"|title}} </label>
+                                            {{ form.quantite }}
+                                        </div>
+                                        <div class="mb-3 mr-3 ml-4 col-5">
+                                            <label for="age">{{ "fréquence"|title }} </label>
+                                            {{ form.frequence_nourriture }}
+                                        </div>
+                                    </div>
+                                    </div>
+
+
+                                     <div>
+                                        <h4>{{ "tarifs"|title }}  </h4>
+                                    </div>
+
+                                    <div class="form-row ml-5 mb-5">
+                                        <div class="custom-control custom-switch mb-3 mr-3 ml-4 col-5">
+                                            {{ form.tarif_journalier }}
+                                            <label class="custom-control-label" for="customSwitch2">cocher pour utiliser un tarif horaire pour la facturation , sinon votre facturation se calculera en  heure  </label>
+                                        </div>
+                                    </div>
+
+
+                                    <div>
+                                        <h4>Médicaments  </h4>
+                                    </div>
+                                    <div class="form-row ml-5 mb-5">
+                                        <div class="custom-control custom-switch mb-3 mr-3 ml-4 col-5">
+                                            {{ form.medicaments }}
+                                            <label class="custom-control-label" for="customSwitch1">l'animal a besoin de médicaments</label>
+                                        </div>
+                                        <div class="mb-3 mr-3  col-5">
+                                            {{ form.frequence_medicament }}
+                                        </div>
+                                    </div>
+
+                                    <button class="btn btn-primary" type="submit">valider</button>
+                                </form>
+                            </div> <!-- /.card-body -->
+                        </div> <!-- /.card -->
+                    </div> <!-- /.col -->
+                    <!-- /.col -->
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+{% endblock %}

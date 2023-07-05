@@ -9,7 +9,6 @@ from rest_framework.utils import json
 from hebergement.models import Animal_accepte
 from globale.models.race import Race
 
-
 def Add_new_type_animals(request):
     races = Race.objects.all()
     context = {'races': races}

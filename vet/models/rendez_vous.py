@@ -111,7 +111,16 @@ class Rendez_vous(models.Model):
             raise ValidationError("Date déjà occupée")
         self.save()
 
-    
+    def check_demande(self):
+        all_rendezvous_dates = Rendez_vous.objects.filter(
+            Q(date_de_prise__range=(self.date_de_prise, self.date_fin)) |
+            Q(date_fin__range=(self.date_de_prise, self.date_fin)),
+            Q(etat = 2)
+        )
+
+        if all_rendezvous_dates.exists():
+            raise ValidationError("Date déjà occupée")
+        self.save()
     def files_for_new_date(self):
         rendez_vous_par_mois = Rendez_vous.objects.annotate(mois=ExtractMonth('date_de_prise')).values('mois').annotate(count=Count('id')).order_by('mois')
         labels = []

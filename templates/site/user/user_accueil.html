@@ -1,0 +1,44 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Liste des postes{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'css/style_login.css'%}">
+    <link href="https://fonts.googleapis.com/css?family=Poppins" rel="stylesheet">
+</head>
+
+<body>
+    <div class="wrapper fadeInDown">
+        <div id="formContent">
+            <h2 class="active">ajouter un patient</h2>
+        
+                    <form action="{% url 'ajout_patient' %}" method="post">
+                        {% csrf_token %}
+                      
+                            <select name="nature" class="fadeIn second" placeholder="Race">
+                                {% for race in races %}
+                                <option value="{{ race.id }}">{{ race.designation }}</option>
+                                {% endfor %}
+                            </select>   
+                            <input required type="text" name="nom" {% if patient1 %} value="{{patient1.nom}}" {% endif  %} class="fadeIn" placeholder="Nom">
+                      
+                            <input required type="text" name="age" {% if patient1 %} value="{{patient1.age}}" {% endif  %} class="fadeIn" placeholder="Age">
+                        
+                            <input type="submit" class="fadeIn fourth" value="Ajouter">
+                  
+                    </form>
+                    <div id="formFooter">
+                            <a href="http://m.me/vetconseil" class="underlineHover">Contacter</a>
+                            <a href="{% url 'demande_hebergement' %}" class="underlineHover">Heberger</a>
+                            <a href="{% url 'demande_rendez_vous' %}" class="underlineHover">Rendez-vous</a>
+                      </div>      
+        </div>
+    </div>
+</body>
+
+</html>
