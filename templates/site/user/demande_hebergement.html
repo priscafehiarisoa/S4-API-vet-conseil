@@ -1,68 +1,123 @@
+
 {% block title %}
-Nouveau rendez-vous
+    Ajouter une reservation
 {% endblock %}
 
 {% block content %}
-<main role="main" class="main-content">
-    <div class="row mb-5">
-                    <div class="col-5">
-                        <h2 class="mb-2 page-title">Demandes d'hébergement</h2>
-                    </div>
-                    <div class="offset-4 ">
-                        <a href="{% url 'Demande_de_rendez_vous' %}" class="btn btn-outline-primary">Demande de rendez-vous</a>
-                    </div>
+    <main role="main" class="main-content">
+    <div class="container-fluid">
+        <div class="row justify-content-center">
+            <div class="col-12">
+                <h2 class="h3 mb-3 page-title">Ajouter une nouvelle réservation </h2>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="card shadow m-4 ">
+                            <div class="card-header">
+                                <strong class="card-title">formulaire</strong>
+                            </div>
+                            <div class="card-body">
+                                <form class="needs-validation" action="'{% url "" %}"method="post">
+                                    {% csrf_token %}
+                                    {% if form.errors %}
+                                        <div class="alert alert-danger" role="alert">
 
+                                                {% for field in form %}
+                                                    {% for error in field.errors %}
+                                                        <p class="mt-3"><span class="fe fe-minus-circle fe-16 mr-2"></span> {{ error }}</p>
+                                                    {% endfor %}
+                                                {% endfor %}
+                                         </div>
+                                    {% endif %}
+                                    <div>
+                                        <h4>{{ "détails clients"|title }}  </h4>
+                                    </div>
+{#                                        choix client #}
+                                        <div class="form-row">
+                                            <div class="form-group mb-3 mr-3 ml-4 col-5">
+                                                <label for="">sélectioner un client </label>
+
+                                                {{ form.client }}
+                                        </div>
+
+{#                                        choix animal de companie #}
+                                        <div class="form-group mb-3 ml-4 col-5">
+                                          <label for="">sélectioner un patient </label>
+                                          {{ form.animal }}
+                                        </div>
+
+                                    </div>
+
+                                    <div>
+                                        <h4>{{ "dates" | title}} </h4>
+                                    </div>
+{#                                        dates de reservations #}
+                                        <div class="form-row col-12 mb-3">
+
+                                            <div class="mb-3 mr-3 ml-4 col-5">
+                                                <label for="designation">Date de début d'hébergement</label>
+                                                {{ form.date_debut_hebergement }}
+                                            </div>
+                                            <div class="mb-3 ml-4 col-5">
+                                                <label for="designation">Date de fin d'hébergement</label>
+                                                {{ form.date_fin_hebergement }}
+                                            </div>
+                                        </div>
+                                    <div>
+                                        <h4>{{ "Nourriture"|title }} </h4>
+                                    </div>
+                                    <div class="mb-3">
+                                        {# type de nourriture #}
+                                    <div class="form-group mb-3 mr-3 ml-4 col-5">
+                                          <label for="">{{ "sélectionez"|title }} une nourriture pour le patient </label>
+                                          {{ form.type_nourriture }}
+                                        </div>
+                                    <div class="form-row p-3">
+                                        <div class="mb-3 mr-3 ml-4 col-5">
+                                            <label for="age">{{ "quantité totale"|title}} </label>
+                                            {{ form.quantite }}
+                                        </div>
+                                        <div class="mb-3 mr-3 ml-4 col-5">
+                                            <label for="age">{{ "fréquence"|title }} </label>
+                                            {{ form.frequence_nourriture }}
+                                        </div>
+                                    </div>
+                                    </div>
+
+
+                                     <div>
+                                        <h4>{{ "tarifs"|title }}  </h4>
+                                    </div>
+
+                                    <div class="form-row ml-5 mb-5">
+                                        <div class="custom-control custom-switch mb-3 mr-3 ml-4 col-5">
+                                            {{ form.tarif_journalier }}
+                                            <label class="custom-control-label" for="customSwitch2">cocher pour utiliser un tarif horaire pour la facturation , sinon votre facturation se calculera en  heure  </label>
+                                        </div>
+                                    </div>
+
+
+                                    <div>
+                                        <h4>Médicaments  </h4>
+                                    </div>
+                                    <div class="form-row ml-5 mb-5">
+                                        <div class="custom-control custom-switch mb-3 mr-3 ml-4 col-5">
+                                            {{ form.medicaments }}
+                                            <label class="custom-control-label" for="customSwitch1">l'animal a besoin de médicaments</label>
+                                        </div>
+                                        <div class="mb-3 mr-3  col-5">
+                                            {{ form.frequence_medicament }}
+                                        </div>
+                                    </div>
+
+                                    <button class="btn btn-primary" type="submit">valider</button>
+                                </form>
+                            </div> <!-- /.card-body -->
+                        </div> <!-- /.card -->
+                    </div> <!-- /.col -->
+                    <!-- /.col -->
                 </div>
-    <div class="row">
-        
-    <div class="col-lg-6">
-        <div class="card-header">
-            <strong>Validation</strong>
+            </div>
         </div>
-        <div class="card-body card shadow">
-        {% if date_choisie  %}
-            Nouveau rendez-vous pour {{ date_choisie }}
-        {% endif %}
-        <form action="{% url 'Inserer_rendez_vous' %}" method="post" class="needs-validation" novalidate>
-            {% csrf_token %}
-            <div class="form-group">
-                <label for="motif">Motif:</label>
-                <input type="text" name="raison" id="motif" class="form-control" required>
-                <div class="invalid-feedback">Please provide a motif.</div>
-            </div>
-            <div class="form-group">
-                <label for="date_prise">Durée (heure):</label>
-                <input type="number" name="duree" id="duree" class="form-control" required>
-                <div class="invalid-feedback">Pick a valide input.</div>
-            </div>
-
-            <div class="form-group">
-                <label for="date_consultation">Date de Prise:</label>
-                <input type="datetime-local" name="date_consultation" id="date_consultation" class="form-control" required>
-                <div class="invalid-feedback">Veuillez sélectionner une date libre pour la consultation .</div>
-            </div>
-
-            <div class="form-group">
-                <label for="date_prise">Date Consultation:</label>
-                <input type="datetime-local" name="date_prise" id="date_prise" class="form-control" 
-                {% if date_choisie  %}
-                    value = "{{ date_choisie }}T08:00"
-                {% endif %}
-                required>
-                <div class="invalid-feedback">Veuillez sélectionner une date libre .</div>
-            </div>
-            
-            <button type="submit" class="btn btn-outline-primary mb-3">Inserer</button>
-
-            {% if error %}
-                <div class="alert alert-danger" role="alert">
-                    {{ error }}
-                </div>
-            {% endif %}
-        </form>
-            <a href="/vet/"><button class="btn btn-outline-secondary mb-3 mt-3">Voir les dates libre</button></a>
-    </div>
-    </div>
     </div>
 </main>
 {% endblock %}

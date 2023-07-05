@@ -1,9 +1,16 @@
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from globale.models import Client, Patient, Race
-from vet.models import Tarif_rendez_vous
+from vet.models import Tarif_rendez_vous, Rendez_vous
 import json
 from django.core.exceptions import ValidationError
+from datetime import datetime, timedelta
+
+from django.core.exceptions import ValidationError
+
+from hebergement.forms import Ajouter_hebergement_user_form 
+from django import forms
+
 
 def demande_rendez_vous(request):
     id_client = request.session.get('client')['id']
@@ -13,6 +20,7 @@ def demande_rendez_vous(request):
     
 def inserer_rendez_vous(request):
     tarif = Tarif_rendez_vous.objects.latest('id')
+    # obtenir l'id du patient
     client = request.POST.get('client')
     patient = Patient.objects.get(pk=client)
 
@@ -30,11 +38,11 @@ def inserer_rendez_vous(request):
     rendez_vous.patient = patient
     rendez_vous.etat = 2 # en attente de
     rendez_vous.prix= tarif.valeur * float(duree)
-    rendez_vous.temps=1
+    rendez_vous.temps=10    
     rendez_vous.duree=duree
     try:
-        rendez_vous.check_date()
-        rendez_vous.save()
+        rendez_vous.check_demande()
+        #rendez_vous.save()
     except ValidationError as e:
         error_messages = e.message
         id_client = request.session.get('client')['id']
@@ -45,7 +53,12 @@ def inserer_rendez_vous(request):
     return redirect("/frontVetConseil/demande_rendez_vous")
 
 def demande_hebergement(request):
-    return render(request, 'site/user/demande_hebergement.html')
+    id_client = request.session.get('client')['id']
+    print(id_client)
+    client = Client.objects.get(id=id_client)
+    #patient = Patient.objects.filter(proprietaire_id=client.id)
+    form = Ajouter_hebergement_user_form(client)
+    return render(request, 'site/user/demande_hebergement.html',  {'form': form})
 
 def ajout_patient(request):
     if request.method == 'POST':

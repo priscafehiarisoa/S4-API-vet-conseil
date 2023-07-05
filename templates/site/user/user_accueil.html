@@ -1,57 +1,43 @@
+{% load static %}
 
-{% block title %}
-Liste des postes
-{% endblock %}
+<!DOCTYPE html>
+<html lang="en">
 
-{% block content %}
-<main role="main" class="main-content">
-    <div class="container-fluid">
-        <div class="row justify-content-center">
-            <div class="col-12">
-                <h2 class="page-title mb-5">ajouter un patient</h2>
-                <div class="card col-8 shadow mb-4">
-                    <div class="card-header ">
-                        <strong class="card-title">formulaire</strong>
-                    </div>
-                    <div class="card-body">
-                        <div class="row">
-                            <div class="col-md-12">
-                                <form  action="{% url 'ajout_patient' %}" method="post">
-                                    {% csrf_token %}
-                                
-                                    <div class="col-md-12 mb-3">
-                                        <label >Race</label>
-                                        <select class="form-control" name="nature">
-                                            {% for race in races %}
-                                                <option value="{{ race.id }}">{{ race.designation }}</option>
-                                            {% endfor %}
-                                        </select>
-                                    </div>
-                                    <div class="form-group mb-3">
-                                        <label >Nom</label>
-                                        <input class="form-control" required type="text" name="nom" {% if patient1 %} value="{{patient1.nom}}" {% endif  %}>
-                                        <!--                                        {{forms.designation}}-->
-                                    </div>
-                                    <div class="form-group mb-3">
-                                        <label >Age</label>
-                                        <input class="form-control" required type="number" name="age" {% if patient1 %} value="{{patient1.age}}" {% endif  %}>
-                                        <!--                                        {{forms.designation}}-->
-                                    </div>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Liste des postes{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'css/style_login.css'%}">
+    <link href="https://fonts.googleapis.com/css?family=Poppins" rel="stylesheet">
+</head>
 
-                                    <div class="form-group">
-                                        <button class="btn btn-outline-primary" type="submit">valider</button>
-                                    </div>
-                                </form>
-                                <a href="http/m.me/vetconseil">Contacter</a>
-                            </div> <!-- /.col -->
-
-                        </div>
-                    </div>
-                </div>
-            </div> <!-- / .card -->
-
-
+<body>
+    <div class="wrapper fadeInDown">
+        <div id="formContent">
+            <h2 class="active">ajouter un patient</h2>
+        
+                    <form action="{% url 'ajout_patient' %}" method="post">
+                        {% csrf_token %}
+                      
+                            <select name="nature" class="fadeIn second" placeholder="Race">
+                                {% for race in races %}
+                                <option value="{{ race.id }}">{{ race.designation }}</option>
+                                {% endfor %}
+                            </select>   
+                            <input required type="text" name="nom" {% if patient1 %} value="{{patient1.nom}}" {% endif  %} class="fadeIn" placeholder="Nom">
+                      
+                            <input required type="text" name="age" {% if patient1 %} value="{{patient1.age}}" {% endif  %} class="fadeIn" placeholder="Age">
+                        
+                            <input type="submit" class="fadeIn fourth" value="Ajouter">
+                  
+                    </form>
+                    <div id="formFooter">
+                        <a href="http://m.me/vetconseil" class="underlineHover">Contacter</a>
+                      </div>
+                    
         </div>
     </div>
-</main>
-{% endblock %}
+</body>
+
+</html>
