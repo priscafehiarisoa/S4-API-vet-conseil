@@ -1,0 +1,204 @@
+{% load static %}
+{# navbar #}
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <title></title>
+    <meta charset="utf-8">
+    <link rel="stylesheet" type="text/css" media="screen" href='{% static "css/reset.css" %}' >
+    <link rel="stylesheet" type="text/css" media="screen" href='{% static "css/style.css" %}'%>
+    <link rel="stylesheet" type="text/css" media="screen" href='{% static "css/grid.css" %}'%>
+    <link rel="icon" href='{% static "images/favicon.ico" %}' type="image/x-icon">
+    <link rel="shortcut icon" href='{% static "images/favicon.ico" %}' type="image/x-icon" />
+    <script src='{% static "js/jquery-1.7.1.min.js" %}'></script>
+    <script src='{% static "js/jquery.easing.1.3.js" %}'></script>
+    <script src='{% static "js/superfish.js" %}'></script>
+    <script src='{% static "js/jquery.hoverIntent.minified.js" %}'></script>
+    <script type="text/javascript" src='{% static "js/jquery.bouncebox.1.0.js" %}'></script>
+    <script src='{% static "js/jquery.ui.totop.js" %}'></script>
+    <script>
+    $(window).load(function(){
+        $('.panel-1').bounceBox();
+        $('.link-1').hover(function(e){
+        $('.panel-1').bounceBoxToggle();
+            e.preventDefault();
+        });
+        $('.panel-1').hover(function(){
+            $('.panel-1').bounceBoxHide();
+        });
+        $('.panel-2').bounceBox();
+        $('.link-2').hover(function(e){
+        $('.panel-2').bounceBoxToggle();
+            e.preventDefault();
+        });
+        $('.panel-2').hover(function(){
+            $('.panel-2').bounceBoxHide();
+        });
+        $('.panel-3').bounceBox();
+            $('.link-3').hover(function(e){
+        $('.panel-3').bounceBoxToggle();
+            e.preventDefault();
+        });
+        $('.panel-3').hover(function(){
+            $('.panel-3').bounceBoxHide();
+        });
+        $('.panel-4').bounceBox();
+        $('.link-4').hover(function(e){
+        $('.panel-4').bounceBoxToggle();
+            e.preventDefault();
+        });
+        $('.panel-4').hover(function(){
+            $('.panel-4').bounceBoxHide();
+        });
+         $().UItoTop({ easingType: 'easeOutQuart' });
+    });
+    </script>
+    <!--[if lt IE 8]>
+       <div style=' clear: both; text-align:center; position: relative;'>
+         <a href="http://windows.microsoft.com/en-US/internet-explorer/products/ie/home?ocid=ie6_countdown_bannercode">
+           <img src="http://storage.ie6countdown.com/assets/100/images/banners/warning_bar_0000_us.jpg" border="0" height="42" width="820" alt="Vous utilisez un navigateur obsolète. Pour une expérience de navigation plus rapide et plus sécurisée, mettez à jour gratuitement aujourd'hui." />
+        </a>
+      </div>
+    <![endif]-->
+    <!--[if lt IE 9]>
+        <script type="text/javascript" src="js/html5.js"></script>
+        <link rel="stylesheet" type="text/css" media="screen" href="css/ie.css">
+    <![endif]-->
+</head>
+<body>
+<!--==============================header=================================-->
+<div class="main">
+    <div class="main-1">
+        <div class="main-div">
+            <div class="div-content">
+                 <header>
+                   <h1><a href="index.html"><img src='{% static "images/logo.png" %}' alt=""></a></h1>
+                   <nav> 
+                     <ul class="sf-menu">
+                         <li class="current"><a href="index.html">Accueil</a></li>
+                          <!-- <li><a href="index-1.html">À propos de nous</a><span class="indicator-1"></span> -->
+                           <ul>
+                              <li><a href="#">histoire</a></li> 
+                               <li><a href="#">personnel</a>
+                               <ul>
+                                   <li><a href="#">nouveau</a></li>
+                                   <li><a href="#">archive</a></li>
+                                </ul> 
+                               </li>
+                               <li><a href="#">nos actualités</a></li>
+                            </ul>
+                          </li>
+                          <li><a href="#">services</a></li>
+                          <li><a href="{% url 'inscription' %}">Sign in</a></li>
+                          <li><a href="{% url 'login' %}">Sign on</a></li> 
+                      </ul>
+                    </nav>
+                    <div class="clear"></div>
+              </header>
+              <div class="box">
+                 <div class="block">
+                     <div class="panel-1 panel">
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla consectetur auctor sodales. Praesent malesuada vitae turpis nec eleifend. Duis pharetra maecenas tortor ac tincidunt.</p>
+                     </div>
+                     <img src='{% static "images/page-img.jpg"  %}'alt="">
+                     <a href="#" class="link-1 link"><span></span>Vétérinaire<br><strong>Urgence</strong></a>
+                 </div>
+                 <div class="block-1">
+                     <a href="#" class="link-2 link"><span></span>Vaccinations<br><strong>pour animaux de compagnie</strong></a>
+                     <div class="div-panel">
+                         <div class="panel-2 panel">
+                           <p>Nunc ipsum dolor sit amet, consectetur adipiscing elit. Duis ultricies pharetra magna, ac accumsan erat molestie sit amet.</p>
+                        </div>
+                         <img src='{% static "images/page-img-1.jpg"  %}'alt="">
+                     </div>
+                 </div>
+                 <div class="block-2">
+                     <div class="panel-3 panel">
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla consectetur auctor sodales. Praesent malesuada vitae turpis nec eleifend. Duis pharetra maecenas tortor ac tincidunt.</p>
+                     </div>
+                     <img src='{% static "images/page-img-2.jpg"  %}' alt="">
+                     <a href="#" class="link-3 link"><span></span>Médecine<br><strong>vétérinaire équine</strong></a> 
+                 </div>
+                 <div class="block-3">
+                     <a href="#" class="link-4 link"><span></span>Consultation<br><strong>en ligne</strong></a>
+                     <div class="div-panel">
+                         <div class="panel-4 panel">
+                           <p>Donec ipsum dolor sit amet, consectetur adipiscing elit. Maecenas tristique odio sem, in ultricies pharetra. </p>
+                        </div>
+                         <img src='{% static "images/page-img-3.jpg" %}' alt="">
+                     </div>
+                 </div>
+                 <div class="clear"></div>
+              </div>
+                    <!--==============================content================================-->
+            <section id="content">         
+                <div class="container_16">
+                    <div class="wrapper bg-wrap">
+                        <div class="grid_6 suffix_1">
+                            <h2>Bienvenue !</h2>
+                            <img src='{% static "images/page-img-4.jpg"  %}' alt="" class="top">
+                            <p class="font-14 top-1 bot">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla consectetur auctor sodales. Praesent malesuada vitae turpis nec eleifend. Duis pharetra maecenas tortor ac tincidunt.</p>
+                            <a href="#" class="button">Lire la suite<span></span></a>
+                        </div>
+                        <div class="grid_4 suffix_1">
+                            <h3 class="padd">Dernières actualités</h3>
+                            <span class="date dis-inblock bot-1">12.10.12 Parturition pénible</span>
+                            <p class=" bot-2">Nunc ipsum dolor sit amet, consectetur adipiscing elit. Duis ultricies pharetra magna, ac accumsan erat molestie sit amet.</p>
+                            <a href="#" class="button-1">Plus d'actualités</a>
+                            <div class="bd-top">
+                                <span class="date dis-inblock bot-1">14.10.12 Lettre de remerciement</span>
+                                <p class=" bot-2">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas tristique odio sem, in ultricies pharetra. </p>
+                                <a href="#" class="button-1">Plus d'actualités</a>
+                            </div>
+                            
+                        </div>
+                        <div class="grid_4">
+                            <h3 class="padd">Nos services</h3>
+                            <ul class="list">
+                                 <li><a href="#">Urgences vétérinaires</a><span>Pour soigner votre animal de compagnie en cas d'urgence.</span></li>
+                                 <li><a href="#">Consultation en ligne</a><span>Une manière pratique de consulter nos vétérinaires.</span></li>
+                                 <li><a href="#">Soins pour animaux exotiques</a><span>Prendre soin des animaux exotiques.</span></li>
+                                 <li><a href="#">Service d'hôtel pour animaux</a><span>Des services d'hôtel pour les animaux.</span></li>
+                            </ul>
+                        </div>
+                         
+                     </div><!--the end of wrapper-->
+                </div>
+            </section>
+            </div>
+        </div>
+        <!--==============================footer=================================-->        
+        <aside>
+            <div class="container_16">
+               <div class="wrapper bg-wrap-aside">
+                   <div class="grid_5 suffix_1">
+                       <h3>Retrouvez-nous sur les réseaux sociaux</h3>
+                       <span>Rejoignez-nous sur nos réseaux sociaux</span><br>
+                       <a href="#" id="icon" class="icons"></a>
+                       <a href="#" id="icon-1" class="icons"></a>
+                       <a href="#" id="icon-2" class="icons"></a>
+                       <a href="#" id="icon-3" class="icons"></a>
+                   </div>
+                   <div class="grid_6">
+                       <ul>
+                            <li><a href="#">À propos de nous</a><strong><a href="#"></a></strong></li>
+                            <li><a href="#">Politique de confidentialité</a><strong><a href="#"></a></strong></li>
+                            <li><a href="#">Conditions d'utilisation</a><strong><a href="#"></a></strong></li>
+                            <li><a href="#">FAQ</a><strong><a href="#"></a></strong></li>
+                       </ul>
+                   </div>
+                   <div class="grid_4">
+                       <h3>Contacts</h3>
+                       <span>1234 Rue des Animaux<br>Ville, Pays</span><br>
+                       <span>+12 34 567 890</span><br>
+                       <a href="mailto:info@animauxcompagnie.com">info@animauxcompagnie.com</a><br>
+                       <a href="mailto:support@animauxcompagnie.com">support@animauxcompagnie.com</a>
+                   </div>
+               </div><!--the end of bg-wrap-aside-->
+            </div>
+        </aside>    
+    </div>
+</div>
+</body>
+</html>

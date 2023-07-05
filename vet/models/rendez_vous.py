@@ -133,3 +133,10 @@ class Rendez_vous(models.Model):
     def obtenir_demande_rendez_vous(self): # 2 etat demaned
         rendez_vous = Rendez_vous.objects.filter(etat = 2)
         return rendez_vous
+    
+    def update_time_out_rendez_vous(self):
+        rendez_vous = Rendez_vous.objects.filter(etat = 0)
+        for rendez_vou in rendez_vous:
+            if rendez_vou.date_de_prise < timezone.now():
+                rendez_vou.etat = 1
+                rendez_vou.save()
