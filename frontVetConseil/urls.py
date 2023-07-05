@@ -11,4 +11,5 @@ urlpatterns = [
     path("demande_rendez_vous", user_area_view.demande_rendez_vous, name="demande_rendez_vous"),
     path("demande_hebergement", user_area_view.demande_hebergement, name="demande_hebergement"),
     path("inserer_rendez_vous", user_area_view.inserer_rendez_vous, name="inserer_rendez_vous"),
+    path("traitement_demande_hebergement", user_area_view.traitement_demande_hebergement, name="traitement_demande_hebergement"),
 ]

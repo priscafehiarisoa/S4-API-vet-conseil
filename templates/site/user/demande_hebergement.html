@@ -1,4 +1,4 @@
-
+{% extends 'base/root.html'%}
 {% block title %}
     Ajouter une reservation
 {% endblock %}
@@ -16,28 +16,13 @@
                                 <strong class="card-title">formulaire</strong>
                             </div>
                             <div class="card-body">
-                                <form class="needs-validation" action="'{% url "" %}"method="post">
+                                <form class="needs-validation" action="{% url 'traitement_demande_hebergement' %}" method="post">
                                     {% csrf_token %}
-                                    {% if form.errors %}
-                                        <div class="alert alert-danger" role="alert">
-
-                                                {% for field in form %}
-                                                    {% for error in field.errors %}
-                                                        <p class="mt-3"><span class="fe fe-minus-circle fe-16 mr-2"></span> {{ error }}</p>
-                                                    {% endfor %}
-                                                {% endfor %}
-                                         </div>
-                                    {% endif %}
+                                    
                                     <div>
                                         <h4>{{ "détails clients"|title }}  </h4>
                                     </div>
 {#                                        choix client #}
-                                        <div class="form-row">
-                                            <div class="form-group mb-3 mr-3 ml-4 col-5">
-                                                <label for="">sélectioner un client </label>
-
-                                                {{ form.client }}
-                                        </div>
 
 {#                                        choix animal de companie #}
                                         <div class="form-group mb-3 ml-4 col-5">
