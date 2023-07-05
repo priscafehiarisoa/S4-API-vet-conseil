@@ -1,8 +1,69 @@
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
-from globale.models import Client
+from globale.models import Client, Patient, Race
+from vet.models import Tarif_rendez_vous
 import json
 from django.core.exceptions import ValidationError
+
+def demande_rendez_vous(request):
+    id_client = request.session.get('client')['id']
+    client = Client.objects.get(id=id_client)
+    patients = Patient.objects.filter(proprietaire=client)
+    return render(request, 'site/user/demande_rendez_vous.html', {'patients': patients})
+    
+def inserer_rendez_vous(request):
+    tarif = Tarif_rendez_vous.objects.latest('id')
+    client = request.POST.get('client')
+    patient = Patient.objects.get(pk=client)
+
+    motif = request.POST.get('raison')
+    date_prise = request.POST.get('date_prise')
+    date_consultation = request.POST.get('date_consultation')
+    duree = request.POST.get('duree')
+    date_prise = datetime.fromisoformat(date_prise)
+    date_consultation = datetime.fromisoformat(date_consultation)
+    rendez_vous = Rendez_vous()
+    rendez_vous.date_de_prise = date_prise
+    rendez_vous.date_fin = date_prise + timedelta(hours=int(duree))
+    rendez_vous.date_consultation = date_consultation
+    rendez_vous.raison = motif
+    rendez_vous.patient = patient
+    rendez_vous.etat = 2 # en attente de
+    rendez_vous.prix= tarif.valeur * float(duree)
+    rendez_vous.temps=1
+    rendez_vous.duree=duree
+    try:
+        rendez_vous.check_date()
+        rendez_vous.save()
+    except ValidationError as e:
+        error_messages = e.message
+        id_client = request.session.get('client')['id']
+        client = Client.objects.get(id=id_client)
+        patients = Patient.objects.filter(proprietaire=client)
+        context = { 'patients' : patients, "error" : error_messages}
+        return render(request, 'site/user/demande_rendez_vous.html', context)
+    return redirect("/frontVetConseil/demande_rendez_vous")
+
+def demande_hebergement(request):
+    return render(request, 'site/user/demande_hebergement.html')
+
+def ajout_patient(request):
+    if request.method == 'POST':
+        client = request.session.get('client')
+        id_race = request.POST.get('nature')    
+        race = Race.objects.get(id=id_race)
+        age = request.POST.get('age')
+        nom = request.POST.get('nom')
+        patient = Patient()
+        patient.nature = race
+        patient.nom = nom
+        patient.age = age
+        patient.proprietaire = Client.objects.get(id=client['id'])
+        patient.save()
+        races = Race.objects.all()
+        return render(request, "site/user/user_accueil.html", { "races": races})
+    else:
+        return render(request, 'insert_patient1.html', {"client_id":client_id})  # Supposons que vous avez un modèle appelé 'save_patient.html'
 
 def index(request):
     return render(request, "site/index.html")
@@ -29,10 +90,12 @@ def save(request):
     client.save()
     json_data = client.jsonClient()
     request.session['client'] = json_data
-    return render(request, "site/user/user_accueil.html")
+    races = Race.objects.all()
+    return render(request, "site/user/user_accueil.html", { "races": races})
 
 def authentification(request):
     client = Client()
+
     client.mail = request.POST.get('email')
     client.password = request.POST.get('password')
     client = client.authentification()
@@ -41,4 +104,5 @@ def authentification(request):
     #json_data = json.dumps(client)
     json_data = client.jsonClient()
     request.session['client'] = json_data
-    return render(request, "site/user/user_accueil.html")
+    races = Race.objects.all()
+    return render(request, "site/user/user_accueil.html", { "races": races })

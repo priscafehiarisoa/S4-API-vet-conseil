@@ -37,16 +37,11 @@ def Inserer_rendez_vous(request):
     date_consultation = request.POST.get('date_consultation')
     duree = request.POST.get('duree')
     rendez_vous = Rendez_vous()
-
     date_prise = datetime.fromisoformat(date_prise)
     date_consultation = datetime.fromisoformat(date_consultation)
-
     rendez_vous.date_de_prise = date_prise
-
     rendez_vous.date_fin = date_prise + timedelta(hours=int(duree))
-
     rendez_vous.date_consultation = date_consultation
-
     rendez_vous.raison = motif
     rendez_vous.patient = patient
     rendez_vous.etat = 0
