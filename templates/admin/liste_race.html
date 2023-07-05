@@ -10,14 +10,14 @@ Liste des postes
       <div class="col-12">
         <div class="row">
           <div class="col-5">
-            <h2 class="mb-2 page-title">liste races</h2>
+            <h2 class="mb-2 page-title">Liste des races</h2>
           </div>
-
+<div class="offset-4">
+          <a type="button" class="btn mb-2 btn-outline-primary" href="{% url 'form_insert_race' %}">Ajouter une nouvelle race</a>
+        </div>
 
         </div>
-        <div class="row my-4">
-          <a type="button" class="btn mb-2 btn-primary" href="{% url 'form_insert_race' %}">Ajouter race</a>
-        </div>
+
         <div class="row my-4">
           <!-- Small table -->
           <div class="col-md-12">
@@ -28,7 +28,7 @@ Liste des postes
                   <thead>
                   <tr>
                     <th></th>
-                    <th>designation</th>
+                    <th>désignation</th>
                     <th>-</th>
                     <th>-</th>
 

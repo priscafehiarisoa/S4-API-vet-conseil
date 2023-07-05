@@ -8,10 +8,10 @@ Liste des postes
     <div class="container-fluid">
         <div class="row justify-content-center">
             <div class="col-12">
-                <h2 class="page-title mb-5">ajouter un poste</h2>
+                <h2 class="page-title mb-5">{{ "ajouter un nouveau poste"|title}}</h2>
                 <div class="card col-8 shadow mb-4">
                     <div class="card-header ">
-                        <strong class="card-title">formulaire</strong>
+                        <strong class="card-title">{{ "formulaire"|title }}</strong>
                     </div>
                     <div class="card-body">
                         <div class="row">
@@ -20,18 +20,18 @@ Liste des postes
                                 <form {% if poste1 %} action="{% url 'modify_poste' idPoste=poste1.id %}"{% else  %} action="{% url 'save_poste' %}" {% endif %}" method="post">
                                     {% csrf_token %}
                                     <div class="form-group mb-3">
-                                        <label >designation</label>
-                                        <input type="text" name="designation" {% if poste1 %} value="{{poste1.designation}}" {% endif  %}>
+                                        <label >{{ "désignation"|title }}</label>
+                                        <input type="text" class="form-control" required name="designation" {% if poste1 %} value="{{poste1.designation}}" {% endif  %}>
 <!--                                        {{forms.designation}}-->
                                     </div>
                                     <div class="form-group mb-3">
-                                        <label >rang</label>
-                                        <input type="number" name="rang" {% if poste1 %} value="{{poste1.rang}}" {% endif  %}>
+                                        <label >{{ "rang"|title }}</label>
+                                        <input type="number" class="form-control" required name="rang" {% if poste1 %} value="{{poste1.rang}}" {% endif  %}>
 <!--                                        {{forms.rang}}-->
                                     </div>
 
                                     <div class="form-group">
-                                        <button class="btn btn-outline-primary" type="submit">valider</button>
+                                        <button class="btn btn-outline-primary" type="submit">{{ "valider"|title }}</button>
                                     </div>
                                 </form>
 

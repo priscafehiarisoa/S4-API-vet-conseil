@@ -16,11 +16,11 @@ Liste des postes
                     <div class="card-body">
                         <div class="row">
                             <div class="col-md-12">
-                                <form {% if race1 %} action="{% url 'modify_race' idRace=race1.id %}"{% else  %} action="{% url 'save_race' %}" {% endif %} method="post">
+                                <form {% if race1 %} action="{% url 'modify_race'  idRace=race1.id %}"{% else  %} action="{% url 'save_race' %}" {% endif %} method="post">
                                 {% csrf_token %}
                                 <div class="form-group mb-3">
-                                    <label >designation</label>
-                                    <input type="text" name="designation" {% if race1 %} value="{{race1.designation}}" {% endif  %}>
+                                    <label >désignation</label>
+                                    <input type="text" class="form-control" required placeholder="ex : berger Allemand" name="designation" {% if race1 %} value="{{race1.designation}}" {% endif  %}>
                                     <!--                                        {{forms.designation}}-->
                                 </div>
                                 <div class="form-group">

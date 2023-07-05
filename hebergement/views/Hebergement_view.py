@@ -14,19 +14,31 @@ from hebergement.models import Reservation, Details_reservation, Validation_rese
 # gestion des hebergements
 def load_hosting_managemment(request):
     formulaire = Date_validation_form()
-    nombre_hebergement_attentes= Reservation.objects.filter(etat=10).count()
-    nombre_reservations=Reservation.objects.filter(etat=20,date_fin__gt=datetime.now().date()).count()
-    context = {"form": formulaire, 'nombre_hebergement_attente':nombre_hebergement_attentes,'nombre_reservations':nombre_reservations}
+    nombre_hebergement_attentes = Reservation.objects.filter(etat=10).count()
+    nombre_reservations = Reservation.objects.filter(etat=20, date_fin__gt=datetime.now().date()).count()
+    context = {"form": formulaire, 'nombre_hebergement_attente': nombre_hebergement_attentes,
+               'nombre_reservations': nombre_reservations}
     return render(request, "hebergement/hebergement/Gestion_hebergement.html", context)
 
 
-def load_hosting_managemments(request, allowed):
-    formulaire = Date_validation_form()
+def load_hosting_managemments(request, form):
+    formulaire = form
     nombre_hebergement_attentes = Reservation.objects.filter(etat=10).count()
-    nombre_reservations=Reservation.objects.filter(etat=20,date_fin__gt=datetime.now().date()).count()
-    context = {"form": formulaire, 'nombre_hebergement_attente': nombre_hebergement_attentes,"allowed": allowed,'nombre_reservations':nombre_reservations}
+    nombre_reservations = Reservation.objects.filter(etat=20, date_fin__gt=datetime.now().date()).count()
+    context = {"form": formulaire, 'nombre_hebergement_attente': nombre_hebergement_attentes,
+               'nombre_reservations': nombre_reservations}
     return render(request, "hebergement/hebergement/Gestion_hebergement.html",
                   context)
+def load_hosting_managemments_permission(request, allowed):
+    formulaire = Date_validation_form()
+    nombre_hebergement_attentes = Reservation.objects.filter(etat=10).count()
+    nombre_reservations = Reservation.objects.filter(etat=20, date_fin__gt=datetime.now().date()).count()
+    context = {"form": formulaire, 'nombre_hebergement_attente': nombre_hebergement_attentes, "allowed": allowed,
+               'nombre_reservations': nombre_reservations}
+    return render(request, "hebergement/hebergement/Gestion_hebergement.html",
+                  context)
+
+
 
 
 def get_reservations(request):
@@ -46,7 +58,7 @@ def get_reservations(request):
             background_color = '#F47174'
         else:
             background_color = 'gray'  # Default color for other etat values
-        title = "client : "+d_reservation.reservation.client.nom, " | patient : ", d_reservation.patient.nom
+        title = "client : " + d_reservation.reservation.client.nom, " | patient : ", d_reservation.patient.nom
         event = {
             'title': title,
             'start': d_reservation.reservation.date_debut.isoformat(),
@@ -80,12 +92,16 @@ def check_if_valid_date(request):
                 Q(date_debut__range=(date_debut, date_fin)) | Q(date_fin__range=(date_debut, date_fin)),
                 etat=20
             )
+            if(date_fin<date_debut):
+                formulaire.add_error("date_debut","la date de fin be peux pas être antérieure au début")
+                return load_hosting_managemments(request,formulaire)
             if (reservations.count() >= 10):
-                res = "les dates sélectionnées "+ str(date_debut)+" et "+str(date_fin)+" ne sont pas valides "
-                return load_hosting_managemments(request, res)
+                res = "les dates sélectionnées " + str(date_debut) + " et " + str(date_fin) + " ne sont pas valides "
+                return load_hosting_managemments_permission(request, res)
             else:
-                res = "les dates sélectionnés "+ str(date_debut)+" et "+str(date_fin)+" sont libres : il reste "+ (10-reservations.count()).__str__()+" place(s)"
-                return load_hosting_managemments(request, res)
+                res = "les dates sélectionnés " + str(date_debut) + " et " + str(
+                    date_fin) + " sont libres "
+                return load_hosting_managemments_permission(request, res)
     else:
         formulaire = Date_validation_form()
         return load_hosting_managemment(request)
@@ -141,7 +157,6 @@ def add_new_hosting_request(request):
         form = Ajouter_hebergement_form(request.POST)
         if form.is_valid():
 
-
             client = form.cleaned_data['client']
             animal = form.cleaned_data['animal']
             date_debut = form.cleaned_data['date_debut_hebergement']
@@ -150,34 +165,36 @@ def add_new_hosting_request(request):
             quantite = form.cleaned_data['quantite']
             frequence_nourriture = form.cleaned_data['frequence_nourriture']
             medicaments = form.cleaned_data['medicaments']
+            tarif_horaire = form.cleaned_data['tarif_journalier']
             frequence_medicaments = form.cleaned_data['frequence_medicament']
-            okay=True
+            okay = True
 
-        # verifications de la validité des dates
-            is_date_available = check_date(date_debut,date_fin)
-        # verifications si la nourriture choisie n'est pas adapté a l'animal
-            is_adapted_food=Attribution.check_if_available(animal.nature_id,nourriture)
-        # verification si l'animal appartient au client
-            is_owned_by_client=animal.check_if_owned_by_client(client)
-        # redirections
+            # verifications de la validité des dates
+            is_date_available = check_date(date_debut, date_fin)
+            # verifications si la nourriture choisie n'est pas adapté a l'animal
+            is_adapted_food = Attribution.check_if_available(animal.nature_id, nourriture)
+            # verification si l'animal appartient au client
+            is_owned_by_client = animal.check_if_owned_by_client(client)
+            # redirections
             if not is_date_available or not is_adapted_food or not is_owned_by_client:
                 if not is_owned_by_client:
                     form.add_error('client', 'le patient sélectionné n\'appartient pas au client')
                 if not is_date_available:
-                    form.add_error('date_debut_hebergement','la date n\'est pas libre ou bien elle n\'est pas valide' )
+                    form.add_error('date_debut_hebergement', 'la date n\'est pas libre ou bien elle n\'est pas valide')
                 if not is_adapted_food:
-                    form.add_error('type_nourriture','l\'aliment sélectionnée ne correspond pas au patient')
+                    form.add_error('type_nourriture', 'l\'aliment sélectionnée ne correspond pas au patient')
 
-                okay=False
-                return render(request, 'hebergement/hebergement/ajout_hebergement/ajout_hebergement.html',{'form': form})
+                okay = False
+                return render(request, 'hebergement/hebergement/ajout_hebergement/ajout_hebergement.html',
+                              {'form': form})
             if okay:
                 reservation = Reservation()
                 reservation.etat = 10
                 reservation.client = client
                 reservation.date_debut = date_debut
                 reservation.date_fin = date_fin
-                # todo mila calculer-na ny prix
-                reservation.prix = reservation.calcul_prix()
+                reservation.prix = calcul_prix(reservation, animal, quantite, frequence_nourriture, nourriture,
+                                               tarif_horaire)
                 reservation.date_de_prise = timezone.now().date()
                 reservation.save()
 
@@ -200,15 +217,15 @@ def load_tarifs(request):
 
 
 def modify_tarifs(request, id_tarif):
-
     tarif = Tarifs_Hebergement.objects.get(id=id_tarif)
     form = Modifier_tarif_form()
     form.initial['id_race'] = tarif.race_id
     form.initial['id_tarif'] = tarif.id
     form.initial['montant_horaire'] = tarif.montant_horaire
     form.initial['montant_journalier'] = tarif.montant_journalier
-    form.initial['race']=tarif.race.designation
+    form.initial['race'] = tarif.race.designation
     return render(request, 'hebergement/tarifs/modifier_tarif.html', {'form': form})
+
 
 def modifier_tarif_view(request):
     if request.method == 'POST':
@@ -220,16 +237,16 @@ def modifier_tarif_view(request):
                     id_tarif = form.cleaned_data['id_tarif']
                     montant_journalier = form.cleaned_data['montant_journalier']
                     montant_horaire = form.cleaned_data['montant_horaire']
-                    tarif=Tarifs_Hebergement.objects.get(id=id_tarif)
-                    tarif.montant_horaire=montant_horaire
-                    tarif.montant_journalier=montant_journalier
+                    tarif = Tarifs_Hebergement.objects.get(id=id_tarif)
+                    tarif.montant_horaire = montant_horaire
+                    tarif.montant_journalier = montant_journalier
                     tarif.save()
                 except:
                     print(form.errors)
 
                 return redirect('load_tarifs')
             else:
-                print(">> ",form.errors)
+                print(">> ", form.errors)
         except:
             print(form.errors)
     else:
@@ -239,15 +256,32 @@ def modifier_tarif_view(request):
 
 
 # validations
-def check_date(date_debut,date_fin):
-     isa=Reservation.objects.filter(
+def check_date(date_debut, date_fin):
+    isa = Reservation.objects.filter(
         Q(date_debut__range=(date_debut, date_fin)) | Q(date_fin__range=(date_debut, date_fin)), etat=20).count() < 10
-     if(date_debut>date_fin):
+    if (date_debut > date_fin):
         return False
-     if isa >=10:
-         return False
-     return True
+    if isa >= 10:
+        return False
+    return True
 
 
+def calcul_prix(reservation, patient, quantite_nourriture, frequence_nourriture, nourriture, is_tarif_horaire):
+    # patient =Patient()
+    tarifs = Tarifs_Hebergement.objects.filter(race=patient.nature).first()
+    tarif = 0
+    prix_hebergement = 0
+    # calcul prix hebergement
+    if (is_tarif_horaire):
+        tarif = tarifs.montant_horaire.__float__()
+        quantité_heure = (reservation.date_fin - reservation.date_debut).total_seconds() // 3600
+        prix_hebergement = quantité_heure * tarif
+    else:
+        tarif = tarifs.montant_journalier.__float__()
+        quantite_jour = (reservation.date_fin - reservation.date_debut).days
+        prix_hebergement = tarif * quantite_jour
 
+        # calcul prix nourriture
+    prix_nourriture = (nourriture.prix_par_unite * (quantite_nourriture * frequence_nourriture)) / nourriture.unite
 
+    return prix_nourriture + prix_hebergement

@@ -7,10 +7,14 @@ Liste rendez-vous
 {% block content %}
 
 
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 <main role="main" class="main-content">
     <div class="container">
-        <h1>Liste des rendez-vous</h1>
+                <div class="row">
+                    <div class="col-5">
+                        <h3 class="mb-4 page-title">Liste des rendez-vous</h3>
+                    </div>
+
+                </div>
         <table class="table">
             <thead>
                 <tr>
@@ -26,7 +30,7 @@ Liste rendez-vous
                         <td>{{ rendez_vous.date_de_prise }}</td>
                         <td>{{ rendez_vous.raison }}</td>
                         <td>
-                            <a href="/vet/modifier_rendez_vous/{{ rendez_vous.id }}"><button class="btn btn-primary btn-sm">Modifier</button>
+                            <a href="/vet/modifier_rendez_vous/{{ rendez_vous.id }}"><button class="btn btn-primary btn-sm">Modifier</button></a>
                         </td>
                         <td>
                            <a href="/vet/supprimer_rendez_vous/{{ rendez_vous.id }}"><button class="btn btn-danger btn-sm">Supprimer</button></a>
@@ -38,5 +42,4 @@ Liste rendez-vous
         </table>
     </div>
 </main>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 {% endblock %}

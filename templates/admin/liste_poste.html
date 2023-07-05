@@ -10,14 +10,14 @@ Liste des postes
             <div class="col-12">
                 <div class="row">
                     <div class="col-5">
-                        <h2 class="mb-2 page-title">liste postes</h2>
+                        <h2 class=" page-title">Liste des postes</h2>
                     </div>
-
+                <div class="offset-4 mb-2">
+                    <a type="button" class="btn m-3 btn-outline-primary" href="{% url 'form_insert_poste' %}">Ajouter un nouveau poste</a>
+                </div>
 
                 </div>
-                <div class="row my-4">
-                    <a type="button" class="btn mb-2 btn-primary" href="{% url 'form_insert_poste' %}">Ajouter poste</a>
-                </div>
+
                 <div class="row my-4">
                     <!-- Small table -->
                     <div class="col-md-12">
@@ -28,7 +28,7 @@ Liste des postes
                                     <thead>
                                     <tr>
                                         <th></th>
-                                        <th>designation</th>
+                                        <th>désignation</th>
                                         <th>-</th>
                                         <th>-</th>
 
@@ -39,8 +39,8 @@ Liste des postes
                                             <tr>
                                                 <td><span class="fe fe-24 fe-user"></span></td>
                                                 <td>{{poste.designation}}</td>
-                                                <td><a class="btn btn-outline-primary" href="{% url 'modify_poste' idPoste=poste.id %}" >modifier</a></td>
-                                                <td><a class="btn btn-outline-danger" href="{% url 'delete_poste' idPoste=poste.id %}" >supprimer</a></td>
+                                                <td><a class="btn btn-outline-primary" href="{% url 'modify_poste' idPoste=poste.id %}" >{{ "modifier"|title }}</a></td>
+                                                <td><a class="btn btn-outline-danger" href="{% url 'delete_poste' idPoste=poste.id %}" >{{ "supprimer"|title }}</a></td>
                                             </tr>
                                         {% endfor%}
                                     </tbody>

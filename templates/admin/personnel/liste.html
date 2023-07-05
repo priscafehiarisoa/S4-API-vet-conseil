@@ -10,14 +10,14 @@ reservations
       <div class="col-12">
         <div class="row">
           <div class="col-5">
-            <h2 class="mb-2 page-title">liste reservations</h2>
+            <h2 class="mb-2 page-title">{{ "liste"|title }} des personnels</h2>
           </div>
-
+        <div class="offset-4">
+          <a type="button" class="btn mb-2 btn-outline-primary" href="{% url 'form_insert_personnel' %}">Ajouter un nouveau personnel</a>
+        </div>
 
         </div>
-        <div class="row my-4">
-          <a type="button" class="btn mb-2 btn-primary" href="{% url 'form_insert_personnel' %}">Ajouter personnel</a>
-        </div>
+
         <div class="row my-4">
           <!-- Small table -->
           <div class="col-md-12">
@@ -27,7 +27,6 @@ reservations
                 <table class="table datatables" id="dataTable-1">
                   <thead>
                   <tr>
-                    <th></th>
                     <th>#</th>
                     <th>nom</th>
                     <th>contact</th>
@@ -43,12 +42,7 @@ reservations
 
                   {% for personnel in personnels %}
                   <tr>
-                    <td>
-                      <div class="custom-control custom-checkbox">
-                        <input type="checkbox" class="custom-control-input">
-                        <label class="custom-control-label"></label>
-                      </div>
-                    </td>
+
 
                     <td>{{personnel.nom}}  {{personnel.prenom}}</td>
                     <td>{{personnel.contact}}</td>
@@ -61,7 +55,7 @@ reservations
                         <div class="modal-dialog modal-sm" role="document">
                           <div class="modal-content">
                             <div class="modal-header">
-                              <h5 class="modal-title" id="defaultModalLabel">details sur le personnel</h5>
+                              <h5 class="modal-title" id="defaultModalLabel">Détails sur le personnel</h5>
                               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                               </button>
@@ -71,16 +65,16 @@ reservations
                               {#                                            client #}
                               <div class="card p-2 m-3">
                                 <div class="card-header">
-                                  <h5>informations personnelles </h5>
+                                  <h5>{{ "informations personnelles"|title}} </h5>
                                 </div>
                                 <div class="card-body">
-                                  <p><strong>nom complet : </strong>
+                                  <p><strong>{{ "nom complet"|title}} : </strong>
                                     {{personnel.nom}}  {{personnel.prenom}}
                                   </p>
-                                  <p><strong>adresse : </strong>
+                                  <p><strong>{{ "adresse"|title }} : </strong>
                                     {{personnel.adresse}}
                                   </p>
-                                  <p><strong>contact : </strong>
+                                  <p><strong>{{ "contact"|title }} : </strong>
                                     {{personnel.contact}}
                                   </p>
 
@@ -89,20 +83,20 @@ reservations
                               {#                                            patient #}
                               <div class="card p-2 m-3">
                                 <div class="card-header">
-                                  <h5>poste </h5>
+                                  <h5>{{ "poste"|title }} </h5>
                                 </div>
                                 <div class="card-body">
-                                  <p><strong>designation : </strong>
+                                  <p><strong>{{ "désignation"|title }} : </strong>
                                       {{personnel.poste.designation}}
                                   </p>
-                                  <p><strong>rang : </strong>
+                                  <p><strong>{{ "rang"|title }} : </strong>
                                       {{personnel.poste.rang}}
                                   </p>
                                 </div>
                               </div>
                             </div>
                             <div class="modal-footer">
-                              <button type="button" class="btn mb-2 btn-secondary" data-dismiss="modal">fermer</button>
+                              <button type="button" class="btn mb-2 btn-secondary" data-dismiss="modal">{{ "fermer"|upper }}</button>
                             </div>
                           </div>
                         </div>
