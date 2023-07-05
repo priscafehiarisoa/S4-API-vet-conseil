@@ -102,6 +102,7 @@ def inserer_rendez_vous(request):
     rendez_vous.duree=duree
     try:
         rendez_vous.check_demande()
+        return redirect("/frontVetConseil/demande_rendez_vous")
         #rendez_vous.save()
     except ValidationError as e:
         error_messages = e.message
@@ -110,7 +111,6 @@ def inserer_rendez_vous(request):
         patients = Patient.objects.filter(proprietaire=client)
         context = { 'patients' : patients, "error" : error_messages}
         return render(request, 'site/user/demande_rendez_vous.html', context)
-    return redirect("/frontVetConseil/demande_rendez_vous")
 
 def demande_hebergement(request):
     id_client = request.session.get('client')['id']
