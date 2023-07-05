@@ -36,6 +36,8 @@ urlpatterns = [
     path('list_hosted_animal',Animaux_hebergement_view.show_list_hosted_animal,name="show_list_hosted_animal"),
     path('list_can_be_hosted_animals',Animaux_hebergement_view.show_list_animals_that_can_be_hosted,name="show_list_animals_that_can_be_hosted"),
     path('new_form_animals',Animaux_hebergement_view.traiter_formulaire,name="traiter_formulaire"),
+    path('animaux_calendrier',Animaux_hebergement_view.animaux_calendrier,name="animaux_calendrier"),
+    path('animaux_calendrier/<int:race_id>',Animaux_hebergement_view.show_animaux_calendrier,name="show_animaux_calendrier"),
 
     path('redirect_calendar_to_list_hosted_animals/<str:date_value_test>',Animaux_hebergement_view.redirect_calendar_to_list_hosted_animals,name='redirect_calendar_to_list_hosted_animals'),
 

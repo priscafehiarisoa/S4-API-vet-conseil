@@ -68,3 +68,15 @@ def traiter_formulaire(request):
         # Redirigez vers une autre vue ou affichez un message de confirmation
         return redirect('load_hosting_managemment')
     return render(request, "hebergement/animaux/Ajouter_Animaux.html")
+
+def animaux_calendrier(request):
+    races = Race.objects.all()
+    return render(request, "hebergement/animaux/animaux_calendrier.html", {"races":races})
+
+def show_animaux_calendrier(request, race_id):
+    races = Race.objects.all()
+    animal_accepte = Animal_accepte.objects.filter(race_id=race_id)
+    return render(request, "hebergement/animaux/animaux_calendrier.html", {"races":races,"animal_accepte":animal_accepte})
+
+
+

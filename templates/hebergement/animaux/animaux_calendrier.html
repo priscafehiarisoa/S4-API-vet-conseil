@@ -1,0 +1,101 @@
+{% extends 'base/root_nav_sidebar.html' %}
+{% load static %}
+{% block title %}
+
+{% endblock %}
+
+{% block content %}
+<main role="main" class="main-content">
+  <div class="container-fluid">
+    <div class="row justify-content-center">
+      <div class="col-12">
+
+      <div class="row">
+                <div class="row col-5 m-3 p-3">
+                        <h2 class="mb-2 page-title">Calendrier d'animaux </h2>
+                    </div>
+                    <div class="col m-5 pr-2">
+                       <div class="dropdown float-right">
+                             <a href="{% url 'add_new_type_food' %}" class="btn btn-primary float-right ml-3" type="button"></a>
+                       </div>
+                     </div>
+
+                </div>
+
+        <div class="col-md-10 mb-4">
+          <div class="card shadow">
+            <div class="card-body py-4 mb-1">
+              <div class="row">
+                <div class="col-md-3">
+                  <div class="nav flex-column nav-pills shadow" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+                    {% for race in races %}
+                        {% if race == attributions.first.race %}
+                            <a class="nav-link p-2 nos_liens" href="{% url 'show_animaux_calendrier' race_id=race.id %}" > <i class="fe fe-play fe-12 pr-2"></i>{{ race.designation }}</a>
+                        {% else %}
+                           <a class="nav-link p-2 nos_liens"  href="{% url 'show_animaux_calendrier' race_id=race.id %}" >{{ race.designation }}</a>
+                        {% endif %}
+
+                    {% endfor %}
+                  </div>
+                </div>
+                <div class="col-md-9">
+                  <div class="tab-content mb-4" id="v-pills-tabContent">
+                    <div class="tab-pane fade show active" id="v-pills-home" role="tabpanel" aria-labelledby="v-pills-home-tab">
+                        <div id='calendar' class="col-12"></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+    <script>
+
+  document.addEventListener('DOMContentLoaded', function() {
+    var calendarEl = document.getElementById('calendar');
+
+    var liens = document.getElementsByClassName("nos_liens");
+    var url = ""
+    for(var i = 0; i<liens.length; i++){
+        liens[i].addEventListener("click", function(event) {
+            //event.preventDefault();
+            url = this.href;
+            console.log(url)
+        })
+    }
+
+    var calendar = new FullCalendar.Calendar(calendarEl, {
+      headerToolbar: {
+        left: 'prev,next today',
+        center: 'title',
+        right: 'dayGridMonth,timeGridWeek,timeGridDay'
+      },
+      initialDate: '2023-06-12',
+      themeSystem: 'bootstrap',
+
+      navLinks: true, // can click day/week names to navigate views
+      selectable: true,
+      selectMirror: true,
+
+
+      editable: false,
+      dayMaxEvents: true, // allow "more" link when too many events
+      events: url
+    });
+
+    calendar.render();
+  });
+
+
+
+      </script>
+{% endblock %}
+<style>
+    .selected{
+        background-color: red;
+    }
+</style>
