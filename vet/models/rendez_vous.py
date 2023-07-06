@@ -28,7 +28,7 @@ class Rendez_vous(models.Model):
     raison = models.CharField(max_length=700)
     temps = models.IntegerField(default=0, validators=[validate_positive_integer])
     prix = models.FloatField(validators=[validate_positive_float])
-    patient = models.ForeignKey(Patient, on_delete=models.CASCADE)
+    patient = models.ForeignKey(Patient, on_delete=models.CASCADE, null=True)
     etat = models.IntegerField(default=0, validators=[validate_positive_integer])
 
     def clean(self):

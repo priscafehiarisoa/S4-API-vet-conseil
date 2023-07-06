@@ -1,4 +1,4 @@
-from django.http import HttpResponse
+from django.http import HttpResponse, JsonResponse
 from django.shortcuts import render, redirect
 from vet.models import Rendez_vous
 from django.shortcuts import get_object_or_404
